@@ -430,8 +430,9 @@ body[data-side="right"] #helpCard{right:auto;left:16px}
 .fs-in>.src{margin:12px 2px 0}
 
 /* the country's own headlines, in the panel */
-.p-news{margin-top:10px;border-left:3px solid var(--arc);padding:2px 0 2px 10px;display:flex;flex-direction:column;gap:5px}
-.pn-h{font:700 12px "Barlow Condensed",sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.p-news{margin-top:12px;background:color-mix(in srgb,var(--arc) 11%,transparent);border:1px solid color-mix(in srgb,var(--arc) 40%,transparent);border-left:4px solid var(--arc);border-radius:8px;padding:9px 12px 10px;display:flex;flex-direction:column;gap:6px}
+.pn-h{display:flex;align-items:center;gap:7px;font:700 14px "Barlow Condensed",sans-serif;letter-spacing:.08em;text-transform:uppercase;color:color-mix(in srgb,var(--arc) 78%,var(--ink))}
+.pn-h .pn-n{font:600 12px "JetBrains Mono",monospace;letter-spacing:0;background:var(--arc);color:var(--chip-on-ink);border-radius:9px;padding:1px 7px}
 .p-news a{color:var(--ink);text-decoration:none;font-size:13px;line-height:1.35}
 .p-news a:hover{text-decoration:underline}
 .p-news a span{font:500 12px "JetBrains Mono",monospace;color:var(--ink-2);margin-right:6px}
@@ -501,6 +502,77 @@ body[data-side="right"] #helpCard{right:auto;left:16px}
 
 </head>
 <body>
+<div id="intro" aria-hidden="true">
+  <svg id="introArcs" viewBox="-400 -250 800 500" preserveAspectRatio="xMidYMid slice"></svg>
+  <div class="in-card">
+    <div class="in-eyebrow">SIN · Changi · Departures</div>
+    <h2 class="in-title" id="inTitle"></h2>
+    <div class="in-stats" id="inStats"></div>
+  </div>
+  <div class="in-skip">click to skip</div>
+</div>
+<style>
+#intro{position:fixed;inset:0;z-index:9999;background:var(--sea);color:var(--ink);display:grid;place-items:center;overflow:hidden;cursor:pointer}
+#introArcs{position:absolute;inset:0;width:100%;height:100%}
+#introArcs path{fill:none;stroke-width:1.6;stroke-linecap:round}
+.in-card{position:relative;text-align:center;padding:0 16px}
+.in-eyebrow{font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-2)}
+.in-title{font:600 clamp(40px,9vw,92px)/1.05 Barlow,system-ui,sans-serif;letter-spacing:-.01em;margin:10px 0 18px;white-space:nowrap}
+.in-title span{display:inline-block}
+.in-stats{display:flex;gap:clamp(16px,4vw,44px);justify-content:center;flex-wrap:wrap}
+.in-stats div{display:flex;flex-direction:column;align-items:center}
+.in-stats b{font:600 clamp(24px,4vw,34px)/1 "JetBrains Mono",monospace;font-variant-numeric:tabular-nums;color:var(--arc)}
+.in-stats span{font-size:13px;color:var(--ink-2);margin-top:6px}
+.in-skip{position:absolute;bottom:18px;font-size:12px;color:var(--ink-2);opacity:.7}
+</style>
+<script>
+// Title card, driven by requestAnimationFrame so a frame-by-frame recorder can step it.
+(function(){
+  const el=document.getElementById('intro');
+  let seen=false; try{seen=!!localStorage.getItem('cc_intro_seen'); localStorage.setItem('cc_intro_seen','1');}catch(e){}
+  if(/[?&]nointro/.test(location.search)||(seen&&!/[?&]intro/.test(location.search))){el.remove();return;}
+  const LEN=2.9;                                   // seconds on screen, exit included
+  const t0=performance.now(); window.MOTION_AT=t0+(LEN-.35)*1000;
+  const ease=k=>1-Math.pow(1-Math.min(1,Math.max(0,k)),3), win=(t,a,b)=>ease((t-a)/(b-a));
+  let built=false, arcs=[], letters=[], nums=[], end=LEN;
+  function build(){ built=true;
+    // totals across every country on the map
+    let cities=0, flights=0; const air=new Set();
+    COUNTRIES.forEach(({cfg})=>cfg.cities.forEach(c=>{const s=cfg.sched[c[4]]; if(!s||s.lost||s.connect||!s.a) return;
+      let wk=0; s.a.forEach(r=>{if(r[4]) return; if(r[2]){wk+=r[2];return;} if(!r[1]) return;
+        const [a,b=a]=String(r[1]).split('–').map(Number); wk+=Math.round((a+b)/2*[...r[3]].filter(x=>x==='1').length);});
+      if(wk){cities++; flights+=wk;} (c[5]||[]).forEach(a=>air.add(a));}));
+    const stats=[[COUNTRIES.length,'countries'],[cities,'cities'],[air.size,'airlines'],[flights,'flights a week']];
+    document.getElementById('inStats').innerHTML=stats.map(([,w])=>`<div><b>0</b><span>${w}</span></div>`).join('');
+    nums=[...document.querySelectorAll('#inStats b')].map((b,i)=>({b,to:stats[i][0]}));
+    const T=document.getElementById('inTitle'); T.innerHTML=[...'Changi Routes'].map(ch=>`<span>${ch===' '?'&nbsp;':ch}</span>`).join('');
+    letters=[...T.children];
+    // arcs fanning out from a Singapore dot low on the card
+    const svg=document.getElementById('introArcs'), NS='http://www.w3.org/2000/svg', cs=getComputedStyle(document.documentElement);
+    const cols=['--r-south','--r-east','--r-southwest','--r-central','--r-north','--r-northeast','--r-northwest','--arc'].map(v=>cs.getPropertyValue(v).trim());
+    const sg=[-30,190];
+    for(let i=0;i<14;i++){const a=-2.9+i*(2.6/13), r=260+((i*73)%5)*40, ex=sg[0]+Math.cos(a)*r*1.5, ey=sg[1]+Math.sin(a)*r;
+      const p=document.createElementNS(NS,'path'); p.setAttribute('d',`M${sg[0]},${sg[1]} Q${(sg[0]+ex)/2},${Math.min(sg[1],ey)-120} ${ex},${ey}`);
+      p.setAttribute('stroke',cols[i%cols.length]); p.setAttribute('opacity','.45'); svg.append(p); const L=p.getTotalLength();
+      p.style.strokeDasharray=L; p.style.strokeDashoffset=L; arcs.push({p,L,d:.1+((i*5)%14)*.05});}
+    const dot=document.createElementNS(NS,'circle'); dot.setAttribute('cx',sg[0]); dot.setAttribute('cy',sg[1]); dot.setAttribute('r',6);
+    dot.setAttribute('fill',cs.getPropertyValue('--sg').trim()); svg.append(dot);
+  }
+  function frame(now){
+    if(!el.isConnected) return; if(!built) build();
+    const t=(now-t0)/1000;
+    arcs.forEach(a=>a.p.style.strokeDashoffset=a.L*(1-win(t,a.d,a.d+.9)));
+    letters.forEach((s,i)=>{const k=win(t,.35+i*.035,.8+i*.035); s.style.opacity=k; s.style.transform=`translateY(${(1-k)*.45}em)`;});
+    nums.forEach((n,i)=>{const k=win(t,.9+i*.08,1.8+i*.08); n.b.textContent=Math.round(n.to*k).toLocaleString('en-GB');});
+    const out=win(t,end-.55,end); el.style.opacity=1-out; el.style.transform=`scale(${1+out*.06})`;
+    if(t>=end){el.remove();return;} requestAnimationFrame(frame);
+  }
+  // skip: jump straight to the exit
+  const skip=()=>{const t=(performance.now()-t0)/1000; if(t<end-.55){end=t+.55; window.MOTION_AT=performance.now()+200;}};
+  el.addEventListener('click',skip); addEventListener('keydown',skip,{once:true});
+  requestAnimationFrame(frame);
+})();
+</script>
 <div id="stage"></div>
 <div id="lineLabels"></div>
 <aside id="panel" data-sheet="peek">
@@ -3563,7 +3635,7 @@ const dayMon=s=>new Date(s+'T00:00:00').toLocaleDateString('en-GB',{day:'numeric
 // the country's own headlines, under the panel heading
 function panelNews(cfg){const box=document.getElementById('pNews'); box.hidden=true;
   getNews().then(n=>{if(COUNTRIES[CURRENT].cfg!==cfg) return; const it=newsFor(n,cfg).slice(0,3); if(!it.length) return;
-    box.innerHTML=`<div class="pn-h">In the news</div>${it.map(i=>`<a href="${escH(i.url)}" target="_blank" rel="noopener"><span>${dayMon(i.date)}</span>${escH(i.title)}</a>`).join('')}`; box.hidden=false;}).catch(()=>{});}
+    box.innerHTML=`<div class="pn-h"><span aria-hidden="true">📰</span>In the news<span class="pn-n">${it.length}</span></div>${it.map(i=>`<a href="${escH(i.url)}" target="_blank" rel="noopener"><span>${dayMon(i.date)}</span>${escH(i.title)}</a>`).join('')}`; box.hidden=false;}).catch(()=>{});}
 
 // Swap country: stop the running map, empty the panel lists, start again.
 function loadCountry(i){
@@ -3710,8 +3782,8 @@ const rings=[0].map(()=>{const r=new THREE.Mesh(new THREE.RingGeometry(.9,1.05,6
 
 // arcs
 const arcVS=`varying vec2 vUv; void main(){vUv=uv; gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}`;
-const arcFS=`uniform vec3 uCol; uniform float uT; uniform float uOn; uniform float uSpeed; uniform float uDash; varying vec2 vUv;
- void main(){ if(uDash>0.0 && fract(vUv.x*uDash)>0.55) discard; float d=fract(vUv.x*3.0 - uT*uSpeed); float pulse=smoothstep(0.0,0.25,d)*smoothstep(0.45,0.25,d);
+const arcFS=`uniform vec3 uCol; uniform float uT; uniform float uOn; uniform float uSpeed; uniform float uDash; uniform float uGrow; varying vec2 vUv;
+ void main(){ if(vUv.x>uGrow) discard; if(uDash>0.0 && fract(vUv.x*uDash)>0.55) discard; float d=fract(vUv.x*3.0 - uT*uSpeed); float pulse=smoothstep(0.0,0.25,d)*smoothstep(0.45,0.25,d);
  float a=mix(0.10,0.55,uOn)+pulse*mix(0.25,0.9,uOn); gl_FragColor=vec4(uCol,a);} `;
 const pickables=[];
 // airlines that were renamed: old name shown as a hint and still found by search
@@ -3721,10 +3793,10 @@ const ALL_AIRLINES=[...new Set(cities.flatMap(c=>c.airlines))].sort((a,b)=>{
 const routes=[];
 function makeRoute(c,curve,airline,dist,dashed){
   const mat=new THREE.ShaderMaterial({vertexShader:arcVS,fragmentShader:arcFS,transparent:true,depthWrite:false,
-    uniforms:{uCol:{value:new THREE.Color()},uT:{value:0},uOn:{value:.5},uSpeed:{value:0.12+6/Math.max(dist,6)*0.08},uDash:{value:dashed?Math.round(dist*2.2):0}}});
+    uniforms:{uCol:{value:new THREE.Color()},uT:{value:0},uOn:{value:.5},uSpeed:{value:0.12+6/Math.max(dist,6)*0.08},uDash:{value:dashed?Math.round(dist*2.2):0},uGrow:{value:1}}});
   const tube=new THREE.Mesh(new THREE.TubeGeometry(curve,dashed?220:90,airline?0.026:0.032,6,false),mat); scene.add(tube);
-  const dot=new THREE.Mesh(new THREE.SphereGeometry(airline?.08:.1,12,12),new THREE.MeshBasicMaterial({transparent:true})); scene.add(dot);
-  const rt={city:c,airline,curve,tube,dot,phase:Math.random(),speed:0.9/Math.max(dist,4)}; routes.push(rt); return rt;
+  const dot=new THREE.Mesh(planeGeo(airline?.32:.42),new THREE.MeshBasicMaterial({transparent:true,side:THREE.DoubleSide})); scene.add(dot);
+  const rt={city:c,airline,curve,tube,dot,phase:Math.random(),speed:0.9/Math.max(dist,4),mDist:dist}; routes.push(rt); return rt;
 }
 cities.forEach(c=>{
   const E=new THREE.Vector3(px(c.lon),0.45,pz(c.lat));
@@ -3780,6 +3852,13 @@ cities.forEach(c=>{
   const hit=new THREE.Mesh(new THREE.SphereGeometry(.8,8,8),new THREE.MeshBasicMaterial({visible:false})); hit.position.copy(pil.position); hit.userData.city=c; scene.add(hit); pickables.push(hit);
   c.top=new THREE.Vector3(E.x,endY+0.2,E.z);
 });
+// motion: launch order by distance from Singapore; lost + change-planes cities come last
+{const flown=cities.filter(c=>routes.some(r=>r.city===c&&!r.tube.material.uniforms.uDash.value)||c.viaV)
+   .sort((a,b)=>S.distanceTo(a.E)-S.distanceTo(b.E));
+ flown.forEach((c,i)=>{c.mDelay=0.05+0.3*i/Math.max(1,flown.length-1); c.mArr=c.mDelay+0.28+Math.min(S.distanceTo(c.E),40)*0.0075; c.pDelay=0.1+1.2*i/Math.max(1,flown.length-1);});
+ cities.forEach(c=>{if(c.mDelay==null){c.mDelay=0.6; c.mArr=0.6+0.3; c.pDelay=0.9;}
+   const h=c.pillar.geometry.parameters.height; c.pH=h; c.pBase=c.pillar.position.y-h/2;});
+ routes.forEach(r=>{r.mDur=r.mDist!=null?0.28+Math.min(r.mDist,40)*0.0075:0.3; r.pDur=1.6+Math.min(r.mDist||0,40)*0.035;});}
 
 // ---------- labels ----------
 // names printed flat on the ground; side = which way the text runs from the city dot
@@ -4263,7 +4342,7 @@ function resize(){const w=innerWidth,h=innerHeight;renderer.setSize(w,h);camera.
 addEventListener('resize',resize,{signal:LIVE.signal}); resize();
 
 // loop
-const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const reduce=false;   // the arrival motion is short, plays once and any click ends it, so it runs for everyone
 const v=new THREE.Vector3(); let last=performance.now(), T=0;
 function place(el,p){v.copy(p).project(camera);
   if(v.z>1){el.style.display='none';return;} el.style.display='';
@@ -4293,20 +4372,30 @@ function layoutLabels(focus){
   order.forEach(c=>{const m=c.gl.mesh; if(!m.visible){c.glBlocked=true;return;}
     const r=glRect(c.gl); if(!c.llHot&&hits(r,placed)){c.glBlocked=true;return;} c.glBlocked=false; placed.push(r);});
 }
+// motion clock: starts when the title card has gone (first load) or right away (country switch)
+let g=0, M0=Math.max(performance.now(),window.MOTION_AT||0); const MV=new THREE.Vector3();
+['pointerdown','wheel','keydown'].forEach(ev=>addEventListener(ev,()=>{if(g<4){M0=-1e9; if(fly&&fly.hold) fly.k=1;}},{signal:LIVE.signal,passive:true}));
+const mK=(t0,dur)=>reduce?1:Math.min(1,Math.max(0,(g-t0)/dur));
+const backOut=k=>1+2.70158*Math.pow(k-1,3)+1.70158*Math.pow(k-1,2);
+function planeGeo(s){ // flat little plane, nose along +Z, wings level
+  const p=[[0,1],[.1,.78],[.1,.22],[.95,-.12],[.95,-.27],[.1,-.1],[.1,-.62],[.38,-.84],[.38,-.95],[0,-.84]];
+  const sh=new THREE.Shape(); [...p,...p.slice(1,-1).reverse().map(([x,y])=>[-x,y])].forEach(([x,y],i)=>i?sh.lineTo(x*s,y*s):sh.moveTo(x*s,y*s));
+  return new THREE.ShapeGeometry(sh).rotateX(Math.PI/2);}
 function tick(now){
-  const dt=Math.min((now-last)/1000,.05); last=now; if(!reduce) T+=dt;
-  if(fly){fly.k=Math.min(1,fly.k+dt*1.1);const e=1-Math.pow(1-fly.k,3);
+  const dt=Math.min((now-last)/1000,.05); last=now; g=(now-M0)/1000;
+  if(fly&&!(fly.hold&&now<M0)){fly.k=Math.min(1,fly.k+dt*(fly.rate||1.1));const e=fly.ease?fly.ease(fly.k):1-Math.pow(1-fly.k,3);
     controls.target.lerpVectors(fly.from.t,fly.to.t,e); camera.position.lerpVectors(fly.from.p,fly.to.p,e); if(fly.k>=1) fly=null;}
   controls.update();
   const F=new Set([selected,compareWith].filter(Boolean)); if(!F.size&&hovered) F.add(hovered); const focus=F.size>0;
   const byAir=colourMode==='airline';
   cities.forEach(c=>{
+    const pk=mK(c.mArr,.25);
     const on=cityOn(c); const hot=F.has(c); const dimmed=!on||(focus&&!hot);
-    c.apIcon.visible=on&&codesOn&&linesOn; c.apIcon.material.opacity=dimmed?.3:1; c.pillar.visible=linesOn;   // 'Map only' hides bars + badges
+    c.apIcon.visible=on&&codesOn&&linesOn&&pk>=1; c.apIcon.material.opacity=dimmed?.3:1; c.pillar.visible=linesOn&&pk>0; {const s=pk>=1?1:backOut(pk); c.pillar.scale.y=Math.max(.001,s); c.pillar.position.y=c.pBase+c.pH*s/2;}   // 'Map only' hides bars + badges
     c.pillar.material.color.copy(!on?COL.dim:byAir?COL.ink:c.region.col); c.pillar.material.opacity=dimmed?.3:1;
-    c.llShow=on&&linesOn&&(lineNamesOn||hot); c.llHot=hot; c.llDim=!!focus&&!hot;
+    c.llShow=on&&linesOn&&(lineNamesOn||hot)&&pk>.6; c.llHot=hot; c.llDim=!!focus&&!hot;
     c.llCol=byAir&&airlineFilter&&c.airlines.includes(airlineFilter)?airCss[airlineFilter]:byAir?'var(--ink)':`var(--r-${c.region.key})`;
-    const m=c.gl.mesh; m.visible=on&&(namesOn||hot); const s=hot?1.35:1; m.scale.set(c.gl.w*s,c.gl.h*s,1);
+    const m=c.gl.mesh; m.visible=on&&(namesOn||hot)&&(pk>.6||!linesOn); const s=hot?1.35:1; m.scale.set(c.gl.w*s,c.gl.h*s,1);
     m.material.opacity+=((hot?1:c.glBlocked?0:focus?.25:linesOn?.55:1)-m.material.opacity)*.25;   // clearer names on the plain map
   });
   routes.forEach(rt=>{
@@ -4318,7 +4407,11 @@ function tick(now){
     const col=!on?COL.dim:rt.airline?airCol[rt.airline]:c.region.col;
     u.uCol.value.copy(col); rt.dot.material.color.copy(col);
     rt.dot.visible=on&&!(focus&&!F.has(c));
-    rt.phase=(rt.phase+dt*rt.speed*(reduce?0:1))%1; rt.curve.getPointAt(rt.phase,rt.dot.position);
+    const gk=mK(c.mDelay,rt.mDur), gu=1-Math.pow(1-gk,3); u.uGrow.value=gu;
+    const fk=mK(c.pDelay,rt.pDur), land=mK(c.pDelay+rt.pDur,.35);   // one flight out, eased take-off + landing, then it fades
+    const at=Math.max(fk<.5?2*fk*fk:1-Math.pow(-2*fk+2,2)/2,.001);
+    rt.dot.visible=rt.dot.visible&&fk>0&&land<1; rt.dot.material.opacity=1-land;
+    rt.curve.getPointAt(at,rt.dot.position); rt.curve.getTangentAt(at,MV); rt.dot.lookAt(MV.add(rt.dot.position));
   });
   regionGLs.forEach(g=>{const t=regionSel.size?(regionSel.has(g.r)?.45:.08):.2; g.mesh.material.opacity+=(t-g.mesh.material.opacity)*.15;});
   layoutLabels(focus);
@@ -4330,6 +4423,9 @@ function tick(now){
 document.getElementById('h1').textContent=CFG.heading||CFG.title;
 document.getElementById('subLine').textContent=CFG.sub;
 document.getElementById('srcLine').innerHTML=CFG.src;
+if(!reduce){const to={t:controls.target.clone(),p:camera.position.clone()}, off=to.p.clone().sub(to.t);
+  camera.position.copy(to.t).add(off.multiplyScalar(1.7)).add(new THREE.Vector3(off.z*.25,0,-off.x*.25));
+  fly={from:{t:to.t.clone(),p:camera.position.clone()},to,k:0,rate:.9,hold:1,ease:k=>k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2};}
 placeDetail(); render(); requestAnimationFrame(tick); panelNews(CFG);
 } // end boot
 
