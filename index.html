@@ -264,16 +264,21 @@ body[data-side="right"] #helpBtn{right:auto;left:16px}
 #allFab:hover{transform:translateY(-2px)}
 #allFab:focus-visible{outline:2px solid var(--arc);outline-offset:3px}
 body[data-side="right"] #allFab{right:auto;left:16px}
-#allR{position:fixed;inset:0;z-index:30;background:var(--sea);display:flex;flex-direction:column;animation:arIn .35s ease-out}
-@keyframes arIn{from{opacity:0;transform:scale(1.02)}to{opacity:1;transform:none}}
+#allR{position:fixed;inset:0;z-index:30;background:var(--sea);display:flex;flex-direction:column}
 .ar-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:calc(16px + env(safe-area-inset-top,0px)) 20px 0;position:relative;z-index:1}
 .ar-eye{font:600 12px/1 "Barlow Condensed",sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2)}
 .ar-top h2{font:700 30px/1.05 "Barlow Condensed",sans-serif;margin:6px 0 4px;color:var(--ink)}
 .ar-top p{margin:0;font-size:14px;color:var(--ink-2)}
-.ar-act{display:flex;gap:8px}
+.ar-act{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
 .ar-btn{height:38px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:600 14px Barlow,sans-serif;cursor:pointer}
 .ar-btn:hover{border-color:var(--arc);color:var(--arc)}
 .ar-x{width:38px;padding:0;font-size:22px;line-height:1}
+.ar-stage{cursor:grab}
+.ar-seg{display:inline-flex;height:38px;border:1px solid var(--line);border-radius:999px;background:var(--panel);padding:3px;gap:2px}
+.ar-seg button{border:0;border-radius:999px;background:none;color:var(--ink-2);font:600 13px Barlow,sans-serif;padding:0 12px;cursor:pointer}
+.ar-seg button[aria-pressed="true"]{background:var(--chip-on);color:var(--chip-on-ink)}
+.ar-stage:active{cursor:grabbing}
+@media (max-width:640px){.ar-top{flex-direction:column}.ar-act{align-self:flex-end}}
 .ar-stage{flex:1;min-height:0;position:relative;cursor:pointer}
 .ar-stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
 .ar-tip{position:absolute;z-index:3;pointer-events:none;background:var(--ink);color:var(--sea);font:500 13px/1.35 Barlow,sans-serif;padding:7px 10px;border-radius:8px;white-space:nowrap;transform:translate(-50%,calc(-100% - 12px));box-shadow:0 6px 20px rgba(0,0,0,.25)}
@@ -393,10 +398,13 @@ body[data-side="right"] #helpCard{right:auto;left:16px}
   /* "?" sits under the theme button, clear of the bottom sheet */
   #helpBtn,body[data-side] #helpBtn{bottom:auto;top:calc(64px + env(safe-area-inset-top,0px));right:14px;left:auto}
   #mapBtn,body[data-side] #mapBtn{bottom:auto;top:calc(114px + env(safe-area-inset-top,0px));right:14px;left:auto}
-  #dashFab,body[data-side] #dashFab{bottom:auto;top:calc(164px + env(safe-area-inset-top,0px));right:14px;left:auto;width:38px;padding:0;justify-content:center}
-  #dashFab span{display:none}
-  #allFab,body[data-side] #allFab{bottom:auto;top:calc(214px + env(safe-area-inset-top,0px));right:14px;left:auto;width:38px;padding:0;justify-content:center}
-  #allFab span{display:none}
+  /* phone: two small quiet icons under the round buttons, no labels */
+  #dashFab,body[data-side] #dashFab,#allFab,body[data-side] #allFab{bottom:auto;right:17px;left:auto;width:32px;height:32px;padding:0;justify-content:center;
+    background:var(--panel);color:var(--arc);border:1px solid var(--line);box-shadow:var(--shadow)}
+  #dashFab,body[data-side] #dashFab{top:calc(162px + env(safe-area-inset-top,0px))}
+  #allFab,body[data-side] #allFab{top:calc(202px + env(safe-area-inset-top,0px))}
+  #dashFab svg,#allFab svg{width:15px;height:15px}
+  #dashFab span,#allFab span{display:none}
   .ar-top h2{font-size:24px}
   #helpCard,body[data-side] #helpCard{bottom:auto;top:calc(114px + env(safe-area-inset-top,0px));right:14px;left:auto;max-height:calc(100vh - 140px);overflow-y:auto}
 
@@ -643,11 +651,11 @@ a.fs-btn{text-decoration:none}
 <div id="allR" role="dialog" aria-modal="true" aria-label="All routes from Changi" hidden>
   <div class="ar-top">
     <div><div class="ar-eye">SIN · Changi · all routes</div><h2>Every direct flight from Changi</h2><p id="arSub"></p></div>
-    <div class="ar-act"><button class="ar-btn" id="arReplay" type="button">↻ Replay</button><button class="ar-btn ar-x" id="arClose" type="button" aria-label="Close">×</button></div>
+    <div class="ar-act"><div class="ar-seg" role="group" aria-label="Picture"><button type="button" id="arFlat" aria-pressed="true">Map</button><button type="button" id="arGlobe" aria-pressed="false">Globe</button></div><button class="ar-btn ar-x" id="arOut" type="button" aria-label="Zoom out" title="Zoom out">−</button><button class="ar-btn ar-x" id="arIn" type="button" aria-label="Zoom in" title="Zoom in">+</button><button class="ar-btn" id="arReplay" type="button" title="Back to the start and play again">↻ Replay</button><button class="ar-btn ar-x" id="arClose" type="button" aria-label="Close">×</button></div>
   </div>
   <div class="ar-stage"><canvas id="arCv" aria-hidden="true"></canvas></div>
   <div class="ar-tip" id="arTip" hidden></div>
-  <p class="ar-hint">Thicker line = more flights. Point at a city for its numbers; tap it to open that country on the map.</p>
+  <p class="ar-hint" id="arHint">Drag to move, scroll or +/− to zoom in for more city names. Tap a city to open that country.</p>
 </div>
 <a id="dashFab" href="dashboard.html" title="Dashboard: key numbers and the latest news" aria-label="Open the dashboard" hidden><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 3h6v8H3zM11 3h6v5h-6zM11 10h6v7h-6zM3 13h6v4H3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span>Dashboard</span></a>
 <button id="helpBtn" type="button" title="What am I looking at?" aria-label="What am I looking at?">?</button>
@@ -666,7 +674,7 @@ a.fs-btn{text-decoration:none}
 </div>
 <div id="fact" role="dialog" aria-modal="true" aria-label="Country fact sheet" hidden><div class="fs-in" id="factIn"></div></div>
 <div id="ins" role="dialog" aria-modal="true" aria-label="All-country insights" hidden><div class="fs-in" id="insIn"></div></div>
-<div id="stamp" title="When this map was last rebuilt with new data">Last updated 14 Oct 2026, 11:48 pm SGT</div>
+<div id="stamp" title="When this map was last rebuilt with new data">Last updated 15 Oct 2026, 12:16 am SGT</div>
 <div id="hint">drag to rotate · scroll to zoom · right-drag to pan · press / to search</div>
 <script>
 /**
@@ -1783,17 +1791,22 @@ a.fs-btn{text-decoration:none}
 </script>
 <script>
 // Changi network picture: every direct route from Changi on a dot map of Asia.
-// Shared by the dashboard's top banner and the map's "All routes" view (build.py inlines it into both).
+// Shared by the dashboard's top banner (flat) and the map's "All routes" view (globe, drag to turn).
 // Plays once: land dots ripple out from Singapore, lines fly out nearest-first with planes on the busiest,
 // cities pop as they land, country labels settle in. Then it holds still; pointing at a city shows its numbers.
 //
 // opt: canvas, tip (tooltip element, positioned inside the canvas's offset parent), routes [{name,code,lon,lat,wk,air,slug,country,flag}],
 //      totals {slug: flights a week}, grid (land dots from build.py), colours {ink,ink2,arc,sg,bg} as CSS variable names,
-//      wide (centre the network at this fraction of the width when wide), avoid() → [{x,y,w,h}] boxes labels must keep clear of,
+//      wide (flat only: centre the network at this fraction of the width when wide), globe (true = round earth you can drag/zoom),
+//      lineScale (line thickness, 1 = normal), avoid() → [{x,y,w,h}] boxes labels must keep clear of,
 //      onHover(route|null), onPick(route|null) on click.
 function ChangiNetwork(opt){
-  const cv=opt.canvas, ctx=cv.getContext('2d'), G=opt.grid, tip=opt.tip, R=opt.routes.slice();
-  const SG={lon:103.99,lat:1.36}, fmt=n=>Math.round(n).toLocaleString('en-GB'), pl=(n,a,b)=>n===1?a:b;
+  const cv=opt.canvas, ctx=cv.getContext('2d'), G=opt.grid, tip=opt.tip, R=opt.routes.slice(), LS=opt.lineScale||1, BOLD=!!opt.bold, TALK=!!opt.interactive;
+  let GLOBE=!!opt.globe;
+  // country shapes (map page passes geo.json): drawn as filled land with clear borders instead of dots
+  const MAPC=new Set(['China','Hong Kong','Macao','Japan','South Korea','Thailand','Malaysia','Indonesia','Philippines','Vietnam','Singapore']);
+  const SHAPES=(opt.geo||[]).map(f=>({hi:MAPC.has(f.n),polys:f.p.map(poly=>poly[0])}));
+  const SG={lon:103.99,lat:1.36}, RAD=Math.PI/180, fmt=n=>Math.round(n).toLocaleString('en-GB'), pl=(n,a,b)=>n===1?a:b;
   const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const maxWk=Math.max(1,...R.map(r=>r.wk));
   R.forEach(r=>r.dist=Math.hypot(r.lon-SG.lon,r.lat-SG.lat)); R.sort((a,b)=>a.dist-b.dist);
@@ -1802,71 +1815,136 @@ function ChangiNetwork(opt){
   const planes=new Set([...R].sort((a,b)=>b.wk-a.wk).slice(0,16));
   const hub={}; R.forEach(r=>{if(!hub[r.slug]||r.wk>hub[r.slug].wk) hub[r.slug]=r;});
   const END=Math.max(...R.map(r=>r.t0+r.dur))+.9;
-  let W=0,H=0,dpr=1,P=null,start=0,raf=0,hover=null,dots=[],base=null,col={},labels=[];
+  const land=[]; for(let i=0;i<G.d.length;i+=3) land.push({lon:G.lon0+(G.d[i]+.5)*G.step, lat:G.lat0+(G.d[i+1]+.5)*G.step, hi:G.d[i+2]});
+  let W=0,H=0,dpr=1,P=null,start=0,raf=0,hover=null,dots=[],base=null,col={},labels=[],names=[];
+  const z0=()=>GLOBE&&cv.clientWidth<640?1.5:1, view={lon:116,lat:20,zoom:1,px:0,py:0};   // globe: turn + zoom; flat: zoom + slide (px,py) let GR=0,gx=0,gy=0;   // globe: centre of view, radius on screen
   const tok=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
   const ease=k=>k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2, clamp=k=>Math.max(0,Math.min(1,k));
   function colours(){const c=opt.colours; col={ink:tok(c.ink),ink2:tok(c.ink2),arc:tok(c.arc),sg:tok(c.sg),bg:tok(c.bg)};}
+  // globe: orthographic view; z>0 is the side facing you. lift>1 raises a point above the ground (flight arcs).
+  function projG(lon,lat,lift=1){const l=(lon-view.lon)*RAD, b=lat*RAD, b0=view.lat*RAD, cb=Math.cos(b);
+    const x=cb*Math.sin(l), y=Math.cos(b0)*Math.sin(b)-Math.sin(b0)*cb*Math.cos(l), z=Math.sin(b0)*Math.sin(b)+Math.cos(b0)*cb*Math.cos(l);
+    return [gx+x*GR*lift, gy-y*GR*lift, z];}
+  const vec=(lon,lat)=>[Math.cos(lat*RAD)*Math.cos(lon*RAD),Math.cos(lat*RAD)*Math.sin(lon*RAD),Math.sin(lat*RAD)];
+  const seen=q=>q[2]>0||Math.hypot(q[0]-gx,q[1]-gy)>GR;   // in front of the earth, or lifted clear of its edge
   function layout(){
     W=cv.clientWidth; H=cv.clientHeight; if(!W||!H) return false;
     dpr=Math.min(2,devicePixelRatio||1); cv.width=Math.round(W*dpr); cv.height=Math.round(H*dpr);
-    const narrow=W<640||!opt.wide, kx=Math.cos(20*Math.PI/180);
-    const sc=narrow?Math.min(H/60,W/(52*kx)):H/64, cx=narrow?W*.5:W*opt.wide, cy=H*.5, mLon=narrow?120:121, mLat=19;
-    P=(lon,lat)=>[cx+(lon-mLon)*sc*kx, cy-(lat-mLat)*sc];
+    if(GLOBE){GR=Math.min(W*.62,H*.8)*view.zoom; gx=W/2; gy=H/2; P=(lon,lat)=>projG(lon,lat);}
+    else{const narrow=W<640||!opt.wide, kx=Math.cos(20*RAD);
+      const zm=TALK?view.zoom:1, sc=(narrow?Math.min(H/60,W/(52*kx)):H/64)*zm, cx=(narrow?W*.5:W*opt.wide)+view.px, cy=H*.5+view.py, mLon=narrow?120:121, mLat=19;
+      P=(lon,lat)=>[cx+(lon-mLon)*sc*kx, cy-(lat-mLat)*sc, 1];}
     const [sx,sy]=P(SG.lon,SG.lat), far=Math.hypot(W,H);
-    dots=[]; for(let i=0;i<G.d.length;i+=3){const lon=G.lon0+(G.d[i]+.5)*G.step, lat=G.lat0+(G.d[i+1]+.5)*G.step, [x,y]=P(lon,lat);
-      if(x<-4||y<-4||x>W+4||y>H+4) continue; dots.push({x,y,hi:G.d[i+2],t:Math.hypot(x-sx,y-sy)/far*1.1});}
-    R.forEach(r=>{const a=P(SG.lon,SG.lat), b=P(r.lon,r.lat), mx=(a[0]+b[0])/2, my=(a[1]+b[1])/2, dx=b[0]-a[0], dy=b[1]-a[1], L=Math.hypot(dx,dy)||1;
-      let nx=-dy/L, ny=dx/L; if(ny>0){nx=-nx; ny=-ny;}           // bow the line upward
-      r.a=a; r.b=b; r.c=[mx+nx*L*.22, my+ny*L*.22];});
+    dots=[]; for(const p of land){const [x,y,z]=P(p.lon,p.lat);
+      if(z<=0||x<-4||y<-4||x>W+4||y>H+4) continue; dots.push({x,y,z,hi:p.hi,t:Math.hypot(x-sx,y-sy)/far*1.1});}
+    const va=vec(SG.lon,SG.lat);
+    R.forEach(r=>{
+      if(GLOBE){const vb=vec(r.lon,r.lat), om=Math.acos(Math.max(-1,Math.min(1,va[0]*vb[0]+va[1]*vb[1]+va[2]*vb[2])));
+        r.g={va,vb,om,h:.04+.22*om};}
+      else{const a=P(SG.lon,SG.lat), b=P(r.lon,r.lat), mx=(a[0]+b[0])/2, my=(a[1]+b[1])/2, dx=b[0]-a[0], dy=b[1]-a[1], L=Math.hypot(dx,dy)||1;
+        let nx=-dy/L, ny=dx/L; if(ny>0){nx=-nx; ny=-ny;}           // bow the line upward
+        r.q={a,b,c:[mx+nx*L*.22, my+ny*L*.22]};}
+      r.a=pt(r,0); r.b=pt(r,1);});
     placeLabels(); paintBase(); return true;}
-  const pt=(r,t)=>{const u=1-t; return [u*u*r.a[0]+2*u*t*r.c[0]+t*t*r.b[0], u*u*r.a[1]+2*u*t*r.c[1]+t*t*r.b[1]];};
+  // a point t (0→1) along a route: a curve on the flat map; on the globe, the great circle lifted into an arc
+  function pt(r,t){
+    if(GLOBE){const g=r.g, s=Math.sin(g.om)||1, A=Math.sin((1-t)*g.om)/s, B=Math.sin(t*g.om)/s;
+      const v=[A*g.va[0]+B*g.vb[0],A*g.va[1]+B*g.vb[1],A*g.va[2]+B*g.vb[2]];
+      return projG(Math.atan2(v[1],v[0])/RAD, Math.asin(Math.max(-1,Math.min(1,v[2])))/RAD, 1+g.h*Math.sin(Math.PI*t));}
+    const q=r.q, u=1-t; return [u*u*q.a[0]+2*u*t*q.c[0]+t*t*q.b[0], u*u*q.a[1]+2*u*t*q.c[1]+t*t*q.b[1], 1];}
+  // the earth itself: soft disc, grid of latitude/longitude, glow at the rim
+  function sphere(g){if(!GLOBE) return;
+    const grd=g.createRadialGradient(gx-GR*.35,gy-GR*.4,GR*.1,gx,gy,GR);
+    grd.addColorStop(0,col.bg); grd.addColorStop(1,col.ink2);
+    g.globalAlpha=.09; g.fillStyle=grd; g.beginPath(); g.arc(gx,gy,GR,0,6.283); g.fill();
+    g.globalAlpha=.12; g.strokeStyle=col.ink2; g.lineWidth=1;
+    const line=pts=>{let on=false; g.beginPath(); for(const [lon,lat] of pts){const q=projG(lon,lat); if(q[2]>0){on?g.lineTo(q[0],q[1]):g.moveTo(q[0],q[1]); on=true;} else on=false;} g.stroke();};
+    for(let lon=-180;lon<180;lon+=15){const a=[]; for(let lat=-90;lat<=90;lat+=3) a.push([lon,lat]); line(a);}
+    for(let lat=-75;lat<=75;lat+=15){const a=[]; for(let lon=-180;lon<=180;lon+=3) a.push([lon,lat]); line(a);}
+    g.globalAlpha=.35; g.strokeStyle=col.ink2; g.lineWidth=1.2; g.beginPath(); g.arc(gx,gy,GR,0,6.283); g.stroke();
+    const halo=g.createRadialGradient(gx,gy,GR,gx,gy,GR*1.08); halo.addColorStop(0,col.arc); halo.addColorStop(1,'rgba(0,0,0,0)');
+    g.globalAlpha=.08; g.fillStyle=halo; g.beginPath(); g.arc(gx,gy,GR*1.08,0,6.283); g.arc(gx,gy,GR,0,6.283,true); g.fill();
+    g.globalAlpha=1;}
+  // country shapes: map countries a little stronger; on the globe, points round the back are pinned to the edge
+  function landAt(g,k){if(!SHAPES.length||!k) return;
+    for(const pass of [0,1]) for(const f of SHAPES){if(!!f.hi!==!!pass) continue;
+      g.beginPath();
+      for(const ring of f.polys){let prev=null, open=false;
+        for(const [lon,lat] of ring){let x,y;
+          if(GLOBE){const q=projG(lon,lat); x=q[0]; y=q[1]; if(q[2]<0){const dx=x-gx, dy=y-gy, d=Math.hypot(dx,dy)||1; x=gx+dx/d*GR; y=gy+dy/d*GR;}}
+          else{const q=P(lon,lat); x=q[0]; y=q[1]; if(prev!==null&&Math.abs(lon-prev)>90) open=false;}
+          open?g.lineTo(x,y):g.moveTo(x,y); open=true; prev=lon;}
+        g.closePath();}
+      g.globalAlpha=k*(f.hi?.2:.09); g.fillStyle=col.ink2; g.fill('evenodd');
+      g.globalAlpha=k*(f.hi?.75:.4); g.strokeStyle=col.ink2; g.lineWidth=f.hi?1:.7; g.lineJoin='round'; g.stroke();}
+    g.globalAlpha=1;}
   // land dots drawn once into a back buffer, so the still picture costs nothing
   function paintBase(){base=document.createElement('canvas'); base.width=cv.width; base.height=cv.height;
-    const b=base.getContext('2d'); b.setTransform(dpr,0,0,dpr,0,0); dotsAt(b,99);}
-  function dotsAt(g,T){const rr=Math.max(1,Math.min(1.7,W/700));
-    for(const d of dots){const k=clamp((T-d.t)/.35); if(!k) continue;
-      g.globalAlpha=k*(d.hi?.42:.16); g.fillStyle=col.ink2; g.beginPath(); g.arc(d.x,d.y,rr*(d.hi?1.05:.85)*(.6+.4*k),0,6.283); g.fill();}
+    const b=base.getContext('2d'); b.setTransform(dpr,0,0,dpr,0,0); sphere(b); if(SHAPES.length) landAt(b,1); else dotsAt(b,99);}
+  function dotsAt(g,T){const rr=Math.max(1,Math.min(1.7,W/700))*(TALK?Math.max(.8,Math.min(1.5,view.zoom)):1);
+    for(const d of dots){const k=clamp((T-d.t)/.35); if(!k) continue; const shade=GLOBE?.35+.65*d.z:1;
+      g.globalAlpha=k*(d.hi?.42:.16)*shade; g.fillStyle=col.ink2; g.beginPath(); g.arc(d.x,d.y,rr*(d.hi?1.05:.85)*(.6+.4*k)*(GLOBE?.6+.4*d.z:1),0,6.283); g.fill();}
     g.globalAlpha=1;}
   function placeLabels(){labels=(opt.avoid?opt.avoid():[]).map(b=>({...b,obstacle:1})); ctx.font='600 13px Barlow, system-ui, sans-serif';
-    Object.values(hub).sort((a,b)=>b.wk-a.wk).forEach(h=>{const txt=`${h.flag} ${h.country}`, sub=`${fmt(opt.totals[h.slug]||h.wk)} a week`;
-      const w=Math.max(ctx.measureText(txt).width,ctx.measureText(sub).width)+4, [x,y]=h.b;
+    Object.values(hub).sort((a,b)=>b.wk-a.wk).forEach(h=>{if(h.b[2]<=0) return;
+      const txt=`${h.flag} ${h.country}`, sub=`${fmt(opt.totals[h.slug]||h.wk)} a week`;
+      ctx.font='600 13px Barlow, system-ui, sans-serif'; const w1=ctx.measureText(txt).width; ctx.font='500 12px "JetBrains Mono", monospace';
+      const w=Math.max(w1,ctx.measureText(sub).width)+6, [x,y]=h.b;
       const west=h.lon<SG.lon+1&&h.slug!=='indonesia';
       const opts=[[west?x-10-w:x+10,y-14],[west?x-10-w:x+10,y+4],[x-w/2,y-36],[x-w/2,y+12],[west?x+10:x-10-w,y-14]];
-      let best=opts[0]; for(const o of opts){const box={x:o[0],y:o[1],w,h:30};
-        if(box.x<4||box.x+w>W-4||box.y<4||box.y+30>H-4) continue;
-        if(labels.some(l=>box.x<l.x+l.w&&box.x+w>l.x&&box.y<l.y+l.h&&box.y+30>l.y)) continue; best=o; break;}
-      labels.push({x:best[0],y:best[1],w,h:30,txt,sub,r:h});});}
+      const free=(bx,by)=>bx>=4&&bx+w<=W-4&&by>=4&&by+30<=H-4&&!labels.some(l=>bx<l.x+l.w&&bx+w>l.x&&by<l.y+l.h&&by+30>l.y);
+      let best=opts.find(o=>free(o[0],o[1]));
+      if(!best){const cx=Math.max(4,Math.min(W-w-4,opts[0][0]));   // squeezed: pull it inside the edge and step up/down to a clear spot
+        for(const d of [0,32,-32,64,-64,96,-96]) if(free(cx,y-14+d)){best=[cx,y-14+d]; break;}}
+      if(!best) best=[Math.max(4,Math.min(W-w-4,opts[0][0])),opts[0][1]];
+      labels.push({x:best[0],y:best[1],w,h:30,txt,sub,r:h});});
+    names=[]; if(!BOLD) return; ctx.font='600 12px Barlow, system-ui, sans-serif';
+    const taken=labels.slice(), [sx0,sy0]=P(SG.lon,SG.lat); taken.push({x:sx0-6,y:sy0-6,w:120,h:22});
+    [...R].sort((a,b)=>b.wk-a.wk).forEach(r=>{if(r.b[2]<=0) return; const w=ctx.measureText(r.name).width+4, [x,y]=r.b;
+      for(const [bx,by] of [[x+7,y-8],[x-7-w,y-8],[x-w/2,y-22],[x-w/2,y+6]]){
+        if(bx<4||bx+w>W-4||by<4||by+16>H-4) continue;
+        if(taken.some(l=>bx<l.x+l.w&&bx+w>l.x&&by<l.y+l.h&&by+16>l.y)) continue;
+        const n={x:bx,y:by,w,h:16,r}; names.push(n); taken.push(n); break;}});}
   function frame(T){
     ctx.setTransform(dpr,0,0,dpr,0,0); ctx.clearRect(0,0,W,H);
-    if(T>=1.6){ctx.save(); ctx.setTransform(1,0,0,1,0,0); ctx.drawImage(base,0,0); ctx.restore();} else dotsAt(ctx,T);
-    const [sx,sy]=P(SG.lon,SG.lat);
-    ctx.lineCap='round';
+    if(T>=1.6){ctx.save(); ctx.setTransform(1,0,0,1,0,0); ctx.drawImage(base,0,0); ctx.restore();} else {sphere(ctx); if(SHAPES.length) landAt(ctx,clamp(T/.7)); else dotsAt(ctx,T);}
+    const S=P(SG.lon,SG.lat), [sx,sy]=S;
+    ctx.lineCap='round'; ctx.lineJoin='round';
     for(const r of R){const k=clamp((T-r.t0)/r.dur); if(!k) continue; const e=ease(k);
       const on=!hover||hover.slug===r.slug, me=hover===r;
-      ctx.strokeStyle=col.arc; ctx.globalAlpha=me?1:on?(hover?.85:.6):.12; ctx.lineWidth=(.7+2.8*Math.sqrt(r.wk/maxWk))*(me?1.6:1);
-      ctx.beginPath(); ctx.moveTo(r.a[0],r.a[1]); const n=Math.max(6,Math.ceil(28*e)); for(let i=1;i<=n;i++){const q=pt(r,e*i/n); ctx.lineTo(q[0],q[1]);} ctx.stroke();
+      ctx.strokeStyle=col.arc; ctx.globalAlpha=me?1:on?(hover?.85:.6):.12; ctx.lineWidth=(.7+2.8*Math.sqrt(r.wk/maxWk))*LS*(me?1.6:1);
+      const n=Math.max(8,Math.ceil(40*e)); let pen=false; ctx.beginPath();
+      for(let i=0;i<=n;i++){const q=pt(r,e*i/n); if(!GLOBE||seen(q)){pen?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1]); pen=true;} else pen=false;}
+      ctx.stroke();
       ctx.globalAlpha=on?1:.3;
       if(k<1&&planes.has(r)){const q=pt(r,e), q2=pt(r,Math.min(1,e+.02)), ang=Math.atan2(q2[1]-q[1],q2[0]-q[0]);
-        ctx.save(); ctx.translate(q[0],q[1]); ctx.rotate(ang); ctx.fillStyle=col.ink; ctx.beginPath();
-        ctx.moveTo(7,0); ctx.lineTo(-5,-4.5); ctx.lineTo(-2.5,0); ctx.lineTo(-5,4.5); ctx.closePath(); ctx.fill(); ctx.restore();}
-      if(k>=1){const since=T-(r.t0+r.dur), pop=since<.5?1+.8*Math.sin(Math.PI*since/.5):1;
-        ctx.fillStyle=col.arc; ctx.beginPath(); ctx.arc(r.b[0],r.b[1],(1.8+1.8*Math.sqrt(r.wk/maxWk))*pop*(me?1.5:1),0,6.283); ctx.fill();
+        if(!GLOBE||seen(q)){ctx.save(); ctx.translate(q[0],q[1]); ctx.rotate(ang); ctx.fillStyle=col.ink; ctx.beginPath();
+          ctx.moveTo(7,0); ctx.lineTo(-5,-4.5); ctx.lineTo(-2.5,0); ctx.lineTo(-5,4.5); ctx.closePath(); ctx.fill(); ctx.restore();}}
+      if(k>=1&&r.b[2]>0){const since=T-(r.t0+r.dur), pop=since<.5?1+.8*Math.sin(Math.PI*since/.5):1;
+        const cr=BOLD?(3+2.6*Math.sqrt(r.wk/maxWk))*pop*(me?1.4:1):(1.8+1.8*Math.sqrt(r.wk/maxWk))*Math.max(.6,LS)*pop*(me?1.5:1);
+        ctx.fillStyle=col.arc; ctx.beginPath(); ctx.arc(r.b[0],r.b[1],cr,0,6.283); ctx.fill();
+        if(BOLD){ctx.strokeStyle=col.bg; ctx.lineWidth=1.5; ctx.stroke();}
         if(since<.8){ctx.globalAlpha=(1-since/.8)*.7; ctx.strokeStyle=col.arc; ctx.lineWidth=1.5; ctx.beginPath(); ctx.arc(r.b[0],r.b[1],3+since*22,0,6.283); ctx.stroke();}}
       ctx.globalAlpha=1;}
-    // Singapore: red dot, one ripple at the start
-    for(const off of [0,.35]){const k=clamp((T-.15-off)/1.2); if(k>0&&k<1){ctx.globalAlpha=(1-k)*.8; ctx.strokeStyle=col.sg; ctx.lineWidth=2; ctx.beginPath(); ctx.arc(sx,sy,6+k*46,0,6.283); ctx.stroke();}}
-    ctx.globalAlpha=1; ctx.fillStyle=col.sg; ctx.beginPath(); ctx.arc(sx,sy,5.5,0,6.283); ctx.fill();
-    ctx.strokeStyle=col.bg; ctx.lineWidth=2; ctx.stroke();
+    if(S[2]>0){
+      // Singapore: red dot, one ripple at the start
+      for(const off of [0,.35]){const k=clamp((T-.15-off)/1.2); if(k>0&&k<1){ctx.globalAlpha=(1-k)*.8; ctx.strokeStyle=col.sg; ctx.lineWidth=2; ctx.beginPath(); ctx.arc(sx,sy,6+k*46,0,6.283); ctx.stroke();}}
+      ctx.globalAlpha=1; ctx.fillStyle=col.sg; ctx.beginPath(); ctx.arc(sx,sy,5.5,0,6.283); ctx.fill();
+      ctx.strokeStyle=col.bg; ctx.lineWidth=2; ctx.stroke();}
     // labels, once their country's busiest airport has landed
-    ctx.textBaseline='top'; ctx.lineJoin='round';
+    ctx.textBaseline='top';
     for(const l of labels){if(l.obstacle) continue; const k=clamp((T-(l.r.t0+l.r.dur+.15))/.45); if(!k) continue;
       const dim=hover&&hover.slug!==l.r.slug, dy=(1-k)*6;
       ctx.globalAlpha=k*(dim?.35:1);
       ctx.font='600 13px Barlow, system-ui, sans-serif'; ctx.lineWidth=4; ctx.strokeStyle=col.bg;
       ctx.strokeText(l.txt,l.x,l.y+dy); ctx.fillStyle=col.ink; ctx.fillText(l.txt,l.x,l.y+dy);
       ctx.font='500 12px "JetBrains Mono", monospace'; ctx.strokeText(l.sub,l.x,l.y+16+dy); ctx.fillStyle=col.ink2; ctx.fillText(l.sub,l.x,l.y+16+dy);}
-    const kc=clamp((T-.3)/.5); ctx.globalAlpha=kc; ctx.font='700 12px "Barlow Condensed", sans-serif'; ctx.fillStyle=col.sg;
-    ctx.lineWidth=4; ctx.strokeStyle=col.bg; ctx.strokeText('SINGAPORE · CHANGI',sx+9,sy+7); ctx.fillText('SINGAPORE · CHANGI',sx+9,sy+7);
+    ctx.font='600 12px Barlow, system-ui, sans-serif';
+    for(const n of names){const k=clamp((T-(n.r.t0+n.r.dur+.25))/.4); if(!k) continue;
+      ctx.globalAlpha=k*(hover&&hover.slug!==n.r.slug?.3:.95); ctx.lineWidth=3.5; ctx.strokeStyle=col.bg;
+      ctx.strokeText(n.r.name,n.x,n.y+2); ctx.fillStyle=col.ink; ctx.fillText(n.r.name,n.x,n.y+2);}
+    if(S[2]>0){const kc=clamp((T-.3)/.5); ctx.globalAlpha=kc; ctx.font='700 12px "Barlow Condensed", sans-serif'; ctx.fillStyle=col.sg;
+      ctx.lineWidth=4; ctx.strokeStyle=col.bg; ctx.strokeText('SINGAPORE · CHANGI',sx+9,sy+7); ctx.fillText('SINGAPORE · CHANGI',sx+9,sy+7);}
     ctx.globalAlpha=1;}
   function run(){hover=null; if(tip) tip.hidden=true; start=performance.now(); cancelAnimationFrame(raf);
     const tick=now=>{const T=(now-start)/1000; frame(T); if(T<END) raf=requestAnimationFrame(tick); else {raf=0; frame(99);}};
@@ -1874,22 +1952,44 @@ function ChangiNetwork(opt){
   const still=()=>!raf;
   function repaint(){colours(); if(layout()&&still()) frame(99);}
   function stop(){cancelAnimationFrame(raf); raf=0;}
-  // pointing at a city: highlight its country and show its numbers
   const host=cv.parentElement;
-  host.addEventListener('pointermove',e=>{if(!still()) return;
-    const rc=cv.getBoundingClientRect(), zz=rc.width/W||1, x=(e.clientX-rc.left)/zz, y=(e.clientY-rc.top)/zz;
-    let best=null,bd=14; for(const r of R){const d=Math.hypot(r.b[0]-x,r.b[1]-y); if(d<bd){bd=d; best=r;}}
+  const local=e=>{const rc=cv.getBoundingClientRect(), zz=rc.width/W||1; return [(e.clientX-rc.left)/zz,(e.clientY-rc.top)/zz];};
+  // globe: drag to turn it, wheel or pinch-free buttons to zoom; a drag never counts as a tap
+  let drag=null, moved=false;
+  function zoomBy(f){const z=view.zoom, nz=Math.max(.7,Math.min(GLOBE?2.2:4,z*f)); view.px*=nz/z; view.py*=nz/z; view.zoom=nz; if(raf) stop(); layout(); frame(99);}
+  if(TALK){
+    host.style.touchAction='none';
+    host.addEventListener('pointerdown',e=>{drag={x:e.clientX,y:e.clientY,lon:view.lon,lat:view.lat,px:view.px,py:view.py}; moved=false; host.setPointerCapture(e.pointerId);});
+    host.addEventListener('pointerup',()=>{drag=null;});
+    host.addEventListener('pointercancel',()=>{drag=null;});
+    host.addEventListener('wheel',e=>{e.preventDefault(); zoomBy(Math.exp(-e.deltaY*.0015));},{passive:false});
+  }
+  host.addEventListener('pointermove',e=>{
+    if(drag){const dx=e.clientX-drag.x, dy=e.clientY-drag.y; if(!moved&&Math.hypot(dx,dy)<5) return; moved=true;
+      if(raf) stop(); hover=null; if(tip) tip.hidden=true;
+      if(GLOBE){view.lon=Math.max(60,Math.min(170,drag.lon-dx/GR/RAD*.9)); view.lat=Math.max(-20,Math.min(55,drag.lat+dy/GR/RAD*.9));}
+      else{const lim=Math.max(W,H)*view.zoom*.5; view.px=Math.max(-lim,Math.min(lim,drag.px+dx)); view.py=Math.max(-lim,Math.min(lim,drag.py+dy));}
+      layout(); frame(99); return;}
+    if(!still()) return;
+    const [x,y]=local(e);
+    let best=null,bd=14; for(const r of R){if(r.b[2]<=0) continue; const d=Math.hypot(r.b[0]-x,r.b[1]-y); if(d<bd){bd=d; best=r;}}
     if(best!==hover){hover=best; frame(99); if(opt.onHover) opt.onHover(best);}
     if(!tip) return;
     if(best){tip.hidden=false; tip.style.left=(host.offsetLeft+cv.offsetLeft+best.b[0])+'px'; tip.style.top=(host.offsetTop+cv.offsetTop+best.b[1])+'px';
       tip.innerHTML=`<b>${esc(best.name)}</b> <span style="opacity:.7">${best.code}</span><small>${best.flag} ${esc(best.country)} · ${best.wk?fmt(best.wk)+' flights a week':'some days'} · ${best.air} ${pl(best.air,'airline','airlines')}</small>`;}
     else tip.hidden=true;});
   host.addEventListener('pointerleave',()=>{if(tip) tip.hidden=true; if(hover){hover=null; if(still()) frame(99); if(opt.onHover) opt.onHover(null);}});
-  if(opt.onPick) host.addEventListener('click',()=>opt.onPick(hover));
+  if(opt.onPick) host.addEventListener('click',e=>{if(moved){moved=false; return;}
+    // a tap on a phone has no hover first: find the city under the finger
+    if(!hover){const [x,y]=local(e); let bd=18; for(const r of R){if(r.b[2]<=0) continue; const d=Math.hypot(r.b[0]-x,r.b[1]-y); if(d<bd){bd=d; hover=r;}}}
+    opt.onPick(hover);});
   let rt=0; addEventListener('resize',()=>{clearTimeout(rt); rt=setTimeout(()=>{if(layout()&&still()) frame(99);},120);});
   colours();
   return {run,repaint,stop,
-    start(){colours(); if(layout()){frame(0); run();}}};
+    zoom:zoomBy,
+    reset(){view.lon=116; view.lat=20; view.px=0; view.py=0; view.zoom=z0(); layout(); run();},
+    setGlobe(on){GLOBE=!!on; this.reset();},
+    start(){colours(); if(!this.started){view.zoom=z0(); this.started=1;} if(layout()){frame(0); run();}}};
 }
 
 </script>
@@ -4727,18 +4827,25 @@ if(COUNTRIES.length>1){
       const k=code.split(' ')[0]; if(!lon&&!lat){const ap=(cfg.airports||{})[k]; if(!ap) return; lon=ap[0]; lat=ap[1];}
       const rows=(s.a||[]).filter(r=>!r[4]), wk=rows.reduce((t,r)=>t+wkOf(r),0); totals[slug]=(totals[slug]||0)+wk;
       routes.push({name,code:k,lon,lat,wk,air:new Set(rows.map(r=>r[0])).size||airlines.length,slug,country:(cfg.country||'').replace(/^the /,''),flag:cfg.flag||''});});});
-  let net=null, back=null;
+  let net=null, back=null, mode='map'; try{if(localStorage.getItem('cc_allview')==='globe') mode='globe';}catch(e){}
+  const setMode=m=>{mode=m; try{localStorage.setItem('cc_allview',m);}catch(e){}
+    document.getElementById('arFlat').setAttribute('aria-pressed',String(m==='map')); document.getElementById('arGlobe').setAttribute('aria-pressed',String(m==='globe'));
+    document.getElementById('arHint').textContent=m==='globe'?'Drag to turn the globe, scroll or +/− to zoom. Tap a city to open that country.':'Drag to move, scroll or +/− to zoom in for more city names. Tap a city to open that country.';};
   const close=()=>{if(el.hidden) return; el.hidden=true; if(net) net.stop(); if(back) back.focus();};
   const open=()=>{back=document.activeElement; el.hidden=false;
     const tot=Object.values(totals).reduce((a,b)=>a+b,0);
     document.getElementById('arSub').textContent=`${routes.length} cities in ${COUNTRIES.length} countries · ${tot.toLocaleString('en-GB')} flights a week`;
-    if(!net) net=ChangiNetwork({canvas:document.getElementById('arCv'), tip:document.getElementById('arTip'), routes, totals, grid:GRID,
+    if(!net) net=ChangiNetwork({canvas:document.getElementById('arCv'), tip:document.getElementById('arTip'), routes, totals, grid:GRID, globe:mode==='globe', interactive:true, bold:true, lineScale:.5, geo:GEO,
       colours:{ink:'--ink',ink2:'--ink-2',arc:'--arc',sg:'--sg',bg:'--sea'},
       onPick:r=>{if(!r) return; const i=COUNTRIES.findIndex(c=>c.cfg.slug==='changi-'+r.slug); close(); if(i>=0) loadCountry(i);}});
-    net.start(); document.getElementById('arClose').focus();};
+    setMode(mode); net.start(); document.getElementById('arClose').focus();};
+  document.getElementById('arFlat').onclick=()=>{if(mode!=='map'){setMode('map'); net&&net.setGlobe(false);}};
+  document.getElementById('arGlobe').onclick=()=>{if(mode!=='globe'){setMode('globe'); net&&net.setGlobe(true);}};
   btns.forEach(b=>{b.hidden=false; b.onclick=open;});
   document.getElementById('arClose').onclick=close;
-  document.getElementById('arReplay').onclick=()=>net&&net.run();
+  document.getElementById('arReplay').onclick=()=>net&&net.reset();
+  document.getElementById('arIn').onclick=()=>net&&net.zoom(1.25);
+  document.getElementById('arOut').onclick=()=>net&&net.zoom(.8);
   addEventListener('keydown',e=>{if(e.key==='Escape') close();});
   new MutationObserver(()=>{if(!el.hidden&&net) net.repaint();}).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
   matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{if(!el.hidden&&net) net.repaint();});
