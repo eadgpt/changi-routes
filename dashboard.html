@@ -162,6 +162,17 @@ h3:first-of-type{margin-top:0}
 
 /* watch */
 .watch{display:grid;gap:10px}
+.srcl{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;margin:12px 0 0;font-size:12.5px;line-height:1.4;color:var(--ink-2)}
+.srcl span:last-child{flex:1;min-width:12em}
+.kpisrc{margin:-6px 2px 16px}
+.tagq{flex:none;font:700 11.5px/1 var(--f-display);letter-spacing:.06em;text-transform:uppercase;padding:4px 7px;border-radius:5px;border:1px solid currentColor;white-space:nowrap}
+.tagq.ok{color:var(--up)}
+.tagq.mo{color:var(--arc)}
+.tagq.au{color:var(--ink-2)}
+.how{margin-top:16px}
+.howt td{vertical-align:top;font-size:13.5px;line-height:1.4}
+.howt th{text-align:left}
+.howt td:first-child{font-weight:600;white-space:nowrap}
 .rules{list-style:none;margin:0;padding:0;display:grid;gap:10px}
 .rules li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 10px;font-size:14px;line-height:1.4}
 .rules .rf{font-size:15px;line-height:1.3}
@@ -284,6 +295,7 @@ a.cl:hover{color:var(--arc);border-bottom-color:var(--arc)}
   </section>
 
   <section class="kpis" id="kpis"></section>
+  <p class="srcl kpisrc" id="kpiSrc"></p>
 
   <div class="grid">
     <section class="card news" aria-labelledby="newsH">
@@ -291,7 +303,7 @@ a.cl:hover{color:var(--arc);border-bottom-color:var(--arc)}
       <div class="chips" id="newsChips"></div>
       <ul class="nl" id="newsList"></ul>
       <button class="btn sm more" id="newsMore" type="button" hidden>Show older stories</button>
-      <p class="note">Collected every morning from airline and travel news sites. Only headlines about Changi or Singapore flights.</p>
+      <p class="srcl"><span class="tagq au">Automatic, not checked</span><span>Picked by keyword from 12 airline and travel news feeds every morning. Not read by a person, so an off-topic story can slip in.</span></p>
     </section>
 
     <div class="side">
@@ -299,30 +311,44 @@ a.cl:hover{color:var(--arc);border-bottom-color:var(--arc)}
         <div class="hd"><h2>Flights a week <small>by country</small></h2></div>
         <div class="bars" id="bars"></div>
         <p class="note" id="barsNote"></p>
+        <p class="srcl" id="barsSrc"><span class="tagq mo">Checked monthly</span><span>Estimated from flightsfrom.com timetables (flights a day × days flown).</span></p>
       </section>
 
       <section class="card">
         <div class="hd"><h2>What's changing</h2></div>
         <div id="changes"></div>
+        <p class="srcl"><span class="tagq mo">Checked monthly</span><span>Compares the two newest monthly timetable checks; dates come from the timetables.</span></p>
       </section>
 
       <section class="card" id="rulesCard" hidden>
         <div class="hd"><h2>Travel rules to know <small id="rulesStamp"></small></h2></div>
         <ul class="rules" id="rules"></ul>
+        <p class="srcl"><span class="tagq mo">Checked monthly</span><span>Found by web search in the monthly check; each rule links to its source. Check before you travel.</span></p>
       </section>
 
       <section class="card">
         <div class="hd"><h2>Visitors to Singapore <small id="ivaMonth"></small></h2></div>
         <div id="iva"></div>
+        <p class="srcl"><span class="tagq ok">Official</span><span>Singapore Tourism Board, published on SingStat (the government statistics site). Fetched automatically; about 6 weeks behind.</span></p>
       </section>
 
       <section class="card">
         <div class="hd"><h2>Worth watching</h2><a class="btn sm" id="insLink" href="./#insights">Full insights →</a></div>
         <div class="watch" id="watch"></div>
         <p class="note">Full insights has the rest: who flies each country, who dropped routes, cities with no direct flight, Changi's wish list and expert views.</p>
+        <p class="srcl"><span class="tagq mo">Checked monthly</span><span>Worked out from the timetables. Which airlines count as budget is a list kept by hand.</span></p>
       </section>
     </div>
   </div>
+
+  <section class="card how" aria-labelledby="howH">
+    <div class="hd"><h2 id="howH">Where the numbers come from</h2></div>
+    <div style="overflow-x:auto"><table class="tbl howt">
+      <thead><tr><th>What</th><th>Comes from</th><th>How it's checked</th><th>Trust</th></tr></thead>
+      <tbody id="howRows"></tbody>
+    </table></div>
+    <p class="note">None of the flight numbers are checked against airline or Changi Airport Group figures. They are a careful estimate from public timetables, good for spotting trends, not for exact counts.</p>
+  </section>
 </div>
 
 <script>
@@ -2793,6 +2819,21 @@ function renderRules(){
     return `<li><span class="rf">${FLAG[n]||'🌏'}</span><span>${up?'<span class="soonp">COMING</span>':''}${esc(r.text)}</span>
       <span class="rm">${up?'From':'Since'} ${fd(r.date,1)} · ${r.url?`<a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.src)}</a>`:esc(r.src)}</span></li>`;}).join('');
 }
+function renderSources(){
+  const I=D.insights||{}, ck=fd(dataDate,1), tag=(k,t)=>`<span class="tagq ${k}">${t}</span>`;
+  const OK=tag('ok','Official'), MO=tag('mo','Checked monthly'), AU=tag('au','Automatic, not checked');
+  $('kpiSrc').innerHTML=`${MO}<span>Flights, cities, airlines, starting soon and budget share are estimated from flight timetables, last checked ${ck}. Visitors are official Singapore Tourism Board figures.</span>`;
+  $('barsSrc').querySelector('span:last-child').textContent=`Estimated from flightsfrom.com timetables (flights a day × days flown). Last checked ${ck}.`;
+  const rows=[
+    ['Visitors','Singapore Tourism Board, via SingStat','Official figures, fetched automatically every morning. About 6 weeks behind.',OK],
+    ['Routes and cities','Wikipedia list of Changi airlines and destinations','Compared against the timetables in each monthly check.',MO],
+    ['Flights a week','flightsfrom.com timetables','Estimate: flights a day × days flown. A range like "3–4 a day" is counted as the middle.',MO],
+    ["What's changing",'Two newest monthly checks','Worked out automatically from the timetables saved each month.',MO],
+    ['Budget airline share','Our list of budget airlines','The list is kept by hand. A new airline counts as "other" until added.',MO],
+    ['Travel rules',`Government sites and major news (checked ${I.checked?fd(I.checked,1):'monthly'})`,'Web search in the monthly check; every rule links to its source.',MO],
+    ['Latest news','12 airline and travel news feeds','Picked by keyword every morning. Not read by a person.',AU]];
+  $('howRows').innerHTML=rows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td></tr>`).join('');
+}
 function renderStamp(){
   $('stamp').innerHTML=`${C.length} countries from Changi · timetables checked <b>${fd(dataDate,1)}</b>${NEWS?` · news updated <b>${fd(NEWS.updated||dataDate,1)}</b>`:''}`;
 }
@@ -2802,7 +2843,7 @@ NEWS=D.news?{...D.news,_saved:1}:null; let IVA=D.iva;
 $('hero').style.setProperty('--d','0s');
 document.querySelectorAll('.card').forEach((c,i)=>c.style.setProperty('--d',(.45+i*.09).toFixed(2)+'s'));
 $('wrap').classList.add('go');
-renderKpis(IVA); document.querySelectorAll('.kpi').forEach((c,i)=>c.style.setProperty('--d',(.2+i*.06).toFixed(2)+'s')); renderBars(); renderChanges(); renderIva(IVA); renderWatch(); renderNews(); renderRules(); renderStamp();
+renderKpis(IVA); document.querySelectorAll('.kpi').forEach((c,i)=>c.style.setProperty('--d',(.2+i*.06).toFixed(2)+'s')); renderBars(); renderChanges(); renderIva(IVA); renderWatch(); renderNews(); renderRules(); renderSources(); renderStamp();
 counted=true; setTimeout(()=>{firstNews=false;},50);
 setTimeout(()=>$('wrap').classList.remove('go'),3800);
 
