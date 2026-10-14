@@ -674,7 +674,7 @@ a.fs-btn{text-decoration:none}
 </div>
 <div id="fact" role="dialog" aria-modal="true" aria-label="Country fact sheet" hidden><div class="fs-in" id="factIn"></div></div>
 <div id="ins" role="dialog" aria-modal="true" aria-label="All-country insights" hidden><div class="fs-in" id="insIn"></div></div>
-<div id="stamp" title="When this map was last rebuilt with new data">Last updated 15 Oct 2026, 12:16 am SGT</div>
+<div id="stamp" title="When this map was last rebuilt with new data">Last updated 15 Oct 2026, 12:37 am SGT</div>
 <div id="hint">drag to rotate · scroll to zoom · right-drag to pan · press / to search</div>
 <script>
 /**
@@ -1817,7 +1817,8 @@ function ChangiNetwork(opt){
   const END=Math.max(...R.map(r=>r.t0+r.dur))+.9;
   const land=[]; for(let i=0;i<G.d.length;i+=3) land.push({lon:G.lon0+(G.d[i]+.5)*G.step, lat:G.lat0+(G.d[i+1]+.5)*G.step, hi:G.d[i+2]});
   let W=0,H=0,dpr=1,P=null,start=0,raf=0,hover=null,dots=[],base=null,col={},labels=[],names=[];
-  const z0=()=>GLOBE&&cv.clientWidth<640?1.5:1, view={lon:116,lat:20,zoom:1,px:0,py:0};   // globe: turn + zoom; flat: zoom + slide (px,py) let GR=0,gx=0,gy=0;   // globe: centre of view, radius on screen
+  const z0=()=>TALK&&cv.clientWidth<640?(GLOBE?1.5:1)*.8:1,   // phones open one − step out (user asked)
+    view={lon:116,lat:20,zoom:1,px:0,py:0};   // globe: turn + zoom; flat: zoom + slide (px,py) let GR=0,gx=0,gy=0;   // globe: centre of view, radius on screen
   const tok=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
   const ease=k=>k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2, clamp=k=>Math.max(0,Math.min(1,k));
   function colours(){const c=opt.colours; col={ink:tok(c.ink),ink2:tok(c.ink2),arc:tok(c.arc),sg:tok(c.sg),bg:tok(c.bg)};}
