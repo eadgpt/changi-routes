@@ -428,9 +428,9 @@ body[data-side="right"] #helpCard{right:auto;left:16px}
 .fs-btn:focus-visible{outline:2px solid var(--arc);outline-offset:3px}
 a.fs-btn{text-decoration:none}
 #fact,#ins{position:fixed;inset:0;z-index:20;background:rgba(8,19,28,.45);display:flex;justify-content:center;padding:16px;box-sizing:border-box}
-.fs-in{width:min(1040px,100%);max-height:100%;overflow-y:auto;box-sizing:border-box;background:var(--sea);color:var(--ink);
+.fs-in{--fs-bg:var(--sea);width:min(1040px,100%);max-height:100%;overflow-y:auto;box-sizing:border-box;background:var(--fs-bg);color:var(--ink);
   border-radius:16px;box-shadow:var(--shadow);padding:22px 26px 18px}
-@supports (background:color-mix(in srgb,red,blue)){.fs-in{background:color-mix(in srgb,var(--land) 60%,var(--sea))}}
+@supports (background:color-mix(in srgb,red,blue)){.fs-in{--fs-bg:color-mix(in srgb,var(--land) 60%,var(--sea))}}
 .fs-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
 .fs-top h2{margin:6px 0 2px;font:700 38px/1 "Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.01em}
 .fs-sub{margin:4px 0 0;color:var(--ink-2);font-size:14px}
@@ -572,6 +572,38 @@ body #allFab:hover,body #dashFab:hover{transform:none;box-shadow:var(--shadow);b
   #mapBtn svg,body #allFab svg,body #dashFab svg{width:17px;height:17px}
   body #allFab span,body #dashFab span{display:none}
 }
+
+/* ---- phones: wide tables say they scroll; long pages get a back-to-top button (2026-10-15) ---- */
+.fs-sw{position:relative}
+.fs-sw.more::after{content:"";position:absolute;top:0;right:0;bottom:0;width:36px;pointer-events:none;
+  background:linear-gradient(90deg,transparent,var(--fs-bg))}
+.fs-sw .fs-scroll td:first-child,.fs-sw .fs-scroll th:first-child{position:sticky;left:0;z-index:1;background:var(--fs-bg)}
+.swipe-hint{display:inline-flex;align-items:center;gap:6px;margin:8px 0 2px;padding:4px 10px;border-radius:999px;
+  background:var(--chip);color:var(--ink);font:600 12.5px Barlow,sans-serif;transition:opacity .3s}
+.swipe-hint.gone{opacity:0;pointer-events:none}
+.swipe-hint i{font-style:normal;color:var(--arc);display:inline-block;animation:nudge 1.4s ease-in-out 3}
+@keyframes nudge{0%,100%{transform:none}50%{transform:translateX(4px)}}
+.totop{display:none}
+@media (max-width:760px){
+  .totop{display:grid;place-items:center;position:fixed;right:14px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:40;
+    width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--ink);
+    font:700 20px/1 Barlow,sans-serif;box-shadow:var(--shadow);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .2s,transform .2s}
+  .totop.on{opacity:1;transform:none;pointer-events:auto}
+}
+
+/* phones: "Singaporeans going abroad" as stacked rows (name + number, period + change, then source) — no sideways scroll */
+@media (max-width:760px){
+  .out-t thead{display:none}
+  .out-t,.out-t tbody{display:block;width:100%}
+  .out-t tr{display:grid;grid-template-columns:1fr auto;gap:3px 12px;padding:10px 0;border-bottom:1px solid var(--line)}
+  .out-t td,.fs-sw .fs-scroll .out-t td:first-child{border:0;padding:0;position:static;background:none}
+  .out-t td:nth-child(1){font-weight:600;font-size:15px}
+  .out-t td:nth-child(2){text-align:right;font:600 15px "JetBrains Mono",monospace}
+  .out-t td:nth-child(3){font-size:12.5px;color:var(--ink-2)}
+  .out-t td:nth-child(4){text-align:right;font-size:13px}
+  .out-t td:nth-child(5){grid-column:1/-1;margin-top:2px}
+}
 </style>
 
 </head>
@@ -700,7 +732,7 @@ body #allFab:hover,body #dashFab:hover{transform:none;box-shadow:var(--shadow);b
 </div>
 <div id="fact" role="dialog" aria-modal="true" aria-label="Country fact sheet" hidden><div class="fs-in" id="factIn"></div></div>
 <div id="ins" role="dialog" aria-modal="true" aria-label="All-country insights" hidden><div class="fs-in" id="insIn"></div></div>
-<div id="stamp" title="When this map was last rebuilt with new data">Last updated 15 Oct 2026, 12:27 pm SGT</div>
+<div id="stamp" title="When this map was last rebuilt with new data">Last updated 15 Oct 2026, 12:57 pm SGT</div>
 <div id="hint">drag to rotate · scroll to zoom · right-drag to pan · press / to search</div>
 <script>
 /**
@@ -5036,6 +5068,27 @@ if(COUNTRIES.length>1){
   if(START_HASH==='#all') setTimeout(open,0);
   addEventListener('hashchange',()=>{if(location.hash==='#all') open();});
 }
+
+// ---------- phones: wide tables show they scroll sideways; long pages get a back-to-top button ----------
+function enhanceTables(root){
+  root.querySelectorAll('.fs-scroll').forEach(sc=>{
+    if(sc.parentElement.classList.contains('fs-sw')) {upd(sc); return;}
+    const w=document.createElement('div'); w.className='fs-sw'; sc.before(w); w.appendChild(sc);
+    const hint=document.createElement('div'); hint.className='swipe-hint'; hint.innerHTML='Swipe sideways for more <i>→</i>'; w.before(hint);
+    sc.addEventListener('scroll',()=>{if(sc.scrollLeft>8) hint.classList.add('gone'); upd(sc);},{passive:true});
+    upd(sc);});
+  function upd(sc){const wide=sc.scrollWidth>sc.clientWidth+4, end=sc.scrollLeft+sc.clientWidth>=sc.scrollWidth-4;
+    sc.parentElement.classList.toggle('more',wide&&!end);
+    const hint=sc.parentElement.previousElementSibling; if(hint&&hint.classList.contains('swipe-hint')) hint.hidden=!wide;}
+}
+['insIn','factIn'].forEach(id=>{const box=document.getElementById(id); if(!box) return;
+  let t=0; new MutationObserver(()=>{clearTimeout(t); t=setTimeout(()=>enhanceTables(box),60);}).observe(box,{childList:true,subtree:true});
+  const up=document.createElement('button'); up.type='button'; up.className='totop'; up.setAttribute('aria-label','Back to top'); up.title='Back to top'; up.textContent='↑';
+  box.parentElement.appendChild(up);
+  box.addEventListener('scroll',()=>up.classList.toggle('on',box.scrollTop>500),{passive:true});
+  up.onclick=()=>box.scrollTo({top:0,behavior:'smooth'});
+  new MutationObserver(()=>{if(box.parentElement.hidden) up.classList.remove('on');}).observe(box.parentElement,{attributes:true,attributeFilter:['hidden']});});
+addEventListener('resize',()=>['insIn','factIn'].forEach(id=>{const b=document.getElementById(id); if(b) enhanceTables(b);}));
 </script>
 
 </body>
