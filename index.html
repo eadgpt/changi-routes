@@ -548,6 +548,8 @@ a.fs-btn{text-decoration:none}
 }
 
 .out-t td{vertical-align:top}
+.in-tilehd{margin-bottom:-4px}
+.in-tilehd .in-note{margin:6px 0 0;font-size:13.5px;line-height:1.45}
 .out-src{font-size:13px;line-height:1.35}
 .out-src small{display:block;font-size:12px;color:var(--ink-2);margin-top:2px}
 .out-na{color:var(--ink-2);font-size:12.5px}
@@ -698,7 +700,7 @@ body #allFab:hover,body #dashFab:hover{transform:none;box-shadow:var(--shadow);b
 </div>
 <div id="fact" role="dialog" aria-modal="true" aria-label="Country fact sheet" hidden><div class="fs-in" id="factIn"></div></div>
 <div id="ins" role="dialog" aria-modal="true" aria-label="All-country insights" hidden><div class="fs-in" id="insIn"></div></div>
-<div id="stamp" title="When this map was last rebuilt with new data">Last updated 15 Oct 2026, 11:50 am SGT</div>
+<div id="stamp" title="When this map was last rebuilt with new data">Last updated 15 Oct 2026, 12:27 pm SGT</div>
 <div id="hint">drag to rotate · scroll to zoom · right-drag to pan · press / to search</div>
 <script>
 /**
@@ -4796,6 +4798,13 @@ placeDetail(); render(); requestAnimationFrame(tick); panelNews(CFG);
 // Only the expert notes and the airport's target list come from data/insights.json;
 // every number and every "what the numbers say" line is calculated here, so it stays
 // right whenever a country's timetable file is updated.
+// when the next figures should land: STB visitors ~2–3 weeks after the month after; outbound check runs on the 28th
+const MONS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+function nextVisitors(latest){const [y,m]=String(latest).split(' '); let i=MONS.indexOf(m), yy=+y; if(i<0) return '';
+  const nm=(i+1)%12, ny=yy+(i===11?1:0), rm=(i+2)%12, ry=yy+(i>=10?1:0);
+  return `${MONS[nm]} ${ny} figures, expected mid-to-late ${MONS[rm]} ${ry} (Singapore Tourism Board release), picked up here automatically the next morning`;}
+function next28(){const d=new Date(); d.setHours(0,0,0,0); let n=new Date(d.getFullYear(),d.getMonth(),28); if(n<d) n=new Date(d.getFullYear(),d.getMonth()+1,28);
+  return n.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});}
 // Singaporeans going abroad: each destination's own count of arrivals from Singapore (data/insights.json → outbound, kept by hand)
 function outboundHTML(){
   const O=(INSIGHTS||{}).outbound; if(!O||!(O.rows||[]).length) return '';
@@ -4810,11 +4819,12 @@ function outboundHTML(){
     <td>${chg(r.yoy)}</td>
     <td class="out-src">${r.url?`<a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.source)}</a>`:esc(r.source)}${r.note?`<small>${esc(r.note)}</small>`:''}</td></tr>`;
   const top=same.find(r=>!r.approx);
-  return `<section class="in-full in-top" id="insOut"><h3>Singaporeans going abroad <span class="src">${esc(O.period)} · each destination's own figures · checked ${fd(O.checked)}</span></h3>
+  return `<section class="in-full in-top" id="insOut"><h3>Singaporeans going abroad <span class="src">${esc(O.period)} · each destination's own figures · checked ${fd(O.checked)} · next update ${next28()}</span></h3>
     <p class="in-lead">Singapore counts how many residents leave, but not where they go. These numbers come from the arrival counts each destination publishes for visitors from Singapore${top?`; of the countries with exact ${esc(O.period)} figures, <b>${esc(nm(top.country))}</b> received the most (${top.arrivals.toLocaleString('en-GB')})`:''}.</p>
     <div class="fs-scroll"><table class="fs-t out-t"><thead><tr><th>Destination</th><th class="num">Visitors from Singapore</th><th>Period</th><th>vs a year ago</th><th>Official source</th></tr></thead>
     <tbody>${same.map(row).join('')}${other.map(row).join('')}${none.map(row).join('')}</tbody></table></div>
     <p class="src"><b>How these are checked:</b> every number is copied by hand from the destination's own published table (follow the source link to see it), once a month. ≈ marks a figure worked out from an official share rather than printed directly; "not published" means no official figure exists or could be confirmed, so nothing is guessed.</p>
+    <p class="src"><b>Next update:</b> ${next28()} — the monthly check re-reads every country's latest release; countries that haven't published a new month keep their current row.</p>
     <p class="src">Periods in orange differ from ${esc(O.period)} because that country only publishes longer periods. Countries count differently: some by nationality, some by where the visitor lives, and some include day trips, so compare trends rather than exact numbers between countries.</p></section>`;
 }
 function insightsPage(){
@@ -4905,6 +4915,8 @@ function insightsPage(){
     ${outboundHTML()}
     ${(I.rules||[]).length?`<section class="in-full"><h3>Travel rules to know <span class="src">refreshed by hand once a month · last checked ${fd(I.checked)}</span></h3><ul class="fs-chg in-rules">${I.rules.map(r=>{const c=C.find(x=>x.name.toLowerCase().includes(r.country.toLowerCase())); return `<li><b>${c?c.flag+' ':''}${r.country}</b> ${r.text} <a href="${r.url}" target="_blank" rel="noopener">${r.src} ↗</a></li>`;}).join('')}</ul></section>`:''}
     <section class="in-full in-top" id="insNews"><h3>Latest headlines <span class="src">collected automatically every day</span></h3><p class="in-note">Loading…</p></section>
+    <section class="in-full in-tilehd"><h3>The map in eight numbers <span class="src">the ${C.length} countries on this map · timetables checked ${fd(COUNTRIES.map(c=>c.cfg.dataDate).sort().pop())}</span></h3>
+      <p class="in-note">Totals for every direct Changi flight to the countries on this map. <b>Routes dropped</b> (red) = routes airlines stopped flying since 2024. <b>Airports with no direct flight</b> (grey) = airports in these countries you can only reach by changing planes. Countries not on the map are left out; the dashboard has the whole-of-Changi totals.</p></section>
     <div class="fs-tiles">
       ${tile(T.tot.toLocaleString(),'flights a week')}${tile(cityCount,'airports with direct flights')}${tile(allAir.size,'airlines flying')}${tile(pct(T.sg,T.tot)+'%','flown by Singapore Airlines + Scoot')}
       ${tile(pct(T.bud,T.tot)+'%','flown by budget airlines')}${tile(C.reduce((t,c)=>t+c.solo.length,0),'cities with only one airline')}${tile(allLost.length,'routes dropped','lost')}${tile(C.reduce((t,c)=>t+c.gaps.length,0),'airports with no direct flight','grey')}
@@ -4971,6 +4983,7 @@ function insightsPage(){
          <div class="fs-scroll"><table class="fs-t" style="margin-top:10px"><thead><tr><th>From</th><th class="num">${mf(L)}</th><th>vs last month</th><th>vs ${mf(lyK)}</th><th class="num">Jan–${m} ${y}</th><th>vs Jan–${m} ${y-1}</th></tr></thead>
          <tbody>${rows.map(r=>`<tr><td>${r.flag} ${nameOf(r.k)}</td><td class="num">${r.n.toLocaleString()}</td><td>${chg(r.pm,'')}</td><td>${chg(r.py,'')}</td><td class="num">${r.yt.toLocaleString()}</td><td>${chg(r.yp,'')}</td></tr>`).join('')}
          ${regs.map(r=>`<tr class="in-reg"><td>${r.k} <small>region total</small></td><td class="num">${(r.n||0).toLocaleString()}</td><td></td><td>${chg(r.py,'')}</td><td></td><td></td></tr>`).join('')}</tbody></table></div>
+         <p class="src"><b>Next update:</b> ${nextVisitors(L)}.</p>
          <p class="src">Visitors by country they live in (not flights). STB releases each month's numbers around the 2nd–3rd week of the next month; this page picks them up the next morning. <a href="https://tablebuilder.singstat.gov.sg/table/TS/M550001" target="_blank" rel="noopener">SingStat table ↗</a></p>`;
      }).catch(()=>{box.innerHTML='<h3>Visitors to Singapore</h3><p class="in-note">Visitor numbers could not load here.</p>';});};
    const loadNews=()=>{const box=document.getElementById('insNews'); if(!box) return;

@@ -110,6 +110,10 @@ h1{font:700 34px/1.05 var(--f-display);margin:6px 0 4px;text-wrap:balance}
 .keyt .kv{display:block;font:700 30px/1.05 var(--f-display);font-variant-numeric:tabular-nums;color:var(--ink)}
 .keyt .ks{display:block;margin-top:3px;font-size:12.5px;line-height:1.35;color:var(--ink-2)}
 .keyt td.all .kv{color:var(--ink-2)}
+.keyintro{margin:-4px 0 12px;font-size:13.5px;line-height:1.45;color:var(--ink-2)}
+.keyintro b{color:var(--ink);font-weight:600}
+.keycheck{margin:12px 0 0;padding:10px 12px;border-radius:8px;background:var(--chip);font-size:13px;line-height:1.45;color:var(--ink-2)}
+.keycheck b{color:var(--ink);font-weight:600}
 .keytop{margin-top:14px;border-top:1px solid var(--line);padding-top:12px}
 .kth{display:block;font:600 13px/1.3 var(--f-display);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);margin-bottom:8px}
 .keytop ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px 16px}
@@ -315,7 +319,9 @@ a.cl:hover{color:var(--arc);border-bottom-color:var(--arc)}
 
     <section class="card keyc" aria-labelledby="keyH">
       <div class="hd"><h2 id="keyH">Key numbers</h2></div>
+      <p class="keyintro">Changi's direct passenger flights, split three ways: the <b>9 countries on the map</b>, the <b>rest of the world</b> (every other country Changi flies to), and <b>all of Changi</b> together. Flights are departures from Changi in a normal week.</p>
       <div class="kpis" id="kpis"></div>
+      <p class="keycheck" id="keyCheck"></p>
       <p class="srcl" id="kpiSrc"></p>
     </section>
     </div>
@@ -329,6 +335,25 @@ a.cl:hover{color:var(--arc);border-bottom-color:var(--arc)}
       </section>
 
       <section class="card">
+        <div class="hd"><h2>Visitors to Singapore <small id="ivaMonth"></small></h2></div>
+        <div id="iva"></div>
+        <p class="srcl"><span class="tagq ok">Official</span><span>Singapore Tourism Board, published on SingStat (the government statistics site). Fetched automatically; about 6 weeks behind.</span></p>
+        <p class="note" id="ivaNext"></p>
+      </section>
+
+      <section class="card" id="outCard" hidden>
+        <div class="hd"><h2>Singaporeans going abroad <small id="outPeriod"></small></h2><a class="btn sm" id="outLink" href="./#insights">Details →</a></div>
+        <div id="out"></div>
+      </section>
+
+      <section class="card">
+        <div class="hd"><h2>Worth watching</h2><a class="btn sm" id="insLink" href="./#insights">Full insights →</a></div>
+        <div class="watch" id="watch"></div>
+        <p class="note">Full insights has the rest: who flies each country, who dropped routes, cities with no direct flight, Changi's wish list and expert views.</p>
+        <p class="srcl"><span class="tagq mo">Checked monthly</span><span>Worked out from the timetables. Which airlines count as budget is a list kept by hand.</span></p>
+      </section>
+
+      <section class="card">
         <div class="hd"><h2>What's changing</h2></div>
         <div id="changes"></div>
         <p class="srcl"><span class="tagq mo">Checked monthly</span><span>Compares the two newest monthly timetable checks; dates come from the timetables.</span></p>
@@ -338,19 +363,6 @@ a.cl:hover{color:var(--arc);border-bottom-color:var(--arc)}
         <div class="hd"><h2>Travel rules to know <small id="rulesStamp"></small></h2></div>
         <ul class="rules" id="rules"></ul>
         <p class="srcl"><span class="tagq mo">Checked monthly</span><span>Found by web search in the monthly check; each rule links to its source. Check before you travel.</span></p>
-      </section>
-
-      <section class="card">
-        <div class="hd"><h2>Visitors to Singapore <small id="ivaMonth"></small></h2></div>
-        <div id="iva"></div>
-        <p class="srcl"><span class="tagq ok">Official</span><span>Singapore Tourism Board, published on SingStat (the government statistics site). Fetched automatically; about 6 weeks behind.</span></p>
-      </section>
-
-      <section class="card">
-        <div class="hd"><h2>Worth watching</h2><a class="btn sm" id="insLink" href="./#insights">Full insights →</a></div>
-        <div class="watch" id="watch"></div>
-        <p class="note">Full insights has the rest: who flies each country, who dropped routes, cities with no direct flight, Changi's wish list and expert views.</p>
-        <p class="srcl"><span class="tagq mo">Checked monthly</span><span>Worked out from the timetables. Which airlines count as budget is a list kept by hand.</span></p>
       </section>
     </div>
   </div>
@@ -2936,6 +2948,8 @@ const WORLD=(()=>{const w=D.world||{routes:[]}; const live=w.routes.filter(r=>r.
 const flagCC=cc=>String.fromCodePoint(...[...cc.toUpperCase()].map(ch=>127397+ch.charCodeAt(0)));
 const NICE={'USA':'United States','Turkiye':'Türkiye','Brunei Darussalam':'Brunei','United Arab Emirates':'UAE'};
 const MAP_IVA=['China','Hong Kong SAR','Japan','South Korea','Thailand','Malaysia','Indonesia','Philippines','Vietnam'];
+function renderCheck(allTot,allCities,allCountries,allAir){
+  $('keyCheck').innerHTML=`<b>Cross-check with Changi Airport Group:</b> about 100 airlines and 7,300+ weekly flights counting arrivals and departures (≈3,650 departures), to 170+ cities in 50 countries (Jan 2026); 32,100 take-offs and landings in Aug 2026 (≈3,600 departures a week, cargo included). Our totals: ${fmtN(allTot)} departures, ${allCities} cities in ${allCountries} countries, ${allAir} passenger airlines — in line. <a href="https://www.changiairport.com/en/corporate/about-us/traffic-statistics.html" target="_blank" rel="noopener">Changi traffic figures</a> · <a href="https://airport-world.com/strong-traffic-growth-continues-at-singapore-changi/" target="_blank" rel="noopener">Airport World, Jan 2026</a>`;}
 function renderKpis(iva){
   const v=ivaNums(iva), mapV=v?MAP_IVA.reduce((t,k)=>t+((v.S[k]||{})[v.month]||0),0):0;
   const allAir=new Set([...T.air,...WORLD.air]), allTot=T.tot+WORLD.tot, allBud=Math.round((budWk+WORLD.bud*WORLD.tot/100)*100/Math.max(1,allTot));
@@ -2952,6 +2966,7 @@ function renderKpis(iva){
   $('kpis').innerHTML=`<table class="keyt"><thead><tr><th></th><th class="hi">On the map<small>${C.length} countries</small></th><th>Rest of the world<small>${WORLD.countries} countries</small></th><th>All of Changi</th></tr></thead>
     <tbody>${rows.map(r=>`<tr><td>${r[0]}</td>${r.slice(1).join('')}</tr>`).join('')}</tbody></table>
     ${WORLD.top.length?`<div class="keytop"><span class="kth">Biggest outside the map</span><ol>${WORLD.top.slice(0,6).map(c=>`<li><span>${flagCC(c.cc)} ${esc(NICE[c.name]||c.name)}</span><b>${fmtN(c.wk)}</b><small>flights a week · ${c.cities} ${pl(c.cities,'city','cities')}</small></li>`).join('')}</ol></div>`:''}`;
+  renderCheck(allTot, T.served+WORLD.cities, C.length+WORLD.countries, allAir.size);
   $('kpis').querySelectorAll('.odo').forEach((el,i)=>countUp(el,i%6));
   if(!counted) requestAnimationFrame(()=>requestAnimationFrame(()=>$('kpis').classList.add('roll')));
 }
@@ -2994,9 +3009,12 @@ function ivaNums(iva){
   const tot=S.Total[m], last=S.Total[ly]; if(!tot) return null;
   return {month:m, tot, yoy:last?(tot-last)*100/last:0, ly, S};
 }
+function nextVisitors(latest){const [y,m]=String(latest).split(' '); const i=MON.indexOf(m), yy=+y; if(i<0) return '';
+  return `${MON[(i+1)%12]} ${yy+(i===11?1:0)} figures, expected mid-to-late ${MON[(i+2)%12]} ${yy+(i>=10?1:0)}; this page picks them up automatically the next morning`;}
 function renderIva(iva){
   const v=ivaNums(iva); if(!v){$('iva').innerHTML='<p class="note" style="margin:0">Visitor numbers not available right now.</p>'; return;}
   $('ivaMonth').textContent=v.month.split(' ').reverse().join(' ');
+  $('ivaNext').innerHTML=`<b>Next update:</b> ${nextVisitors(v.month)}.`;
   const rows=C.map(c=>{const k=IVA_NAME[c.name]||c.name, s=v.S[k]||{}; return {c, n:s[v.month], o:s[v.ly]};}).filter(r=>r.n).sort((a,b)=>b.n-a.n);
   $('iva').innerHTML=`<div style="overflow-x:auto"><table class="tbl"><thead><tr><th>From</th><th>Visitors</th><th>vs a year ago</th></tr></thead><tbody>${rows.map(r=>{const p=r.o?(r.n-r.o)*100/r.o:null;
     return `<tr><td>${r.c.flag} ${esc(r.c.name.replace(/^the /,''))}</td><td class="num">${fmtN(r.n)}</td><td class="num ${p===null?'flat':p>=0?'up':'down'}">${p===null?'—':(p>=0?'+':'')+p.toFixed(1)+'%'}</td></tr>`;}).join('')}</tbody></table></div>
@@ -3065,6 +3083,21 @@ function renderSources(){
     ['Latest news','12 airline and travel news feeds','Picked by keyword every morning. Not read by a person.',AU]];
   $('howRows').innerHTML=rows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td></tr>`).join('');
 }
+// Singaporeans going abroad: each destination's own count (map's Insights page has the full table and sources)
+const next28=()=>{const d=new Date(TODAY); let n=new Date(d.getFullYear(),d.getMonth(),28); if(n<d) n=new Date(d.getFullYear(),d.getMonth()+1,28); return fd(`${n.getFullYear()}-${String(n.getMonth()+1).padStart(2,'0')}-28`,1);};
+function renderOut(){
+  const O=(D.insights||{}).outbound; if(!O||!(O.rows||[]).length) return;
+  const FL={Australia:'🇦🇺',Taiwan:'🇹🇼','New Zealand':'🇳🇿'}; C.forEach(c=>{FL[c.name.replace(/^the /,'')]=c.flag;});
+  const rows=O.rows.filter(r=>r.arrivals!=null&&r.period===O.period&&!r.approx).sort((a,b)=>b.arrivals-a.arrivals);
+  const longer=O.rows.filter(r=>r.arrivals!=null&&r.period!==O.period);
+  $('outCard').hidden=false; $('outPeriod').textContent=O.period;
+  $('out').innerHTML=`<div style="overflow-x:auto"><table class="tbl"><thead><tr><th>To</th><th>From Singapore</th><th>vs a year ago</th></tr></thead><tbody>${rows.map(r=>{const n=r.country.replace(/^the /,'');
+      return `<tr><td>${FL[n]||'🌏'} ${esc(n)}</td><td class="num">${fmtN(r.arrivals)}</td><td class="num ${r.yoy==null?'flat':r.yoy>=0?'up':'down'}">${r.yoy==null?'—':(r.yoy>=0?'+':'')+r.yoy.toFixed(1)+'%'}</td></tr>`;}).join('')}</tbody></table></div>
+    ${longer.length?`<p class="note">Longer periods only: ${longer.map(r=>`${FL[r.country.replace(/^the /,'')]||''} ${esc(r.country.replace(/^the /,''))} ${fmtN(r.arrivals)} (${esc(r.period)})`).join(' · ')}.</p>`:''}
+    <p class="srcl"><span class="tagq ok">Official</span><span>Each destination's own arrival figures for visitors from Singapore (Singapore doesn't publish where residents go). Checked ${fd(O.checked,1)}. Sources for every row in the map's Insights page.</span></p>
+    <p class="note"><b>Next update:</b> ${next28()}, when the monthly check reads each country's newest release; countries that haven't published a new month keep their current figure.</p>`;
+  $('outLink').href=mapHref('insights'); if(NEWTAB){$('outLink').target='_blank'; $('outLink').rel='noopener';}
+}
 function renderStamp(){
   $('stamp').innerHTML=`${C.length} countries from Changi · timetables checked <b>${fd(dataDate,1)}</b>${NEWS?` · news updated <b>${fd(NEWS.updated||dataDate,1)}</b>`:''}`;
 }
@@ -3074,7 +3107,7 @@ NEWS=D.news?{...D.news,_saved:1}:null; let IVA=D.iva;
 $('hero').style.setProperty('--d','0s');
 document.querySelectorAll('.card').forEach((c,i)=>c.style.setProperty('--d',(.45+i*.09).toFixed(2)+'s'));
 $('wrap').classList.add('go');
-renderKpis(IVA); renderBars(); renderChanges(); renderIva(IVA); renderWatch(); renderNews(); renderRules(); renderSources(); renderStamp();
+renderKpis(IVA); renderBars(); renderChanges(); renderIva(IVA); renderWatch(); renderNews(); renderRules(); renderOut(); renderSources(); renderStamp();
 counted=true; setTimeout(()=>{firstNews=false;},50);
 setTimeout(()=>$('wrap').classList.remove('go'),3800);
 
