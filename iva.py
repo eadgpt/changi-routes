@@ -61,6 +61,31 @@ try:   # overnight visitors + average stay; never block the main numbers
 except Exception as e:
     print('extra stats skipped:', e)
 
-OUT.write_text(json.dumps({'source': 'Singapore Tourism Board via SingStat (tables M550001, M550071, M550281)', 'updated': arr.get('dataLastUpdated'),
-                           'latest': latest, 'regions': regions, 'countries': countries, 'series': series, 'extra': extra}, ensure_ascii=False, indent=1))
+# Months added by hand from STB's own STAN dashboard (stan.stb.gov.sg) arrive here a few weeks before SingStat has them.
+# Keep them until SingStat catches up, then check the two agree (SingStat's numbers win).
+stb = None
+try:
+    old = json.loads(OUT.read_text())
+    stb = old.get('stb')
+    if stb:
+        still = []
+        for mo in stb.get('months', []):
+            if mo in series['Total']:   # SingStat has it now: compare, then drop the STAN copy
+                diff = [k for k in series if mo in series[k] and old['series'].get(k, {}).get(mo) not in (None, series[k][mo])]
+                print(f'{mo}: SingStat now has it; STAN copy {"matches" if not diff else "DIFFERS for " + ", ".join(diff)}')
+            else:
+                still.append(mo)
+                for k in series:
+                    if mo in old['series'].get(k, {}): series[k][mo] = old['series'][k][mo]
+                for k in extra:
+                    if mo in old.get('extra', {}).get(k, {}): extra[k][mo] = old['extra'][k][mo]
+        stb = {**stb, 'months': still} if still else None
+        if still: latest = max(series['Total'], key=lambda k: int(k[:4]) * 12 + MON.index(k[5:]))
+except Exception as e:
+    print('STAN months not carried over:', e)
+
+out = {'source': 'Singapore Tourism Board via SingStat (tables M550001, M550071, M550281)', 'updated': arr.get('dataLastUpdated'),
+       'latest': latest, 'regions': regions, 'countries': countries, 'series': series, 'extra': extra}
+if stb: out['stb'] = stb
+OUT.write_text(json.dumps(out, ensure_ascii=False, indent=1))
 print(f'latest month {latest}, {len(countries)} countries, extra: {list(extra)}')

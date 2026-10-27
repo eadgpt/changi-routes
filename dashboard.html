@@ -337,7 +337,7 @@ a.cl:hover{color:var(--arc);border-bottom-color:var(--arc)}
       <section class="card">
         <div class="hd"><h2>Visitors to Singapore <small id="ivaMonth"></small></h2></div>
         <div id="iva"></div>
-        <p class="srcl"><span class="tagq ok">Official</span><span>Singapore Tourism Board, published on SingStat (the government statistics site). Fetched automatically; about 6 weeks behind.</span></p>
+        <p class="srcl"><span class="tagq ok">Official</span><span>Singapore Tourism Board. Newest month read from STB's own STAN dashboard; older months fetched automatically from SingStat (the government statistics site), and the two are checked against each other.</span></p>
         <p class="note" id="ivaNext"></p>
       </section>
 
@@ -1037,7 +1037,7 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
 },"iva":{
  "source": "Singapore Tourism Board via SingStat (tables M550001, M550071, M550281)",
  "updated": "05/10/2026",
- "latest": "2026 Aug",
+ "latest": "2026 Sep",
  "regions": [
   "Southeast Asia",
   "Greater China",
@@ -1120,7 +1120,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 1241170,
    "2026 Jun": 1184532,
    "2026 Jul": 1631241,
-   "2026 Aug": 1605019
+   "2026 Aug": 1605019,
+   "2026 Sep": 1227035
   },
   "Southeast Asia": {
    "2024 Aug": 398577,
@@ -1147,7 +1148,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 434530,
    "2026 Jun": 425678,
    "2026 Jul": 444976,
-   "2026 Aug": 398731
+   "2026 Aug": 398731,
+   "2026 Sep": 384686
   },
   "Brunei Darussalam": {
    "2024 Aug": 5679,
@@ -1174,7 +1176,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 4259,
    "2026 Jun": 3916,
    "2026 Jul": 4071,
-   "2026 Aug": 6098
+   "2026 Aug": 6098,
+   "2026 Sep": 3526
   },
   "Indonesia": {
    "2024 Aug": 163910,
@@ -1201,7 +1204,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 170126,
    "2026 Jun": 184565,
    "2026 Jul": 194868,
-   "2026 Aug": 161684
+   "2026 Aug": 161684,
+   "2026 Sep": 154566
   },
   "Malaysia": {
    "2024 Aug": 79895,
@@ -1228,7 +1232,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 111905,
    "2026 Jun": 94549,
    "2026 Jul": 86888,
-   "2026 Aug": 94204
+   "2026 Aug": 94204,
+   "2026 Sep": 108068
   },
   "Myanmar": {
    "2024 Aug": 9852,
@@ -1255,7 +1260,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 16996,
    "2026 Jun": 15129,
    "2026 Jul": 17566,
-   "2026 Aug": 15775
+   "2026 Aug": 15775,
+   "2026 Sep": 14918
   },
   "Philippines": {
    "2024 Aug": 60174,
@@ -1282,7 +1288,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 68985,
    "2026 Jun": 56904,
    "2026 Jul": 55104,
-   "2026 Aug": 51152
+   "2026 Aug": 51152,
+   "2026 Sep": 47156
   },
   "Thailand": {
    "2024 Aug": 27966,
@@ -1309,7 +1316,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 30067,
    "2026 Jun": 23190,
    "2026 Jul": 34514,
-   "2026 Aug": 24690
+   "2026 Aug": 24690,
+   "2026 Sep": 24827
   },
   "Vietnam": {
    "2024 Aug": 43400,
@@ -1336,7 +1344,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 24778,
    "2026 Jun": 40051,
    "2026 Jul": 41307,
-   "2026 Aug": 36346
+   "2026 Aug": 36346,
+   "2026 Sep": 23938
   },
   "Greater China": {
    "2024 Aug": 484556,
@@ -1363,7 +1372,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 259071,
    "2026 Jun": 260124,
    "2026 Jul": 530316,
-   "2026 Aug": 525304
+   "2026 Aug": 525304,
+   "2026 Sep": 278249
   },
   "China": {
    "2024 Aug": 403138,
@@ -1390,7 +1400,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 204643,
    "2026 Jun": 197106,
    "2026 Jul": 429780,
-   "2026 Aug": 435442
+   "2026 Aug": 435442,
+   "2026 Sep": 218674
   },
   "Hong Kong SAR": {
    "2024 Aug": 35682,
@@ -1417,7 +1428,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 23958,
    "2026 Jun": 25553,
    "2026 Jul": 38213,
-   "2026 Aug": 35779
+   "2026 Aug": 35779,
+   "2026 Sep": 22554
   },
   "Taiwan": {
    "2024 Aug": 42282,
@@ -1444,7 +1456,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 29209,
    "2026 Jun": 35769,
    "2026 Jul": 58465,
-   "2026 Aug": 50589
+   "2026 Aug": 50589,
+   "2026 Sep": 35564
   },
   "North Asia": {
    "2024 Aug": 142900,
@@ -1471,7 +1484,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 76918,
    "2026 Jun": 66792,
    "2026 Jul": 103342,
-   "2026 Aug": 146051
+   "2026 Aug": 146051,
+   "2026 Sep": 108688
   },
   "Japan": {
    "2024 Aug": 81803,
@@ -1498,7 +1512,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 44950,
    "2026 Jun": 37866,
    "2026 Jul": 57380,
-   "2026 Aug": 92964
+   "2026 Aug": 92964,
+   "2026 Sep": 75408
   },
   "South Korea": {
    "2024 Aug": 60986,
@@ -1525,7 +1540,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 31917,
    "2026 Jun": 28873,
    "2026 Jul": 45873,
-   "2026 Aug": 53016
+   "2026 Aug": 53016,
+   "2026 Sep": 33237
   },
   "South Asia": {
    "2024 Aug": 113390,
@@ -1552,7 +1568,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 163605,
    "2026 Jun": 125264,
    "2026 Jul": 113754,
-   "2026 Aug": 113819
+   "2026 Aug": 113819,
+   "2026 Sep": 110298
   },
   "Bangladesh": {
    "2024 Aug": 11027,
@@ -1579,7 +1596,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 11172,
    "2026 Jun": 10299,
    "2026 Jul": 13051,
-   "2026 Aug": 12883
+   "2026 Aug": 12883,
+   "2026 Sep": 12358
   },
   "India": {
    "2024 Aug": 91805,
@@ -1606,7 +1624,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 144010,
    "2026 Jun": 105985,
    "2026 Jul": 88457,
-   "2026 Aug": 87765
+   "2026 Aug": 87765,
+   "2026 Sep": 87730
   },
   "Pakistan": {
    "2024 Aug": 1717,
@@ -1633,7 +1652,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 1174,
    "2026 Jun": 2094,
    "2026 Jul": 3394,
-   "2026 Aug": 2076
+   "2026 Aug": 2076,
+   "2026 Sep": 1629
   },
   "Sri Lanka": {
    "2024 Aug": 5767,
@@ -1660,7 +1680,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 4822,
    "2026 Jun": 4809,
    "2026 Jul": 5901,
-   "2026 Aug": 8453
+   "2026 Aug": 8453,
+   "2026 Sep": 6133
   },
   "West Asia": {
    "2024 Aug": 21344,
@@ -1687,7 +1708,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 13932,
    "2026 Jun": 11630,
    "2026 Jul": 22499,
-   "2026 Aug": 23198
+   "2026 Aug": 23198,
+   "2026 Sep": 13431
   },
   "Iran": {
    "2024 Aug": 521,
@@ -1714,7 +1736,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 33,
    "2026 Jun": 75,
    "2026 Jul": 110,
-   "2026 Aug": 313
+   "2026 Aug": 313,
+   "2026 Sep": 376
   },
   "Israel": {
    "2024 Aug": 1299,
@@ -1741,7 +1764,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 1819,
    "2026 Jun": 1676,
    "2026 Jul": 2548,
-   "2026 Aug": 2518
+   "2026 Aug": 2518,
+   "2026 Sep": 2324
   },
   "Kuwait": {
    "2024 Aug": 1957,
@@ -1768,7 +1792,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 77,
    "2026 Jun": 262,
    "2026 Jul": 411,
-   "2026 Aug": 697
+   "2026 Aug": 697,
+   "2026 Sep": 306
   },
   "Saudi Arabia": {
    "2024 Aug": 3065,
@@ -1795,7 +1820,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 1615,
    "2026 Jun": 1808,
    "2026 Jul": 4013,
-   "2026 Aug": 3453
+   "2026 Aug": 3453,
+   "2026 Sep": 2032
   },
   "United Arab Emirates": {
    "2024 Aug": 10764,
@@ -1822,7 +1848,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 8455,
    "2026 Jun": 5524,
    "2026 Jul": 10791,
-   "2026 Aug": 11415
+   "2026 Aug": 11415,
+   "2026 Sep": 6044
   },
   "Americas": {
    "2024 Aug": 67753,
@@ -1849,7 +1876,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 68019,
    "2026 Jun": 73490,
    "2026 Jul": 83391,
-   "2026 Aug": 68761
+   "2026 Aug": 68761,
+   "2026 Sep": 59283
   },
   "Canada": {
    "2024 Aug": 10796,
@@ -1876,7 +1904,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 10364,
    "2026 Jun": 7211,
    "2026 Jul": 11104,
-   "2026 Aug": 11276
+   "2026 Aug": 11276,
+   "2026 Sep": 7879
   },
   "USA": {
    "2024 Aug": 51082,
@@ -1903,7 +1932,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 50390,
    "2026 Jun": 61082,
    "2026 Jul": 65306,
-   "2026 Aug": 51446
+   "2026 Aug": 51446,
+   "2026 Sep": 44929
   },
   "Europe": {
    "2024 Aug": 204247,
@@ -1930,7 +1960,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 119998,
    "2026 Jun": 102358,
    "2026 Jul": 181045,
-   "2026 Aug": 213836
+   "2026 Aug": 213836,
+   "2026 Sep": 133291
   },
   "Belgium & Luxembourg": {
    "2024 Aug": 4458,
@@ -1957,7 +1988,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 2404,
    "2026 Jun": 2055,
    "2026 Jul": 5988,
-   "2026 Aug": 4518
+   "2026 Aug": 4518,
+   "2026 Sep": 3021
   },
   "Denmark": {
    "2024 Aug": 1988,
@@ -1984,7 +2016,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 1441,
    "2026 Jun": 1461,
    "2026 Jul": 3859,
-   "2026 Aug": 1996
+   "2026 Aug": 1996,
+   "2026 Sep": 1761
   },
   "Finland": {
    "2024 Aug": 832,
@@ -2011,7 +2044,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 1438,
    "2026 Jun": 1470,
    "2026 Jul": 1313,
-   "2026 Aug": 964
+   "2026 Aug": 964,
+   "2026 Sep": 1233
   },
   "France": {
    "2024 Aug": 26916,
@@ -2038,7 +2072,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 13574,
    "2026 Jun": 10569,
    "2026 Jul": 21750,
-   "2026 Aug": 29052
+   "2026 Aug": 29052,
+   "2026 Sep": 12519
   },
   "Germany": {
    "2024 Aug": 27501,
@@ -2065,7 +2100,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 22358,
    "2026 Jun": 14105,
    "2026 Jul": 24357,
-   "2026 Aug": 30917
+   "2026 Aug": 30917,
+   "2026 Sep": 23065
   },
   "Italy": {
    "2024 Aug": 29522,
@@ -2092,7 +2128,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 4037,
    "2026 Jun": 5401,
    "2026 Jul": 9042,
-   "2026 Aug": 28406
+   "2026 Aug": 28406,
+   "2026 Sep": 7042
   },
   "Netherlands": {
    "2024 Aug": 12682,
@@ -2119,7 +2156,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 6945,
    "2026 Jun": 4998,
    "2026 Jul": 13743,
-   "2026 Aug": 11491
+   "2026 Aug": 11491,
+   "2026 Sep": 6679
   },
   "Norway": {
    "2024 Aug": 1467,
@@ -2146,7 +2184,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 1103,
    "2026 Jun": 2038,
    "2026 Jul": 3573,
-   "2026 Aug": 1409
+   "2026 Aug": 1409,
+   "2026 Sep": 1416
   },
   "Rep Of Ireland": {
    "2024 Aug": 2028,
@@ -2173,7 +2212,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 1622,
    "2026 Jun": 2088,
    "2026 Jul": 2461,
-   "2026 Aug": 1995
+   "2026 Aug": 1995,
+   "2026 Sep": 1702
   },
   "Russian Federation": {
    "2024 Aug": 3498,
@@ -2200,7 +2240,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 3457,
    "2026 Jun": 3365,
    "2026 Jul": 4938,
-   "2026 Aug": 4812
+   "2026 Aug": 4812,
+   "2026 Sep": 3470
   },
   "Spain": {
    "2024 Aug": 13721,
@@ -2227,7 +2268,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 3397,
    "2026 Jun": 4266,
    "2026 Jul": 8488,
-   "2026 Aug": 12989
+   "2026 Aug": 12989,
+   "2026 Sep": 6317
   },
   "Sweden": {
    "2024 Aug": 1442,
@@ -2254,7 +2296,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 1283,
    "2026 Jun": 1662,
    "2026 Jul": 2131,
-   "2026 Aug": 1516
+   "2026 Aug": 1516,
+   "2026 Sep": 1545
   },
   "Switzerland": {
    "2024 Aug": 7359,
@@ -2281,7 +2324,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 5791,
    "2026 Jun": 4721,
    "2026 Jul": 10569,
-   "2026 Aug": 6997
+   "2026 Aug": 6997,
+   "2026 Sep": 6544
   },
   "United Kingdom": {
    "2024 Aug": 47305,
@@ -2308,7 +2352,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 31879,
    "2026 Jun": 27780,
    "2026 Jul": 42159,
-   "2026 Aug": 50100
+   "2026 Aug": 50100,
+   "2026 Sep": 35999
   },
   "Oceania": {
    "2024 Aug": 100001,
@@ -2335,7 +2380,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 98714,
    "2026 Jun": 112635,
    "2026 Jul": 142521,
-   "2026 Aug": 105365
+   "2026 Aug": 105365,
+   "2026 Sep": 131791
   },
   "Australia": {
    "2024 Aug": 82959,
@@ -2362,7 +2408,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 83512,
    "2026 Jun": 95231,
    "2026 Jul": 121491,
-   "2026 Aug": 86568
+   "2026 Aug": 86568,
+   "2026 Sep": 112538
   },
   "New Zealand": {
    "2024 Aug": 14070,
@@ -2389,7 +2436,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 12787,
    "2026 Jun": 14495,
    "2026 Jul": 18461,
-   "2026 Aug": 15180
+   "2026 Aug": 15180,
+   "2026 Sep": 16580
   },
   "Africa": {
    "2024 Aug": 7027,
@@ -2416,7 +2464,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 6344,
    "2026 Jun": 6519,
    "2026 Jul": 9338,
-   "2026 Aug": 9900
+   "2026 Aug": 9900,
+   "2026 Sep": 7290
   },
   "Egypt": {
    "2024 Aug": 244,
@@ -2443,7 +2492,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 206,
    "2026 Jun": 185,
    "2026 Jul": 245,
-   "2026 Aug": 257
+   "2026 Aug": 257,
+   "2026 Sep": 309
   },
   "Mauritius": {
    "2024 Aug": 504,
@@ -2470,7 +2520,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 305,
    "2026 Jun": 231,
    "2026 Jul": 492,
-   "2026 Aug": 589
+   "2026 Aug": 589,
+   "2026 Sep": 272
   },
   "South Africa (Rep Of)": {
    "2024 Aug": 1902,
@@ -2497,7 +2548,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 2176,
    "2026 Jun": 2847,
    "2026 Jul": 3536,
-   "2026 Aug": 2200
+   "2026 Aug": 2200,
+   "2026 Sep": 2891
   },
   "Others": {
    "2024 Aug": 33,
@@ -2524,7 +2576,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 39,
    "2026 Jun": 42,
    "2026 Jul": 59,
-   "2026 Aug": 54
+   "2026 Aug": 54,
+   "2026 Sep": 28
   }
  },
  "extra": {
@@ -2553,7 +2606,8 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 909697,
    "2026 Jun": 850391,
    "2026 Jul": 1168134,
-   "2026 Aug": 1244929
+   "2026 Aug": 1244929,
+   "2026 Sep": 851284
   },
   "avgStay": {
    "2024 Aug": 3.7,
@@ -2580,8 +2634,16 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "2026 May": 3.58,
    "2026 Jun": 3.59,
    "2026 Jul": 3.38,
-   "2026 Aug": 3.46
+   "2026 Aug": 3.46,
+   "2026 Sep": 3.29
   }
+ },
+ "stb": {
+  "months": [
+   "2026 Sep"
+  ],
+  "note": "Newest month read from STB's own STAN dashboard (stan.stb.gov.sg, refreshed 15 Oct 2026) before SingStat publishes it; checked against SingStat for the months both have (exact match).",
+  "checked": "2026-10-28"
  }
 },"news":{
  "updated": "2026-10-14",
@@ -3010,7 +3072,7 @@ function ivaNums(iva){
   return {month:m, tot, yoy:last?(tot-last)*100/last:0, ly, S};
 }
 function nextVisitors(latest){const [y,m]=String(latest).split(' '); const i=MON.indexOf(m), yy=+y; if(i<0) return '';
-  return `${MON[(i+1)%12]} ${yy+(i===11?1:0)} figures, expected mid-to-late ${MON[(i+2)%12]} ${yy+(i>=10?1:0)}; this page picks them up automatically the next morning`;}
+  return `${MON[(i+1)%12]} ${yy+(i===11?1:0)} figures, released by STB mid-${MON[(i+2)%12]} ${yy+(i>=10?1:0)} and added here by 28 ${MON[(i+2)%12]}`;}
 function renderIva(iva){
   const v=ivaNums(iva); if(!v){$('iva').innerHTML='<p class="note" style="margin:0">Visitor numbers not available right now.</p>'; return;}
   $('ivaMonth').textContent=v.month.split(' ').reverse().join(' ');
@@ -3073,7 +3135,7 @@ function renderSources(){
   $('kpiSrc').innerHTML=`${MO}<span>Flights, cities, airlines, starting soon and budget share are estimated from flightsfrom.com timetables (map countries checked ${ck}; rest of the world checked ${WORLD.checked?fd(WORLD.checked,1):'monthly'}). Visitors are official Singapore Tourism Board figures.</span>`;
   $('barsSrc').querySelector('span:last-child').textContent=`Estimated from flightsfrom.com timetables (flights a day × days flown). Last checked ${ck}.`;
   const rows=[
-    ['Visitors','Singapore Tourism Board, via SingStat','Official figures, fetched automatically every morning. About 6 weeks behind.',OK],
+    ['Visitors','Singapore Tourism Board (STAN dashboard + SingStat)','Official figures. Newest month read from STB\'s STAN dashboard in the monthly check (about 2 weeks after month end); SingStat copy fetched automatically every morning and checked for a match.',OK],
     ['Routes and cities','Wikipedia list of Changi airlines and destinations','Compared against the timetables in each monthly check.',MO],
     ['Flights a week','flightsfrom.com timetables','Estimate: flights a day × days flown. A range like "3–4 a day" is counted as the middle.',MO],
     ['Rest of the world',`flightsfrom.com, every Changi route outside the map (checked ${WORLD.checked?fd(WORLD.checked,1):'monthly'})`,'Same method as the map countries; budget share uses the site\'s own "low-cost airline" label.',MO],
@@ -3136,7 +3198,8 @@ window.HERO=(()=>{
 const get=u=>fetch(u,{cache:'no-cache'}).then(r=>r.ok?r.json():Promise.reject(r.status));
 const T0=performance.now(), afterIntro=f=>setTimeout(f,Math.max(0,2600-(performance.now()-T0)));   // let the opening play before swapping in fresh news
 get(NEWS_URL).then(n=>afterIntro(()=>{if(n&&n.items){seen=NEWS?new Set((NEWS.items||[]).map(i=>i.url)):null; firstNews=false; NEWS=n; $('newsList').classList.add('still'); renderNews(); renderStamp(); seen=null;}})).catch(()=>{});
-get(IVA_URL).then(v=>{if(v&&v.series){IVA=v; $('kpis').classList.add('still'); renderKpis(IVA); renderIva(IVA);}}).catch(()=>{});
+const mNo=k=>+String(k).slice(0,4)*12+MON.indexOf(String(k).slice(5));   // keep whichever copy has the newer month
+get(IVA_URL).then(v=>{if(v&&v.series&&!(IVA&&IVA.latest&&mNo(IVA.latest)>mNo(v.latest))){IVA=v; $('kpis').classList.add('still'); renderKpis(IVA); renderIva(IVA);}}).catch(()=>{});
 </script>
 
 </html>
