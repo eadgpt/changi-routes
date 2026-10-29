@@ -1,6 +1,20 @@
 {
- "updated": "2026-10-28",
+ "updated": "2026-10-29",
  "items": [
+  {
+   "title": "SIA to buy sustainable aviation fuel made from waste gases at new Singapore plant",
+   "url": "https://www.channelnewsasia.com/singapore/sia-sustainable-aviation-fuel-aether-6498971",
+   "src": "CNA",
+   "date": "2026-10-28",
+   "tags": []
+  },
+  {
+   "title": "Singapore Airlines becomes first airline to buy SAF from Aether’s Project Beacon",
+   "url": "https://www.aerotime.aero/articles/singapore-airlines-becomes-first-airline-to-buy-saf-from-aethers-project-beacon",
+   "src": "AeroTime",
+   "date": "2026-10-28",
+   "tags": []
+  },
   {
    "title": "Singapore Airlines makes Auckland A380 year-round",
    "url": "https://mainlymiles.com/2026/10/27/singapore-airlines-makes-auckland-a380-year-round/",
@@ -288,22 +302,6 @@
    "src": "Mainly Miles",
    "date": "2026-10-01",
    "tags": []
-  },
-  {
-   "title": "Singapore Airlines Cancels Flights to Busiest International Airport in the World",
-   "url": "https://aviationa2z.com/index.php/2026/10/01/singapore-airlines-cancels-flights-to-dubai/?utm_source=rss&utm_medium=rss&utm_campaign=singapore-airlines-cancels-flights-to-dubai",
-   "src": "Aviation A2Z",
-   "date": "2026-10-01",
-   "tags": []
-  },
-  {
-   "title": "Scoot removes passenger from S’pore-bound flight in Macau over disruptive behaviour",
-   "url": "https://www.straitstimes.com/singapore/scoot-removes-passenger-from-spore-bound-flight-in-macau-over-disruptive-behaviour",
-   "src": "Straits Times",
-   "date": "2026-10-01",
-   "tags": [
-    "Hong Kong"
-   ]
   }
  ]
 }
