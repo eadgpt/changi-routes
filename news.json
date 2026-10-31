@@ -1,6 +1,29 @@
 {
- "updated": "2026-10-30",
+ "updated": "2026-10-31",
  "items": [
+  {
+   "title": "SIA extends cancellation of Dubai flights to Feb 28",
+   "url": "https://www.channelnewsasia.com/singapore/sia-dubai-flights-cancelled-february-2027-6506341",
+   "src": "CNA",
+   "date": "2026-10-30",
+   "tags": []
+  },
+  {
+   "title": "Air China Increases Chongqing – Singapore Flights in 1Q27",
+   "url": "https://www.aeroroutes.com/eng/261030-ca1q27ckgsin",
+   "src": "AeroRoutes",
+   "date": "2026-10-30",
+   "tags": [
+    "China"
+   ]
+  },
+  {
+   "title": "SIA extends Dubai flight cancellations to February 2027",
+   "url": "https://www.straitstimes.com/singapore/sia-extends-dubai-flight-cancellations-to-february-2027",
+   "src": "Straits Times",
+   "date": "2026-10-30",
+   "tags": []
+  },
   {
    "title": "SIA to buy up to 4,800 tonnes of sustainable aviation fuel from Aether’s Singapore plant",
    "url": "https://www.straitstimes.com/business/sia-to-buy-up-to-4800-tonnes-of-sustainable-aviation-fuel-from-aethers-singapore-plant",
@@ -278,29 +301,6 @@
    "url": "https://aviationa2z.com/index.php/2026/10/04/singapore-airlines-expands-boeing-737-max-network/?utm_source=rss&utm_medium=rss&utm_campaign=singapore-airlines-expands-boeing-737-max-network",
    "src": "Aviation A2Z",
    "date": "2026-10-04",
-   "tags": []
-  },
-  {
-   "title": "Johor Bahru-Singapore RTS Link passenger service delayed to February 2027",
-   "url": "https://www.channelnewsasia.com/singapore/johor-bahru-singapore-rts-link-delayed-6423591",
-   "src": "CNA",
-   "date": "2026-10-02",
-   "tags": [
-    "Malaysia"
-   ]
-  },
-  {
-   "title": "Where is Singapore Airlines flying its Boeing 737 MAX?",
-   "url": "https://mainlymiles.com/2026/10/02/where-is-sia-flying-its-737-max/",
-   "src": "Mainly Miles",
-   "date": "2026-10-02",
-   "tags": []
-  },
-  {
-   "title": "Singapore Airlines cancels flights to and from Dubai until Dec 1",
-   "url": "https://www.channelnewsasia.com/singapore/sia-flight-cancel-dubai-scoot-jeddah-6423611",
-   "src": "CNA",
-   "date": "2026-10-01",
    "tags": []
   }
  ]
