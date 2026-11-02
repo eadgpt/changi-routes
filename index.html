@@ -623,6 +623,21 @@ body #allFab:hover,body #dashFab:hover{transform:none;box-shadow:var(--shadow);b
   .out-t td:nth-child(5){grid-column:1/-1;margin-top:2px}
 }
 </style>
+<style>
+/* phone tidy-up (Nov 2026): panel pulled up full = side buttons + stamp step aside; province rows stack */
+.p-stamp{display:none}
+@media (max-width:900px), (pointer:coarse) and (max-width:1200px){
+  .p-stamp{display:block;font:500 12px "JetBrains Mono",monospace;color:var(--ink-2);margin:10px 0 4px}
+  #stamp,#themeBtn,#helpBtn,#mapBtn,body #allFab,body #dashFab{transition:opacity .2s}
+  body[data-sheet="full"] #stamp,
+  body[data-sheet="full"] #themeBtn,body[data-sheet="full"] #helpBtn,body[data-sheet="full"] #mapBtn,
+  body[data-sheet="full"] #allFab,body[data-sheet="full"] #dashFab{opacity:0;pointer-events:none}
+  .prow{grid-template-columns:1fr auto;grid-template-areas:"pz pc" "pn pn";row-gap:2px}
+  .prow .pz{grid-area:pz;white-space:normal}
+  .prow .pc{grid-area:pc}
+  .prow .pn{grid-area:pn}
+}
+</style>
 
 </head>
 <body>
@@ -722,6 +737,7 @@ body #allFab:hover,body #dashFab:hover{transform:none;box-shadow:var(--shadow);b
       <div class="sec-b"><div class="cnt" id="cityCounts"></div><div class="list" id="list"></div></div>
     </section>
     <p class="src" id="srcLine"></p>
+    <p class="p-stamp">Last updated 3 Nov 2026, 12:44 am SGT</p>
   </div>
 </aside>
 <button id="showPanel" type="button" hidden>Show panel</button>
@@ -755,7 +771,7 @@ body #allFab:hover,body #dashFab:hover{transform:none;box-shadow:var(--shadow);b
 </div>
 <div id="fact" role="dialog" aria-modal="true" aria-label="Country fact sheet" hidden><div class="fs-in" id="factIn"></div></div>
 <div id="ins" role="dialog" aria-modal="true" aria-label="All-country insights" hidden><div class="fs-in" id="insIn"></div></div>
-<div id="stamp" title="When this map was last rebuilt with new data">Last updated 3 Nov 2026, 12:30 am SGT</div>
+<div id="stamp" title="When this map was last rebuilt with new data">Last updated 3 Nov 2026, 12:44 am SGT</div>
 <div id="hint">drag to rotate · scroll to zoom · right-drag to pan · press / to search</div>
 <script>
 /**
@@ -4408,7 +4424,7 @@ if(PROVS.length>1){
     h.innerHTML=`<i class="dot"></i>${rg.name}${CFG.regionSuffix||''} <small>${rg.zh}</small><span>${ps.length} ${ps.length===1?'province':'provinces'}</span>`; provEl.appendChild(h);
     ps.forEach(p=>{const r=document.createElement('button'); r.type='button'; r.className='prow'; r.setAttribute('aria-pressed','false');
       r.style.setProperty('--rc',`var(--r-${rg.key})`);
-      r.innerHTML=`<span class="pz">${p.zhFull}</span><span class="pn">${p.full}<small>${p.names.map(n=>`<em${n.lost?' class="pl" title="Route ended, not back yet"':''}>${n.zh} ${n.name}</em>`).join('、')}</small></span><span class="pc">${p.names.length} ${p.names.length===1?'city':'cities'}</span>`;
+      r.innerHTML=`<span class="pz">${p.zhFull}</span><span class="pn">${p.full}<small>${p.names.map(n=>`<em${n.lost?' class="pl" title="Route ended, not back yet"':''}>${n.zh.split(' · ')[0]} ${n.name}</em>`).join('、')}</small></span><span class="pc">${p.names.length} ${p.names.length===1?'city':'cities'}</span>`;
       r.onclick=()=>{provSel.has(p.en)?provSel.delete(p.en):provSel.add(p.en); if(selected&&!cityOn(selected)) selected=null; flyRegions(); render(); openSheet('half');};
       provEl.appendChild(r); p.btn=r;});});
   const k=document.createElement('p'); k.className='p-key'; k.innerHTML='<em class="pl">Red</em> = Changi used to fly there; the route is not back yet.'; provEl.appendChild(k);}
@@ -4483,6 +4499,9 @@ document.querySelectorAll('.sec').forEach(s=>{const k=s.dataset.sec, tg=s.queryS
 
 // phone: panel is a bottom sheet with three heights
 const panelEl=document.getElementById('panel'), grab=document.getElementById('grab');
+// mirror the sheet height on <body> so floating bits can step aside when the panel fills the screen
+{const sync=()=>{document.body.dataset.sheet=isPhone()&&!panelEl.hidden?(panelEl.dataset.sheet||'peek'):'';};
+ new MutationObserver(sync).observe(panelEl,{attributes:true,attributeFilter:['data-sheet','hidden']}); addEventListener('resize',sync,{signal:LIVE.signal}); sync();}
 function openSheet(s){ if(!isPhone()) return; if(s==='half'&&panelEl.dataset.sheet==='full') return; panelEl.dataset.sheet=s; }
 // on a phone the card sits in the sheet; keep the sheet small so the map still shows
 {let y0=null,h0=0,moved=false,src=null;
