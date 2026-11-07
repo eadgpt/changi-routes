@@ -1,9 +1,54 @@
 {
- "updated": "2026-11-06",
+ "updated": "2026-11-07",
  "items": [
   {
    "title": "Changi Airport baggage handling jobs draw local interest, but hiring remains a challenge",
    "url": "https://www.straitstimes.com/business/baggage-handling-jobs-draw-local-applicants-but-recruitment-remains-a-challenge",
+   "src": "Straits Times",
+   "date": "2026-11-06",
+   "tags": []
+  },
+  {
+   "title": "Man stopped at Changi Airport with S$400,000 worth of One Piece trading cards",
+   "url": "https://www.channelnewsasia.com/singapore/ica-one-piece-trading-cards-man-luggage-changi-airport-6530531",
+   "src": "CNA",
+   "date": "2026-11-06",
+   "tags": []
+  },
+  {
+   "title": "Singapore Airlines’ new 777-9 Premium Economy and Economy: A closer look",
+   "url": "https://mainlymiles.com/2026/11/06/singapore-airlines-new-777-9-premium-economy-and-economy/",
+   "src": "Mainly Miles",
+   "date": "2026-11-06",
+   "tags": []
+  },
+  {
+   "title": "Qantas NW27 Singapore / London Flight Number Changes",
+   "url": "https://www.aeroroutes.com/eng/261106-qfnw27lhr",
+   "src": "AeroRoutes",
+   "date": "2026-11-06",
+   "tags": []
+  },
+  {
+   "title": "THAI Boosts KL / Singapore Flights From Feb 2027",
+   "url": "https://www.aeroroutes.com/eng/261106-tgfeb27sea",
+   "src": "AeroRoutes",
+   "date": "2026-11-06",
+   "tags": [
+    "Thailand",
+    "Malaysia"
+   ]
+  },
+  {
+   "title": "Singapore Airlines secures SAF supply from Aether",
+   "url": "https://www.ttgasia.com/2026/11/06/singapore-airlines-secures-saf-supply-from-aether/",
+   "src": "TTG Asia",
+   "date": "2026-11-06",
+   "tags": []
+  },
+  {
+   "title": "Too many pieces: Man caught carrying One Piece trading cards worth over $400,000 at Changi Airport",
+   "url": "https://www.straitstimes.com/singapore/too-many-pieces-man-caught-carrying-one-piece-trading-cards-worth-over-400000-at-changi-airport",
    "src": "Straits Times",
    "date": "2026-11-06",
    "tags": []
@@ -247,53 +292,6 @@
    "url": "https://www.straitstimes.com/business/sia-passenger-traffic-up-2-8-in-september-cargo-demand-jumps-on-ai-chip-shipments",
    "src": "Straits Times",
    "date": "2026-10-15",
-   "tags": []
-  },
-  {
-   "title": "Singapore Airlines and Scoot to offer over 380,000 discounted tickets at Time To Fly Travel Fair 2026",
-   "url": "https://www.channelnewsasia.com/travel/time-fly-travel-fair-2026-sia-scoot-discounted-flights-6452191",
-   "src": "CNA",
-   "date": "2026-10-13",
-   "tags": [
-    "Japan",
-    "South Korea"
-   ]
-  },
-  {
-   "title": "Changi Airport Early Check-In: 42 airlines, up to 48 hours ahead",
-   "url": "https://mainlymiles.com/2026/10/10/changi-airport-early-check-in-42-airlines-up-to-48-hours-ahead/",
-   "src": "Mainly Miles",
-   "date": "2026-10-10",
-   "tags": []
-  },
-  {
-   "title": "Singapore condemns Houthi attacks on civilian aviation infrastructure in Saudi Arabia",
-   "url": "https://www.channelnewsasia.com/singapore/singapore-mfa-condemns-houthi-attack-civilian-aviation-infrastructure-saudi-arabia-6445696",
-   "src": "CNA",
-   "date": "2026-10-09",
-   "tags": []
-  },
-  {
-   "title": "Air India-Singapore Airlines Partnership Simplifies Codeshare Bookings",
-   "url": "https://www.businesstraveller.com/news/air-india-singapore-airlines-booking-changes/",
-   "src": "Business Traveller",
-   "date": "2026-10-09",
-   "tags": [
-    "India"
-   ]
-  },
-  {
-   "title": "Singapore condemns Houthi strikes after attacks on Saudi airport kill 3",
-   "url": "https://www.straitstimes.com/singapore/singapore-condemns-houthi-strikes-after-attacks-on-saudi-airport-kill-3",
-   "src": "Straits Times",
-   "date": "2026-10-09",
-   "tags": []
-  },
-  {
-   "title": "New $170 million aviation maintenance and repair facility in Changi Creek to create over 500 jobs",
-   "url": "https://www.straitstimes.com/singapore/transport/new-170-million-aviation-maintenance-and-repair-facility-in-changi-creek-to-create-over-500-jobs",
-   "src": "Straits Times",
-   "date": "2026-10-09",
    "tags": []
   }
  ]
