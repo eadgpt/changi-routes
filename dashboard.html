@@ -65,7 +65,7 @@
 <style>
 /* Layout: header + one row of key numbers, then news (wide, left) beside the route cards (right); one column on phones, news first. */
 :root{
-  --bg:#e6edf1; --card:#ffffff; --ink:#0f2233; --ink-2:#4a5d6b; --line:#d3dde3; --chip:#eef3f6;
+  --bg:#e6edf1; --card:#ffffff; --ink:#0f2233; --ink-2:#3c4d59; --line:#d3dde3; --chip:#eef3f6;
   --arc:#d9480f; --arc-soft:#fdebe1; --sg:#c8102e; --up:#2b8a3e; --down:#e03131; --bar:#1971c2;
   --f-display:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
   --f-body:Barlow,system-ui,-apple-system,sans-serif;
@@ -73,10 +73,10 @@
   --z:1;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#08131c; --card:#0f1f2b; --ink:#e7eef3; --ink-2:#98abb8; --line:#223a4a; --chip:#172b39;
+  --bg:#08131c; --card:#0f1f2b; --ink:#e7eef3; --ink-2:#b0c0cb; --line:#223a4a; --chip:#172b39;
   --arc:#ffb547; --arc-soft:#3a2c14; --sg:#ff5364; --up:#69db7c; --down:#ff6b6b; --bar:#4dabf7; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#08131c; --card:#0f1f2b; --ink:#e7eef3; --ink-2:#98abb8; --line:#223a4a; --chip:#172b39;
+  --bg:#08131c; --card:#0f1f2b; --ink:#e7eef3; --ink-2:#b0c0cb; --line:#223a4a; --chip:#172b39;
   --arc:#ffb547; --arc-soft:#3a2c14; --sg:#ff5364; --up:#69db7c; --down:#ff6b6b; --bar:#4dabf7; color-scheme:dark}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 var(--f-body)}
@@ -101,14 +101,14 @@ h1{font:700 34px/1.05 var(--f-display);margin:6px 0 4px;text-wrap:balance}
 .mainc{display:grid;gap:16px;min-width:0;align-content:start}
 .kpis{overflow-x:auto}
 .keyt{width:100%;border-collapse:collapse}
-.keyt th{font:600 12.5px/1.25 var(--f-display);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);text-align:right;padding:0 8px 10px;vertical-align:bottom}
+.keyt th{font:600 13.5px/1.25 var(--f-display);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);text-align:right;padding:0 8px 10px;vertical-align:bottom}
 .keyt th:first-child{text-align:left;padding-left:0}
-.keyt th small{display:block;font:500 12px var(--f-body);letter-spacing:0;text-transform:none}
+.keyt th small{display:block;font:500 13px var(--f-body);letter-spacing:0;text-transform:none}
 .keyt th.hi{color:var(--arc)}
 .keyt td{padding:12px 8px;border-top:1px solid var(--line);text-align:right;vertical-align:top}
 .keyt td:first-child{text-align:left;padding-left:0;font:600 13px/1.3 var(--f-display);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
 .keyt .kv{display:block;font:700 30px/1.05 var(--f-display);font-variant-numeric:tabular-nums;color:var(--ink)}
-.keyt .ks{display:block;margin-top:3px;font-size:12.5px;line-height:1.35;color:var(--ink-2)}
+.keyt .ks{display:block;margin-top:3px;font-size:13.5px;line-height:1.35;color:var(--ink-2)}
 .keyt td.all .kv{color:var(--ink-2)}
 .keyintro{margin:-4px 0 12px;font-size:13.5px;line-height:1.45;color:var(--ink-2)}
 .keyintro b{color:var(--ink);font-weight:600}
@@ -119,8 +119,8 @@ h1{font:700 34px/1.05 var(--f-display);margin:6px 0 4px;text-wrap:balance}
 .keytop ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px 16px}
 .keytop li{display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:0 8px;font-size:14px}
 .keytop li b{font:700 20px/1 var(--f-display);font-variant-numeric:tabular-nums}
-.keytop li small{grid-column:1/-1;font-size:12px;color:var(--ink-2)}
-@media (max-width:520px){.keyt .kv{font-size:22px}.keyt th,.keyt td{padding-inline:4px}.keyt td:first-child{font-size:12px}}
+.keytop li small{grid-column:1/-1;font-size:13px;color:var(--ink-2)}
+@media (max-width:520px){.keyt .kv{font-size:22px}.keyt th,.keyt td{padding-inline:4px}.keyt td:first-child{font-size:13px}}
 .up{color:var(--up)} .down{color:var(--down)} .flat{color:var(--ink-2)}
 
 /* main grid */
@@ -130,7 +130,7 @@ h1{font:700 34px/1.05 var(--f-display);margin:6px 0 4px;text-wrap:balance}
 .card h2{font:700 20px/1.1 var(--f-display);letter-spacing:.02em;margin:0;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
 .card h2 small{font:500 13px var(--f-body);color:var(--ink-2);letter-spacing:0}
 .card .hd{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:12px}
-.note{font-size:12.5px;color:var(--ink-2);margin:10px 0 0}
+.note{font-size:13.5px;color:var(--ink-2);margin:10px 0 0}
 
 /* news */
 .news{border-color:color-mix(in srgb,var(--arc) 40%,var(--line))}
@@ -141,12 +141,12 @@ h1{font:700 34px/1.05 var(--f-display);margin:6px 0 4px;text-wrap:balance}
 .ni{display:grid;grid-template-columns:92px minmax(0,1fr);gap:4px 14px;padding:12px 0;border-top:1px solid var(--line)}
 .ni:first-child{border-top:0;padding-top:4px}
 .nd{font:500 13px/1.35 var(--f-data);color:var(--ink-2);font-variant-numeric:tabular-nums;padding-top:2px}
-.nd .new{display:inline-block;margin-top:4px;font:700 12px/1 var(--f-display);letter-spacing:.08em;padding:4px 7px;border-radius:5px;background:var(--arc);color:var(--card)}
+.nd .new{display:inline-block;margin-top:4px;font:700 13px/1 var(--f-display);letter-spacing:.08em;padding:4px 7px;border-radius:5px;background:var(--arc);color:var(--card)}
 .nt{font-weight:600;font-size:16px;line-height:1.35;text-decoration:none}
 .nt:hover{text-decoration:underline}
 .ni.lead .nt{font-size:19px}
 .nm{font-size:13px;color:var(--ink-2);margin-top:3px;display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center}
-.tag{font-size:12.5px;padding:1px 7px;border-radius:999px;background:var(--chip);color:var(--ink)}
+.tag{font-size:13.5px;padding:1px 7px;border-radius:999px;background:var(--chip);color:var(--ink)}
 .ni.fresh{background:linear-gradient(90deg,var(--arc-soft),transparent 70%);margin-inline:-18px;padding-inline:18px}
 .more{margin-top:10px}
 
@@ -158,20 +158,20 @@ h1{font:700 34px/1.05 var(--f-display);margin:6px 0 4px;text-wrap:balance}
 .bar .t{height:12px;border-radius:3px;background:var(--chip);overflow:hidden}
 .bar .t i{display:block;height:100%;background:var(--bar);border-radius:3px}
 .bar .v{font:500 13px var(--f-data);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
-.bar .v small{font-size:12px;margin-left:4px}
+.bar .v small{font-size:13px;margin-left:4px}
 
 /* lists */
 .ll{list-style:none;margin:0;padding:0;display:grid;gap:7px}
 .ll li{display:flex;gap:8px;align-items:baseline;font-size:14px;line-height:1.35}
-.ll .ic{font-size:12px;width:14px;flex:none}
-.ll .when{margin-left:auto;font:500 12.5px var(--f-data);color:var(--ink-2);white-space:nowrap;padding-left:8px}
-.code{font:500 12.5px var(--f-data);color:var(--ink-2)}
+.ll .ic{font-size:13px;width:14px;flex:none}
+.ll .when{margin-left:auto;font:500 13.5px var(--f-data);color:var(--ink-2);white-space:nowrap;padding-left:8px}
+.code{font:500 13.5px var(--f-data);color:var(--ink-2)}
 h3{font:600 13px/1.2 var(--f-display);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin:14px 0 8px}
 h3:first-of-type{margin-top:0}
 
 /* visitors table */
 .tbl{width:100%;border-collapse:collapse;font-size:14px}
-.tbl th{font:600 12.5px var(--f-body);color:var(--ink-2);text-align:right;padding:4px 6px;border-bottom:1px solid var(--line)}
+.tbl th{font:600 13.5px var(--f-body);color:var(--ink-2);text-align:right;padding:4px 6px;border-bottom:1px solid var(--line)}
 .tbl th:first-child{text-align:left}
 .tbl td{padding:6px;border-bottom:1px solid var(--line)}
 .tbl td.num{text-align:right;font:500 13px var(--f-data);font-variant-numeric:tabular-nums;white-space:nowrap}
@@ -179,9 +179,9 @@ h3:first-of-type{margin-top:0}
 
 /* watch */
 .watch{display:grid;gap:10px}
-.srcl{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;margin:12px 0 0;font-size:12.5px;line-height:1.4;color:var(--ink-2)}
+.srcl{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;margin:12px 0 0;font-size:13.5px;line-height:1.4;color:var(--ink-2)}
 .srcl span:last-child{flex:1;min-width:12em}
-.tagq{flex:none;font:700 11.5px/1 var(--f-display);letter-spacing:.06em;text-transform:uppercase;padding:4px 7px;border-radius:5px;border:1px solid currentColor;white-space:nowrap}
+.tagq{flex:none;font:700 12.5px/1 var(--f-display);letter-spacing:.06em;text-transform:uppercase;padding:4px 7px;border-radius:5px;border:1px solid currentColor;white-space:nowrap}
 .tagq.ok{color:var(--up)}
 .tagq.mo{color:var(--arc)}
 .tagq.au{color:var(--ink-2)}
@@ -192,13 +192,13 @@ h3:first-of-type{margin-top:0}
 .rules{list-style:none;margin:0;padding:0;display:grid;gap:10px}
 .rules li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 10px;font-size:14px;line-height:1.4}
 .rules .rf{font-size:15px;line-height:1.3}
-.rules .rm{grid-column:2;font-size:12.5px;color:var(--ink-2)}
+.rules .rm{grid-column:2;font-size:13.5px;color:var(--ink-2)}
 .rules .rm a{color:inherit}
-.rules .soonp{display:inline-block;font:700 11.5px/1 var(--f-display);letter-spacing:.06em;padding:3px 6px;border-radius:4px;background:var(--arc);color:var(--card);margin-right:6px;vertical-align:1px}
+.rules .soonp{display:inline-block;font:700 12.5px/1 var(--f-display);letter-spacing:.06em;padding:3px 6px;border-radius:4px;background:var(--arc);color:var(--card);margin-right:6px;vertical-align:1px}
 .w{display:grid;grid-template-columns:52px minmax(0,1fr);gap:12px;align-items:center}
 .w b{font:700 30px/1 var(--f-display);text-align:right;font-variant-numeric:tabular-nums}
 .w span{font-size:14px;line-height:1.35}
-.w span small{display:block;font-size:12.5px;color:var(--ink-2)}
+.w span small{display:block;font-size:13.5px;color:var(--ink-2)}
 
 @media (max-width:900px){.grid{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:520px){
@@ -207,7 +207,7 @@ h3:first-of-type{margin-top:0}
   .ni{grid-template-columns:minmax(0,1fr)}
   .nd{display:flex;gap:8px;align-items:center}
   .nd .new{margin-top:0}
-  .bar{grid-template-columns:104px minmax(0,1fr) 96px}
+  .bar{grid-template-columns:122px minmax(0,1fr) 92px}
 }
 
 /* theme switch: colours ease over instead of snapping */
@@ -243,7 +243,7 @@ a.cl:hover{color:var(--arc);border-bottom-color:var(--arc)}
 .hero .tools{position:absolute;right:16px;top:16px;z-index:2}
 .tip{position:absolute;z-index:3;pointer-events:none;background:var(--ink);color:var(--card);font:500 13px/1.35 var(--f-body);padding:7px 10px;border-radius:8px;white-space:nowrap;transform:translate(-50%,calc(-100% - 12px));box-shadow:0 6px 20px rgba(0,0,0,.25)}
 .tip b{font-weight:600}
-.tip small{display:block;font-size:12px;opacity:.75}
+.tip small{display:block;font-size:13px;opacity:.75}
 @media (max-width:640px){
   .hero{height:auto;display:flex;flex-direction:column}
   .hero::before{display:none}
@@ -253,6 +253,37 @@ a.cl:hover{color:var(--arc);border-bottom-color:var(--arc)}
   .hero .tools{position:static;padding:12px 16px 0}
   .hero-map{position:relative;height:260px;order:3}
 }
+
+/* "What's new": one plain sentence under the banner */
+.wn{display:flex;align-items:baseline;gap:14px;margin:0 0 16px;padding:14px 18px;border:1px solid color-mix(in srgb,var(--arc) 45%,var(--line));border-left:4px solid var(--arc);border-radius:12px;
+  background:color-mix(in srgb,var(--arc) 9%,var(--card))}
+.wn h2{flex:none;margin:0;font:700 14px/1.2 var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--arc);white-space:nowrap}
+.wn p{margin:0;font-size:16px;line-height:1.5;color:var(--ink)}
+.wn p b{font-weight:600}
+.wn .up{color:var(--up,#2e9e5b);font-weight:600}.wn .down{color:var(--down,#d9534f);font-weight:600}
+.wn small{display:block;margin-top:4px;font-size:13px;color:var(--ink-2)}
+@media (max-width:640px){.wn{flex-direction:column;gap:6px;padding:12px 14px}.wn p{font-size:15px}}
+
+/* jump menu: stays at the top while the page scrolls */
+.jump{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:8px;overflow-x:auto;margin:0 -20px 16px;padding:9px 20px;
+  background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);scrollbar-width:none}
+.jump::-webkit-scrollbar{display:none}
+.jump span{flex:none;font:700 13px/1 var(--f-display);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
+.jump button{flex:none;font:600 14px var(--f-body);padding:8px 13px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.jump button:hover{border-color:var(--arc);color:var(--arc)}
+.card{scroll-margin-top:64px}
+@media (max-width:520px){.jump{margin-inline:-16px;padding-inline:16px}}
+/* save a card as a picture */
+.shot-b{flex:none;display:inline-flex;align-items:center;gap:6px;margin-left:auto;font:600 13px var(--f-body);padding:6px 10px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink-2);cursor:pointer}
+.shot-b svg{width:16px;height:16px}
+.shot-b:hover{border-color:var(--arc);color:var(--arc)}
+#shot[hidden]{display:none}
+@media (max-width:520px){.shot-b span{display:none}.shot-b{padding:7px 9px}}
+#shot{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:16px;background:rgba(4,10,16,.78)}
+.shot-in{max-width:min(920px,100%);max-height:100%;overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px}
+.shot-in img{display:block;max-width:100%;max-height:62vh;margin:0 auto;border:1px solid var(--line);border-radius:8px}
+.shot-in p{margin:10px 0;font-size:14px;color:var(--ink-2)}
+.shot-act{display:flex;gap:8px;flex-wrap:wrap}
 
 /* rolling digits on the key numbers */
 .odo{display:inline-flex}
@@ -306,10 +337,18 @@ a.cl:hover{color:var(--arc);border-bottom-color:var(--arc)}
     <div class="tip" id="heroTip" hidden></div>
   </section>
 
+  <section class="wn" id="whatsNew" aria-labelledby="wnH" hidden>
+    <h2 id="wnH">What’s new</h2>
+    <p id="wnTxt"></p>
+  </section>
+
+  <nav class="jump" id="jump" aria-label="Jump to a section"><span>Jump to</span>
+    <button type="button" data-j="newsCard">News</button><button type="button" data-j="barsCard">Flights</button><button type="button" data-j="ivaCard">Visitors</button><button type="button" data-j="outCard">Going abroad</button><button type="button" data-j="keyCard">Numbers</button><button type="button" data-j="watchCard">Worth watching</button><button type="button" data-j="chgCard">Changes</button><button type="button" data-j="rulesCard">Travel rules</button>
+  </nav>
 
   <div class="grid">
     <div class="mainc">
-    <section class="card news" aria-labelledby="newsH">
+    <section class="card news" id="newsCard" aria-labelledby="newsH">
       <div class="hd"><h2 id="newsH">Latest news <small id="newsStamp"></small></h2></div>
       <div class="chips" id="newsChips"></div>
       <ul class="nl" id="newsList"></ul>
@@ -317,7 +356,7 @@ a.cl:hover{color:var(--arc);border-bottom-color:var(--arc)}
       <p class="srcl"><span class="tagq au">Automatic, not checked</span><span>Picked by keyword from 12 airline and travel news feeds every morning. Not read by a person, so an off-topic story can slip in.</span></p>
     </section>
 
-    <section class="card keyc" aria-labelledby="keyH">
+    <section class="card keyc" id="keyCard" aria-labelledby="keyH">
       <div class="hd"><h2 id="keyH">Changi’s network in numbers</h2></div>
       <p class="keyintro">Changi's direct passenger flights, split three ways: the <b>9 countries on the map</b>, the <b>rest of the world</b> (every other country Changi flies to), and <b>all of Changi</b> together. Flights are departures from Changi in a normal week.</p>
       <div class="kpis" id="kpis"></div>
@@ -327,14 +366,14 @@ a.cl:hover{color:var(--arc);border-bottom-color:var(--arc)}
     </div>
 
     <div class="side">
-      <section class="card">
+      <section class="card" id="barsCard">
         <div class="hd"><h2>Flights a week <small>by country</small></h2></div>
         <div class="bars" id="bars"></div>
         <p class="note" id="barsNote"></p>
         <p class="srcl" id="barsSrc"><span class="tagq mo">Checked monthly</span><span>Estimated from flightsfrom.com timetables (flights a day × days flown).</span></p>
       </section>
 
-      <section class="card">
+      <section class="card" id="ivaCard">
         <div class="hd"><h2>Visitors to Singapore <small id="ivaMonth"></small></h2></div>
         <div id="iva"></div>
         <p class="srcl"><span class="tagq ok">Official</span><span>Singapore Tourism Board. Newest month read from STB's own STAN dashboard; older months fetched automatically from SingStat (the government statistics site), and the two are checked against each other.</span></p>
@@ -346,14 +385,14 @@ a.cl:hover{color:var(--arc);border-bottom-color:var(--arc)}
         <div id="out"></div>
       </section>
 
-      <section class="card">
+      <section class="card" id="watchCard">
         <div class="hd"><h2>Worth watching</h2><a class="btn sm" id="insLink" href="./#insights">Full insights →</a></div>
         <div class="watch" id="watch"></div>
         <p class="note">Full insights has the rest: who flies each country, who dropped routes, cities with no direct flight, Changi's wish list and expert views.</p>
         <p class="srcl"><span class="tagq mo">Checked monthly</span><span>Worked out from the timetables. Which airlines count as budget is a list kept by hand.</span></p>
       </section>
 
-      <section class="card">
+      <section class="card" id="chgCard">
         <div class="hd"><h2>What's changing</h2></div>
         <div id="changes"></div>
         <p class="srcl"><span class="tagq mo">Checked monthly</span><span>Compares the two newest monthly timetable checks; dates come from the timetables.</span></p>
@@ -375,6 +414,11 @@ a.cl:hover{color:var(--arc);border-bottom-color:var(--arc)}
     </table></div>
     <p class="note">None of the flight numbers are checked against airline or Changi Airport Group figures. They are a careful estimate from public timetables, good for spotting trends, not for exact counts.</p>
   </section>
+</div>
+<div id="shot" role="dialog" aria-modal="true" aria-label="Save as a picture" hidden>
+  <div class="shot-in"><img id="shotImg" alt="Picture of the card">
+    <p id="shotMsg">If Download does nothing, right-click (or press and hold) the picture and choose Save.</p>
+    <div class="shot-act"><a class="btn main" id="shotGet" download="changi-routes.png">Download picture</a><button class="btn" id="shotClose" type="button">Close</button></div></div>
 </div>
 
 <script>
@@ -477,7 +521,7 @@ function ChangiNetwork(opt){
   function placeLabels(){labels=(opt.avoid?opt.avoid():[]).map(b=>({...b,obstacle:1})); ctx.font='600 13px Barlow, system-ui, sans-serif';
     Object.values(hub).sort((a,b)=>b.wk-a.wk).forEach(h=>{if(h.b[2]<=0) return;
       const txt=`${h.flag} ${h.country}`, sub=`${fmt(opt.totals[h.slug]||h.wk)} a week`;
-      ctx.font='600 13px Barlow, system-ui, sans-serif'; const w1=ctx.measureText(txt).width; ctx.font='500 12px "JetBrains Mono", monospace';
+      ctx.font='600 13px Barlow, system-ui, sans-serif'; const w1=ctx.measureText(txt).width; ctx.font='500 13px "JetBrains Mono", monospace';
       const w=Math.max(w1,ctx.measureText(sub).width)+6, [x,y]=h.b;
       const west=h.lon<SG.lon+1&&h.slug!=='indonesia';
       const opts=[[west?x-10-w:x+10,y-14],[west?x-10-w:x+10,y+4],[x-w/2,y-36],[x-w/2,y+12],[west?x+10:x-10-w,y-14]];
@@ -487,7 +531,7 @@ function ChangiNetwork(opt){
         for(const d of [0,32,-32,64,-64,96,-96]) if(free(cx,y-14+d)){best=[cx,y-14+d]; break;}}
       if(!best) best=[Math.max(4,Math.min(W-w-4,opts[0][0])),opts[0][1]];
       labels.push({x:best[0],y:best[1],w,h:30,txt,sub,r:h});});
-    names=[]; if(!BOLD) return; ctx.font='600 12px Barlow, system-ui, sans-serif';
+    names=[]; if(!BOLD) return; ctx.font='600 13px Barlow, system-ui, sans-serif';
     const taken=labels.slice(), [sx0,sy0]=P(SG.lon,SG.lat); taken.push({x:sx0-6,y:sy0-6,w:120,h:22});
     [...R].sort((a,b)=>b.wk-a.wk).forEach(r=>{if(r.b[2]<=0) return; const w=ctx.measureText(r.name).width+4, [x,y]=r.b;
       for(const [bx,by] of [[x+7,y-8],[x-7-w,y-8],[x-w/2,y-22],[x-w/2,y+6]]){
@@ -527,12 +571,12 @@ function ChangiNetwork(opt){
       ctx.globalAlpha=k*(dim?.35:1);
       ctx.font='600 13px Barlow, system-ui, sans-serif'; ctx.lineWidth=4; ctx.strokeStyle=col.bg;
       ctx.strokeText(l.txt,l.x,l.y+dy); ctx.fillStyle=col.ink; ctx.fillText(l.txt,l.x,l.y+dy);
-      ctx.font='500 12px "JetBrains Mono", monospace'; ctx.strokeText(l.sub,l.x,l.y+16+dy); ctx.fillStyle=col.ink2; ctx.fillText(l.sub,l.x,l.y+16+dy);}
-    ctx.font='600 12px Barlow, system-ui, sans-serif';
+      ctx.font='500 13px "JetBrains Mono", monospace'; ctx.strokeText(l.sub,l.x,l.y+16+dy); ctx.fillStyle=col.ink2; ctx.fillText(l.sub,l.x,l.y+16+dy);}
+    ctx.font='600 13px Barlow, system-ui, sans-serif';
     for(const n of names){const k=clamp((T-(n.r.t0+n.r.dur+.25))/.4); if(!k) continue;
       ctx.globalAlpha=k*(hover&&hover.slug!==n.r.slug?.3:.95); ctx.lineWidth=3.5; ctx.strokeStyle=col.bg;
       ctx.strokeText(n.r.name,n.x,n.y+2); ctx.fillStyle=col.ink; ctx.fillText(n.r.name,n.x,n.y+2);}
-    if(S[2]>0){const kc=clamp((T-.3)/.5); ctx.globalAlpha=kc; ctx.font='700 12px "Barlow Condensed", sans-serif'; ctx.fillStyle=col.sg;
+    if(S[2]>0){const kc=clamp((T-.3)/.5); ctx.globalAlpha=kc; ctx.font='700 13px "Barlow Condensed", sans-serif'; ctx.fillStyle=col.sg;
       ctx.lineWidth=4; ctx.strokeStyle=col.bg; ctx.strokeText('SINGAPORE · CHANGI',sx+9,sy+7); ctx.fillText('SINGAPORE · CHANGI',sx+9,sy+7);}
     ctx.globalAlpha=1;}
   function run(){hover=null; if(tip) tip.hidden=true; start=performance.now(); cancelAnimationFrame(raf);
@@ -2646,16 +2690,154 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
   "checked": "2026-10-28"
  }
 },"news":{
- "updated": "2026-10-14",
+ "updated": "2026-11-15",
  "items": [
   {
-   "title": "Singapore Airlines and Scoot to offer over 380,000 discounted tickets at Time To Fly Travel Fair 2026",
-   "url": "https://www.channelnewsasia.com/travel/time-fly-travel-fair-2026-sia-scoot-discounted-flights-6452191",
-   "src": "CNA",
-   "date": "2026-10-13",
+   "title": "Singapore Airlines Holds on to 777-300ER Fleet Amid Delivery Uncertainty",
+   "url": "https://aviationa2z.com/index.php/2026/11/15/singapore-airlines-holds-on-to-777-300er-fleet-amid-delivery-uncertainty/",
+   "src": "Aviation A2Z",
+   "date": "2026-11-15",
+   "tags": []
+  },
+  {
+   "title": "Hainan Airlines Increases Haikou – Singapore Flights From Dec 2026",
+   "url": "https://www.aeroroutes.com/eng/261112-hunw26haksin",
+   "src": "AeroRoutes",
+   "date": "2026-11-13",
    "tags": [
-    "Japan",
-    "South Korea"
+    "China"
+   ]
+  },
+  {
+   "title": "Singapore Airlines half-year profit beats estimates as record revenue cushions fuel cost surge",
+   "url": "https://www.channelnewsasia.com/business/singapore-airlines-sia-results-profit-h1-2026-6542611",
+   "src": "CNA",
+   "date": "2026-11-11",
+   "tags": []
+  },
+  {
+   "title": "Singapore Airlines Will No Longer Fly A380 to This European City",
+   "url": "https://aviationa2z.com/index.php/2026/11/10/singapore-airlines-will-no-longer-fly-a380-to-this-european-city/",
+   "src": "Aviation A2Z",
+   "date": "2026-11-10",
+   "tags": []
+  },
+  {
+   "title": "Singapore Airlines pulls A380 off Frankfurt for summer 2027",
+   "url": "https://mainlymiles.com/2026/11/08/singapore-airlines-pulls-a380-off-frankfurt-for-summer-2027/",
+   "src": "Mainly Miles",
+   "date": "2026-11-08",
+   "tags": []
+  },
+  {
+   "title": "Qantas NW27 Singapore / London Flight Number Changes",
+   "url": "https://www.aeroroutes.com/eng/261106-qfnw27lhr",
+   "src": "AeroRoutes",
+   "date": "2026-11-06",
+   "tags": []
+  },
+  {
+   "title": "THAI Boosts KL / Singapore Flights From Feb 2027",
+   "url": "https://www.aeroroutes.com/eng/261106-tgfeb27sea",
+   "src": "AeroRoutes",
+   "date": "2026-11-06",
+   "tags": [
+    "Malaysia",
+    "Thailand"
+   ]
+  },
+  {
+   "title": "Singapore Airlines Moves Dubai Resumption to March 2027",
+   "url": "https://www.aeroroutes.com/eng/261102-sqnw26dxb",
+   "src": "AeroRoutes",
+   "date": "2026-11-03",
+   "tags": []
+  },
+  {
+   "title": "Scoot extends Middle East flight cancellations to February 2027",
+   "url": "https://www.straitstimes.com/singapore/scoot-extends-middle-east-flight-cancellations-to-february-2027",
+   "src": "Straits Times",
+   "date": "2026-11-03",
+   "tags": []
+  },
+  {
+   "title": "Some airlines hit by disruption to self-service check-in kiosks at Changi Airport",
+   "url": "https://www.straitstimes.com/singapore/some-airlines-hit-by-self-service-check-in-kiosk-disruption-at-changi-airport",
+   "src": "Straits Times",
+   "date": "2026-11-02",
+   "tags": []
+  },
+  {
+   "title": "Singapore Airlines delays Dubai restart to March 2027 – a full year without flights",
+   "url": "https://mainlymiles.com/2026/10/31/singapore-airlines-delays-dubai-restart-to-march-2027/",
+   "src": "Mainly Miles",
+   "date": "2026-10-31",
+   "tags": []
+  },
+  {
+   "title": "SIA extends cancellation of Dubai flights to Feb 28",
+   "url": "https://www.channelnewsasia.com/singapore/sia-dubai-flights-cancelled-february-2027-6506341",
+   "src": "CNA",
+   "date": "2026-10-30",
+   "tags": []
+  },
+  {
+   "title": "Air China Increases Chongqing – Singapore Flights in 1Q27",
+   "url": "https://www.aeroroutes.com/eng/261030-ca1q27ckgsin",
+   "src": "AeroRoutes",
+   "date": "2026-10-30",
+   "tags": [
+    "China"
+   ]
+  },
+  {
+   "title": "Singapore Airlines makes Auckland A380 year-round",
+   "url": "https://mainlymiles.com/2026/10/27/singapore-airlines-makes-auckland-a380-year-round/",
+   "src": "Mainly Miles",
+   "date": "2026-10-27",
+   "tags": []
+  },
+  {
+   "title": "SIA NW27 Hong Kong Preliminary Aircraft Changes",
+   "url": "https://www.aeroroutes.com/eng/261026-sqnw27hkg",
+   "src": "AeroRoutes",
+   "date": "2026-10-26",
+   "tags": [
+    "Hong Kong"
+   ]
+  },
+  {
+   "title": "SIA NW27 London Gatwick Aircraft Changes – 25OCT26",
+   "url": "https://www.aeroroutes.com/eng/261026-sqnw27lgw",
+   "src": "AeroRoutes",
+   "date": "2026-10-26",
+   "tags": []
+  },
+  {
+   "title": "What are the busiest routes on the Singapore Airlines network?",
+   "url": "https://mainlymiles.com/2026/10/25/busiest-routes-sia-2026/",
+   "src": "Mainly Miles",
+   "date": "2026-10-25",
+   "tags": [
+    "Indonesia"
+   ]
+  },
+  {
+   "title": "Vietnam Airlines Adds Regular Da Nang – Singapore Service in NW26",
+   "url": "https://www.aeroroutes.com/eng/261023-vnnw26dadsin",
+   "src": "AeroRoutes",
+   "date": "2026-10-23",
+   "tags": [
+    "Vietnam"
+   ]
+  },
+  {
+   "title": "VietJet flights out of Changi unlikely to be affected despite carrier’s legal troubles: Experts",
+   "url": "https://www.straitstimes.com/singapore/transport/vietjet-flights-out-of-changi-unlikely-to-be-affected-despite-carriers-legal-troubles-experts",
+   "src": "Straits Times",
+   "date": "2026-10-23",
+   "tags": [
+    "Vietnam"
    ]
   },
   {
@@ -2666,80 +2848,11 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "tags": []
   },
   {
-   "title": "Singapore condemns Houthi attacks on civilian aviation infrastructure in Saudi Arabia",
-   "url": "https://www.channelnewsasia.com/singapore/singapore-mfa-condemns-houthi-attack-civilian-aviation-infrastructure-saudi-arabia-6445696",
-   "src": "CNA",
-   "date": "2026-10-09",
-   "tags": []
-  },
-  {
-   "title": "Air India-Singapore Airlines Partnership Simplifies Codeshare Bookings",
-   "url": "https://www.businesstraveller.com/news/air-india-singapore-airlines-booking-changes/",
-   "src": "Business Traveller",
-   "date": "2026-10-09",
-   "tags": [
-    "India"
-   ]
-  },
-  {
-   "title": "Singapore condemns Houthi strikes after attacks on Saudi airport kill 3",
-   "url": "https://www.straitstimes.com/singapore/singapore-condemns-houthi-strikes-after-attacks-on-saudi-airport-kill-3",
-   "src": "Straits Times",
-   "date": "2026-10-09",
-   "tags": []
-  },
-  {
-   "title": "New $170 million aviation maintenance and repair facility in Changi Creek to create over 500 jobs",
-   "url": "https://www.straitstimes.com/singapore/transport/new-170-million-aviation-maintenance-and-repair-facility-in-changi-creek-to-create-over-500-jobs",
-   "src": "Straits Times",
-   "date": "2026-10-09",
-   "tags": []
-  },
-  {
    "title": "Singapore Airlines pushes Riyadh launch back to March 2027",
    "url": "https://mainlymiles.com/2026/10/08/singapore-airlines-pushes-riyadh-launch-back-to-march-2027/",
    "src": "Mainly Miles",
    "date": "2026-10-08",
    "tags": []
-  },
-  {
-   "title": "TransNusa Expands Jakarta – Singapore Flights in 4Q26",
-   "url": "https://www.aeroroutes.com/eng/261008-8b4q26sin",
-   "src": "AeroRoutes",
-   "date": "2026-10-08",
-   "tags": [
-    "Indonesia"
-   ]
-  },
-  {
-   "title": "SIA flight attendants to don new closed-toe shoes from January, with iconic sandals to be phased out",
-   "url": "https://www.straitstimes.com/singapore/sia-flight-attendants-to-don-new-closed-toe-shoes-from-january-with-iconic-sandals-to-be-phased-out",
-   "src": "Straits Times",
-   "date": "2026-10-08",
-   "tags": []
-  },
-  {
-   "title": "Singapore Airlines Moves Riyadh Service Resumption to late-1Q27",
-   "url": "https://www.aeroroutes.com/eng/261007-sqns27ruh",
-   "src": "AeroRoutes",
-   "date": "2026-10-07",
-   "tags": []
-  },
-  {
-   "title": "Changi Airport taps technology to improve passenger journeys",
-   "url": "https://www.ttgasia.com/2026/10/07/changi-airport-taps-technology-to-improve-passenger-journeys/",
-   "src": "TTG Asia",
-   "date": "2026-10-07",
-   "tags": []
-  },
-  {
-   "title": "More flight options between Singapore and eight Indian cities on SIA, Air India from Oct 15",
-   "url": "https://www.straitstimes.com/singapore/more-flight-options-between-singapore-and-eight-indian-cities-on-sia-air-india-from-oct-15",
-   "src": "Straits Times",
-   "date": "2026-10-07",
-   "tags": [
-    "India"
-   ]
   },
   {
    "title": "Gulf Air launching Singapore – Kuala Lumpur ‘fifth freedom’ flights",
@@ -2752,22 +2865,6 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    ]
   },
   {
-   "title": "Singapore Airlines Flies Its Boeing 737 MAX on These Routes",
-   "url": "https://aviationa2z.com/index.php/2026/10/04/singapore-airlines-expands-boeing-737-max-network/?utm_source=rss&utm_medium=rss&utm_campaign=singapore-airlines-expands-boeing-737-max-network",
-   "src": "Aviation A2Z",
-   "date": "2026-10-04",
-   "tags": []
-  },
-  {
-   "title": "Johor Bahru-Singapore RTS Link passenger service delayed to February 2027",
-   "url": "https://www.channelnewsasia.com/singapore/johor-bahru-singapore-rts-link-delayed-6423591",
-   "src": "CNA",
-   "date": "2026-10-02",
-   "tags": [
-    "Malaysia"
-   ]
-  },
-  {
    "title": "Where is Singapore Airlines flying its Boeing 737 MAX?",
    "url": "https://mainlymiles.com/2026/10/02/where-is-sia-flying-its-737-max/",
    "src": "Mainly Miles",
@@ -2775,148 +2872,10 @@ const D={"countries":[{"name":"China","flag":"🇨🇳","slug":"china","date":"2
    "tags": []
   },
   {
-   "title": "Singapore Airlines cancels flights to and from Dubai until Dec 1",
-   "url": "https://www.channelnewsasia.com/singapore/sia-flight-cancel-dubai-scoot-jeddah-6423611",
-   "src": "CNA",
-   "date": "2026-10-01",
-   "tags": []
-  },
-  {
    "title": "Singapore Airlines delays Dubai restart again, Riyadh now set to launch first",
    "url": "https://mainlymiles.com/2026/10/01/singapore-airlines-delays-dubai-restart-again-riyadh-now-set-to-launch-first/",
    "src": "Mainly Miles",
    "date": "2026-10-01",
-   "tags": []
-  },
-  {
-   "title": "Singapore Airlines Cancels Flights to Busiest International Airport in the World",
-   "url": "https://aviationa2z.com/index.php/2026/10/01/singapore-airlines-cancels-flights-to-dubai/?utm_source=rss&utm_medium=rss&utm_campaign=singapore-airlines-cancels-flights-to-dubai",
-   "src": "Aviation A2Z",
-   "date": "2026-10-01",
-   "tags": []
-  },
-  {
-   "title": "Scoot removes passenger from S’pore-bound flight in Macau over disruptive behaviour",
-   "url": "https://www.straitstimes.com/singapore/scoot-removes-passenger-from-spore-bound-flight-in-macau-over-disruptive-behaviour",
-   "src": "Straits Times",
-   "date": "2026-10-01",
-   "tags": [
-    "Hong Kong"
-   ]
-  },
-  {
-   "title": "SIA, Scoot extend Middle East flight cancellations to December",
-   "url": "https://www.straitstimes.com/singapore/sia-scoot-extend-middle-east-flight-cancellations-to-december",
-   "src": "Straits Times",
-   "date": "2026-10-01",
-   "tags": []
-  },
-  {
-   "title": "Singapore Airlines revamps in-flight dining with 100+ dishes and new serviceware",
-   "url": "https://www.aerotime.aero/articles/singapore-airlines-revamps-in-flight-dining-with-100-dishes-and-new-serviceware",
-   "src": "AeroTime",
-   "date": "2026-09-30",
-   "tags": []
-  },
-  {
-   "title": "Singapore Airlines unveils new and refreshed in-flight dishes, including poached lobster and beef short rib sambal percik",
-   "url": "https://www.channelnewsasia.com/travel/singapore-airlines-sia-new-dishes-chefs-selection-6417341",
-   "src": "CNA",
-   "date": "2026-09-29",
-   "tags": []
-  },
-  {
-   "title": "Singapore Airlines refreshes in-flight dining, including Christofle chinaware",
-   "url": "https://mainlymiles.com/2026/09/29/singapore-airlines-refreshes-in-flight-dining-including-christofle-chinaware/",
-   "src": "Mainly Miles",
-   "date": "2026-09-29",
-   "tags": [
-    "China"
-   ]
-  },
-  {
-   "title": "Singapore Airlines Cooks Up 100-Plus New Inflight Meals that Evoke Home",
-   "url": "https://www.businesstraveller.com/news/singapore-airlines-inflight-dining-new-menu/",
-   "src": "Business Traveller",
-   "date": "2026-09-29",
-   "tags": [
-    "China"
-   ]
-  },
-  {
-   "title": "Singapore Airlines Unveils 100+ New Dishes And Premium Serviceware",
-   "url": "https://aviationa2z.com/index.php/2026/09/29/singapore-airlines-unveils-100-new-dishes-and-premium-serviceware/?utm_source=rss&utm_medium=rss&utm_campaign=singapore-airlines-unveils-100-new-dishes-and-premium-serviceware",
-   "src": "Aviation A2Z",
-   "date": "2026-09-29",
-   "tags": []
-  },
-  {
-   "title": "Where is Singapore Airlines flying its Airbus A380s?",
-   "url": "https://mainlymiles.com/2026/09/28/where-is-sia-flying-airbus-a380s/",
-   "src": "Mainly Miles",
-   "date": "2026-09-28",
-   "tags": []
-  },
-  {
-   "title": "Singapore Airlines Fleet: September 2026",
-   "url": "https://mainlymiles.com/2026/09/27/singapore-airlines-fleet-september-2026/",
-   "src": "Mainly Miles",
-   "date": "2026-09-27",
-   "tags": []
-  },
-  {
-   "title": "Air Canada axes Singapore – Vancouver route",
-   "url": "https://mainlymiles.com/2026/09/22/air-canada-axes-singapore-vancouver-route/",
-   "src": "Mainly Miles",
-   "date": "2026-09-22",
-   "tags": []
-  },
-  {
-   "title": "Singapore Airlines announces schedule through to March 2027",
-   "url": "https://mainlymiles.com/2026/09/20/singapore-airlines-announces-schedule-through-to-march-2027/",
-   "src": "Mainly Miles",
-   "date": "2026-09-20",
-   "tags": [
-    "Indonesia"
-   ]
-  },
-  {
-   "title": "Singapore Airlines boosts Ho Chi Minh, Da Nang flights",
-   "url": "https://mainlymiles.com/2026/09/16/singapore-airlines-boosts-ho-chi-minh-da-nang-flights/",
-   "src": "Mainly Miles",
-   "date": "2026-09-16",
-   "tags": [
-    "Vietnam"
-   ]
-  },
-  {
-   "title": "Half of Singapore Airlines’ Bali flights switch to the Boeing 737 MAX",
-   "url": "https://mainlymiles.com/2026/08/30/half-of-singapore-airlines-bali-flights-switch-to-the-boeing-737-max/",
-   "src": "Mainly Miles",
-   "date": "2026-08-30",
-   "tags": [
-    "Indonesia"
-   ]
-  },
-  {
-   "title": "Singapore Airlines cuts Johannesburg flights by over 40% from late October",
-   "url": "https://mainlymiles.com/2026/08/09/singapore-airlines-cuts-johannesburg-flights-from-late-october/",
-   "src": "Mainly Miles",
-   "date": "2026-08-09",
-   "tags": []
-  },
-  {
-   "title": "Turkish Airlines launching Singapore – Sydney flights from October 2026",
-   "url": "https://mainlymiles.com/2026/08/06/turkish-airlines-launching-singapore-sydney-flights/",
-   "src": "Mainly Miles",
-   "date": "2026-08-06",
-   "tags": []
-  },
-  {
-   "title": "Singapore Airlines restores a full A380 season for Auckland",
-   "url": "https://mainlymiles.com/2026/08/02/singapore-airlines-restores-a-full-a380-season-for-auckland/",
-   "src": "Mainly Miles",
-   "date": "2026-08-02",
    "tags": []
   }
  ]
@@ -2994,9 +2953,9 @@ D.countries.forEach(c=>{const H=D.history[c.slug]||{}, m=Object.keys(H).sort(); 
   const a0=H[m[m.length-1]].r, b0=H[m[m.length-2]].r;
   new Set([...Object.keys(a0),...Object.keys(b0)]).forEach(code=>{const a=a0[code]||{}, b=b0[code]||{};
     new Set([...Object.keys(a),...Object.keys(b)]).forEach(al=>{const n=a[al]||0, o=b[al]||0;
-      if(!o&&n) moves.push({up:1,d:n,t:`<b>${esc(al)}</b> started ${cityLink(code)} <span class="code">${code}</span>`,v:`${n}/wk`});
-      else if(o&&!n) moves.push({up:0,d:-o,t:`<b>${esc(al)}</b> stopped ${cityLink(code)} <span class="code">${code}</span>`,v:`was ${o}/wk`});
-      else if(Math.abs(n-o)>=3) moves.push({up:n>o,d:n-o,t:`<b>${esc(al)}</b> ${cityLink(code)} <span class="code">${code}</span>`,v:`${o} → ${n}/wk`});});});});
+      if(!o&&n) moves.push({k:'start',al,code,up:1,d:n,t:`<b>${esc(al)}</b> started ${cityLink(code)} <span class="code">${code}</span>`,v:`${n}/wk`});
+      else if(o&&!n) moves.push({k:'stop',al,code,up:0,d:-o,t:`<b>${esc(al)}</b> stopped ${cityLink(code)} <span class="code">${code}</span>`,v:`was ${o}/wk`});
+      else if(Math.abs(n-o)>=3) moves.push({k:'chg',al,code,o,n,up:n>o,d:n-o,t:`<b>${esc(al)}</b> ${cityLink(code)} <span class="code">${code}</span>`,v:`${o} → ${n}/wk`});});});});
 moves.sort((a,b)=>Math.abs(b.d)-Math.abs(a.d));
 
 // ---------- key numbers ----------
@@ -3050,6 +3009,23 @@ function renderBars(){
   const grow=()=>$('bars').querySelectorAll('i[data-w]').forEach((b,i)=>{b.style.transitionDelay=(.35+i*.06)+'s'; b.style.width=b.dataset.w+'%';});
   requestAnimationFrame(()=>requestAnimationFrame(grow));
   $('barsNote').textContent=`Tap a country to open it on the map. Timetables checked ${fd(dataDate,1)}.${withPrev.length?` Arrows compare with the check on ${fd(prevDate,1)}.`:''}`;
+}
+
+// ---------- what's new: one plain sentence on top ----------
+function renderWhatsNew(){
+  const box=$('whatsNew'); if(!withPrev.length){box.hidden=true; return;}
+  const d=curTot-prevTot, st=moves.filter(m=>m.k==='start'), sp=moves.filter(m=>m.k==='stop'), ch=moves.filter(m=>m.k==='chg');
+  const one=m=>`<b>${esc(m.al)}</b> to ${cityLink(m.code)}`, some=(l,n=2)=>l.slice(0,n).map(one).join(', ')+(l.length>n?` and ${l.length-n} more`:'');
+  const bits=[];
+  bits.push(d?`Flights a week are <span class="${d>0?'up':'down'}">${d>0?'up':'down'} ${fmtN(Math.abs(d))}</span> to <b>${fmtN(curTot)}</b>`:`Flights a week are unchanged at <b>${fmtN(curTot)}</b>`);
+  if(st.length) bits.push(`<span class="up">${st.length} new</span> airline service${st.length>1?'s':''} (${some(st)})`);
+  if(sp.length) bits.push(`<span class="down">${sp.length} ended</span> (${some(sp)})`);
+  if(!st.length&&!sp.length) bits.push('no airline started or ended a route');
+  let h=bits.join('; ')+'.';
+  if(ch.length){const m=ch[0]; h+=` Biggest change: ${one(m)}, ${m.o} → ${m.n} a week.`;}
+  if(upcoming.length){const s=upcoming[0]; h+=` Next to start: <b>${esc(s.a)}</b> to ${cityLink(s.code,s.city)} on ${fd(s.d)}.`;}
+  $('wnTxt').innerHTML=h+`<small>Compares the timetable check on ${fd(dataDate,1)} with the one on ${fd(prevDate,1)}. Details in “What’s changing” below.</small>`;
+  box.hidden=false;
 }
 
 // ---------- what's changing ----------
@@ -3169,8 +3145,38 @@ NEWS=D.news?{...D.news,_saved:1}:null; let IVA=D.iva;
 $('hero').style.setProperty('--d','0s');
 document.querySelectorAll('.card').forEach((c,i)=>c.style.setProperty('--d',(.45+i*.09).toFixed(2)+'s'));
 $('wrap').classList.add('go');
-renderKpis(IVA); renderBars(); renderChanges(); renderIva(IVA); renderWatch(); renderNews(); renderRules(); renderOut(); renderSources(); renderStamp();
+renderWhatsNew(); renderKpis(IVA); renderBars(); renderChanges(); renderIva(IVA); renderWatch(); renderNews(); renderRules(); renderOut(); renderSources(); renderStamp();
 counted=true; setTimeout(()=>{firstNews=false;},50);
+
+// ---------- jump menu ----------
+$('jump').querySelectorAll('button').forEach(b=>{const t=$(b.dataset.j); if(!t||t.hidden){b.hidden=true; return;}
+  b.onclick=()=>t.scrollIntoView({behavior:'smooth',block:'start'});});
+
+// ---------- save a card as a picture (the card is redrawn inside an SVG, then turned into a PNG) ----------
+const CAM='<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6.5h3l1.2-2h5.6l1.2 2h3v9H3z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="10" cy="10.8" r="2.8" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>';
+function shotCard(card,name){
+  const W=card.offsetWidth, pad=16, cap=30, H=card.offsetHeight+pad*2+cap, bs=getComputedStyle(document.body);
+  const c=card.cloneNode(true); c.querySelectorAll('.shot-b,.more').forEach(x=>x.remove()); c.querySelectorAll('.arrive').forEach(x=>x.classList.remove('arrive'));
+  c.style.cssText+=';margin:0;animation:none;transform:none;opacity:1;filter:none';
+  const hold=document.createElement('div'); hold.setAttribute('xmlns','http://www.w3.org/1999/xhtml');
+  hold.style.cssText=`box-sizing:border-box;width:${W+pad*2}px;height:${H}px;padding:${pad}px;background:${bs.backgroundColor};color:${bs.color};font:${bs.font}`;
+  const st=document.createElement('style'); st.textContent=[...document.querySelectorAll('style')].map(x=>x.textContent).join('\n')+'\n*{animation:none!important;transition:none!important}.bar .n{overflow:visible!important}';
+  const ft=document.createElement('div'); ft.style.cssText='margin-top:10px;font-size:13px;color:'+getComputedStyle(document.documentElement).getPropertyValue('--ink-2');
+  ft.textContent=`Changi Routes · timetables checked ${fd(dataDate,1)} · saved ${new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}`;
+  hold.append(st,c,ft);
+  const theme=document.documentElement.dataset.theme||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+  const xml=`<svg xmlns="http://www.w3.org/2000/svg" data-theme="${theme}" width="${W+pad*2}" height="${H}"><foreignObject width="100%" height="100%">${new XMLSerializer().serializeToString(hold)}</foreignObject></svg>`;
+  const img=new Image(), fail=()=>{$('shotImg').hidden=true; $('shotGet').hidden=true; $('shotMsg').textContent='This browser cannot turn a card into a picture. Please take a screenshot instead.'; $('shot').hidden=false;};
+  img.onload=()=>{try{const k=2, cv=document.createElement('canvas'); cv.width=(W+pad*2)*k; cv.height=H*k; cv.getContext('2d').drawImage(img,0,0,cv.width,cv.height);
+      cv.toBlob(b=>{if(!b) return fail(); const u=URL.createObjectURL(b); $('shotImg').src=u; $('shotImg').hidden=false; $('shotGet').hidden=false; $('shotGet').href=u; $('shotGet').download=`changi-${name}.png`;
+        $('shotMsg').textContent='If Download does nothing, right-click (or press and hold) the picture and choose Save.'; $('shot').hidden=false;},'image/png');}catch(e){fail();}};
+  img.onerror=fail; img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(xml);
+}
+document.querySelectorAll('.card').forEach(card=>{const hd=card.querySelector('.hd'); if(!hd) return;
+  const b=document.createElement('button'); b.type='button'; b.className='shot-b'; b.title='Save this card as a picture (for slides or reports)'; b.setAttribute('aria-label','Save this card as a picture'); b.innerHTML=CAM+'<span>Save picture</span>';
+  b.onclick=()=>shotCard(card,(card.id||'card').replace(/Card$/,'')); hd.appendChild(b);});
+$('shotClose').onclick=()=>{$('shot').hidden=true;}; $('shot').onclick=e=>{if(e.target===$('shot')) $('shot').hidden=true;};
+addEventListener('keydown',e=>{if(e.key==='Escape') $('shot').hidden=true;});
 setTimeout(()=>$('wrap').classList.remove('go'),3800);
 
 // pointer light on cards

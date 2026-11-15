@@ -27,15 +27,36 @@ FEEDS = [
 # the headline must name Singapore/Changi AND be about flying; judged on the headline only
 PLACE = re.compile(r'\b(changi|singapore|scoot|sia)\b', re.I)
 AVIA = re.compile(r'\b(scoot|passengers?|airlines?|flights?|routes?|airports?|terminals?|carriers?|aircraft|jets?|aviation|air travel|levy)\b', re.I)
-SKIP = re.compile(r'\b(krisflyer|miles|points|credit card|citi|lounge|award|sale|promo\w*|deals?|review|seats?|cabins?|first class|business class|priority pass|mro|prison|jail|court|charged|crash\w*|collid\w*|drugs?|smuggl\w*|arrested|beach)\b', re.I)
+SKIP = re.compile(r'\b(krisflyer|miles|points|credit card|citi|lounge|award|sale|promo\w*|deals?|review|seats?|cabins?|first class|business class|priority pass|mro|prison|jail|court|charged|crash\w*|collid\w*|drugs?|smuggl\w*|arrested|beach'
+                  # not about routes or airlines: crime and customs, shows and events, staff stories, on-board extras, fuel, far-away conflicts
+                  r'|caught|stopped at|seized|trading cards|probes?|offences?|fined|ordered to pay|complaint|dies|died|cancer|steward\w*|attendants?|shoes|sandals|uniforms?'
+                  r'|pokemon|pikachu|themed|schools?|spotlight|puppet\w*|jewel|travel fair|discount\w*|jobs|hiring'
+                  r'|dining|dish(?:es)?|meals?|menus?|serviceware|chinaware|entertainment|krisworld|premium economy|closer look|prizes?|best airline'
+                  r'|saf|sustainable aviation|jet fuel|maintenance|repair|rts|condemns?|houthi|attacks?|emergency landing|disruptive)\b', re.I)
 def wanted(title): return bool(PLACE.search(title) and AVIA.search(title) and not SKIP.search(title))
-COUNTRIES = {'China': r'china|chinese|beijing|shanghai|guangzhou|shenzhen|chengdu|xiamen|hangzhou|urumqi|hohhot',
-             'Hong Kong': r'hong kong|macau', 'Japan': r'japan|tokyo|osaka|nagoya|fukuoka|sapporo|okinawa',
-             'South Korea': r'korea|seoul|busan|jeju', 'Thailand': r'thailand|thai|bangkok|phuket|chiang mai|krabi',
-             'Malaysia': r'malaysia|kuala lumpur|penang|sabah|sarawak|johor|langkawi', 'Indonesia': r'indonesia|jakarta|bali|surabaya|medan|batam|aceh',
-             'Philippines': r'philippine|manila|cebu|clark|davao', 'Vietnam': r'vietnam|hanoi|ho chi minh|da nang|hai phong|da lat|phu quoc',
+COUNTRIES = {'China': r"china|chinese|hainan|sichuan|beijing|shanghai|guangzhou|shenzhen|chengdu|chongqing|xiamen|hangzhou|urumqi|hohhot|haikou|sanya|kunming|wuhan|xi'?an|nanjing|qingdao|changsha|fuzhou|tianjin|harbin|shenyang|zhengzhou|nanning|guiyang|ningbo|jinan|hefei|lhasa",
+             'Hong Kong': r'hong kong|macau|macao|cathay', 'Japan': r'japan|tokyo|osaka|nagoya|fukuoka|sapporo|okinawa|hiroshima|sendai|kagoshima|haneda|narita|\bana\b|\bjal\b',
+             'South Korea': r'korea|seoul|busan|jeju|incheon|gimpo|daegu|cheongju', 'Thailand': r'thailand|thai|bangkok|phuket|chiang mai|chiang rai|krabi|koh samui|hat yai|pattaya',
+             'Malaysia': r'malaysia|kuala lumpur|\bkl\b|penang|sabah|sarawak|johor|langkawi|kuching|kota kinabalu|ipoh|malacca|subang|firefly|batik air malaysia',
+             'Indonesia': r'indonesia|jakarta|bali|denpasar|surabaya|medan|batam|aceh|lombok|makassar|manado|yogyakarta|bandung|garuda|transnusa|citilink',
+             'Philippines': r'philippine|manila|cebu|clark|davao|iloilo|boracay|caticlan', 'Vietnam': r'vietnam|vietjet|hanoi|ho chi minh|da nang|hai phong|da lat|phu quoc|nha trang|hue\b|can tho',
              'India': r'india\b|indian (?!ocean)|indigo|air india|delhi|mumbai|chennai|bengaluru|bangalore|hyderabad|kolkata|kochi|ahmedabad|amritsar|coimbatore|trichy|tiruchirappalli|thiruvananthapuram|visakhapatnam|vijayawada|guwahati|lucknow|jaipur|goa\b|pune\b'}
 def tag(text): return [c for c, rx in COUNTRIES.items() if re.search(r'\b(?:' + rx + ')', text, re.I)]
+# the same story from several feeds: keep the first one found, drop later look-alikes from the same few days
+STOP = set('a an the to of in on for and with from its is as at by after into over up new will be this that these it s'.split())
+SAME = {'sia': 'singapore airline', 'february': 'feb', 'cancellation': 'cancel', 'cancels': 'cancel', 'flights': 'flight', 'airlines': 'airline'}
+def words(title):
+    t = ' '.join(SAME.get(w, w) for w in re.findall(r"[a-z0-9]+", title.lower()))
+    return {w[:-1] if len(w) > 4 and w.endswith('s') else w for w in t.split()} - STOP
+def near(a, b):
+    if abs((datetime.strptime(a['date'], '%Y-%m-%d') - datetime.strptime(b['date'], '%Y-%m-%d')).days) > 4: return False
+    x, y = words(a['title']), words(b['title'])
+    return len(x & y) / max(1, len(x | y)) >= 0.5
+def no_repeats(items):
+    kept = []
+    for i in sorted(items, key=lambda i: i['date']):   # oldest first, so the first report of a story stays
+        if not any(near(i, k) for k in kept): kept.append(i)
+    return kept
 KEEP_DAYS, KEEP_MAX = 120, 40
 OUT = Path(__file__).parent / 'news.json'
 
@@ -68,6 +89,6 @@ for name, url in FEEDS:
     except Exception as e:   # one broken feed never stops the rest
         print(f'skip {name}: {e}')
 cut = (datetime.now(timezone.utc) - timedelta(days=KEEP_DAYS)).strftime('%Y-%m-%d')
-items = sorted([i for i in old + new if i['date'] >= cut], key=lambda i: i['date'], reverse=True)[:KEEP_MAX]
+items = sorted(no_repeats([i for i in old + new if i['date'] >= cut]), key=lambda i: i['date'], reverse=True)[:KEEP_MAX]
 OUT.write_text(json.dumps({'updated': datetime.now(timezone.utc).strftime('%Y-%m-%d'), 'items': items}, ensure_ascii=False, indent=1))
 print(f'{len(new)} new, {len(items)} kept')

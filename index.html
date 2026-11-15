@@ -66,7 +66,7 @@
 :root{
   --sea:#cfdce4; --land:#e3eaee; --china:#ffffff; --edge:#9db1bd;
   --arc:#d9480f; --arc-dim:#c7a08a; --sg:#c8102e;
-  --ink:#0f2233; --ink-2:#4a5d6b; --panel:rgba(255,255,255,.9); --line:#d3dde3;
+  --ink:#0f2233; --ink-2:#3c4d59; --panel:rgba(255,255,255,.9); --line:#d3dde3;
   --chip:#eef3f6; --chip-on:#0f2233; --chip-on-ink:#ffffff;
   --shadow:0 10px 40px rgba(15,34,51,.14); --is-dark:0; --border-region:#3d5566; --border-prov:#7fa8bf;
   --r-south:#e8590c; --r-east:#1971c2; --r-southwest:#2b8a3e; --r-central:#c2255c; --r-north:#7048e8; --r-northeast:#0b7285; --r-northwest:#9c6b14; --r-connect:#7b8d99; --r-lost:#e03131;
@@ -75,7 +75,7 @@
   :root:not([data-theme="light"]){
     --sea:#08131c; --land:#12202b; --china:#24405a; --edge:#2e4b5e;
     --arc:#ffb547; --arc-dim:#6d5a3a; --sg:#ff5364;
-    --ink:#e7eef3; --ink-2:#98abb8; --panel:rgba(12,24,34,.88); --line:#223a4a;
+    --ink:#e7eef3; --ink-2:#b0c0cb; --panel:rgba(12,24,34,.88); --line:#223a4a;
     --chip:#172b39; --chip-on:#ffb547; --chip-on-ink:#08131c;
     --shadow:0 10px 40px rgba(0,0,0,.45); --is-dark:1; --border-region:#9fb8c9; --border-prov:#5f93b5;
     --r-south:#ff8c42; --r-east:#4dabf7; --r-southwest:#69db7c; --r-central:#f783ac; --r-north:#b197fc; --r-northeast:#3bc9db; --r-northwest:#e0b458; --r-connect:#8ba0ae; --r-lost:#ff6b6b;
@@ -84,7 +84,7 @@
 :root[data-theme="dark"]{
   --sea:#08131c; --land:#12202b; --china:#24405a; --edge:#2e4b5e;
   --arc:#ffb547; --arc-dim:#6d5a3a; --sg:#ff5364;
-  --ink:#e7eef3; --ink-2:#98abb8; --panel:rgba(12,24,34,.88); --line:#223a4a;
+  --ink:#e7eef3; --ink-2:#b0c0cb; --panel:rgba(12,24,34,.88); --line:#223a4a;
   --chip:#172b39; --chip-on:#ffb547; --chip-on-ink:#08131c;
   --shadow:0 10px 40px rgba(0,0,0,.45); --is-dark:1; --border-region:#9fb8c9; --border-prov:#5f93b5;
     --r-south:#ff8c42; --r-east:#4dabf7; --r-southwest:#69db7c; --r-central:#f783ac; --r-north:#b197fc; --r-northeast:#3bc9db; --r-northwest:#e0b458; --r-connect:#8ba0ae; --r-lost:#ff6b6b;
@@ -98,7 +98,7 @@ body{background:var(--sea);color:var(--ink);font:15px/1.45 Barlow,system-ui,sans
 .ll{position:absolute;left:0;top:0;white-space:nowrap;font:600 13px/1 "Barlow Condensed",sans-serif;letter-spacing:.04em;text-transform:uppercase;
   text-shadow:0 0 3px var(--sea),0 0 6px var(--sea),0 0 10px var(--sea);transition:opacity .2s}
 .ll.hot{font-size:17px}
-.ll-code{margin-left:5px;font:500 11.5px/1 "JetBrains Mono",monospace;letter-spacing:0;opacity:.8}
+.ll-code{margin-left:5px;font:500 12.5px/1 "JetBrains Mono",monospace;letter-spacing:0;opacity:.8}
 .ll.hot .ll-code{font-size:13px}
 body.no-codes .ll-code{display:none}
 .apn{font-size:14px}
@@ -113,7 +113,7 @@ body.no-codes .ll-code{display:none}
 .sched .num{text-align:right;font-family:"JetBrains Mono",monospace;font-variant-numeric:tabular-nums;white-space:nowrap}
 .sched tfoot td{font-weight:600;border-bottom:0}
 .al-n{font-size:14px;line-height:1.3}
-.al-n .al-code{min-width:0;padding:2px 4px;margin-right:2px;font-size:11.5px}
+.al-n .al-code{min-width:0;padding:2px 4px;margin-right:2px;font-size:12.5px}
 .al-n small{display:block;font-size:12px;color:var(--ink-2);margin-top:2px}
 .dys{white-space:nowrap}
 .dy{display:inline-block;width:12px;text-align:center;font:600 12px/18px "Barlow Condensed",sans-serif;font-style:normal;color:var(--ink-2);opacity:.35}
@@ -396,12 +396,12 @@ body[data-side="right"] #helpCard{right:auto;left:16px}
   #detail h2 span{font-size:14px}
   .stats{gap:6px}
   .stat .v{font-size:14px}
-  .stat .k{font-size:11.5px}
+  .stat .k{font-size:12.5px}
   .apn,.al-n,.sched-none,.via-box,.chg ul{font-size:12.5px}
   .sched th,.sched td{padding:5px 3px}
-  .al-n small{font-size:11.5px}
-  .dy{width:11px;font-size:11.5px}
-  #detail .src{font-size:11.5px}
+  .al-n small{font-size:12.5px}
+  .dy{width:11px;font-size:12.5px}
+  #detail .src{font-size:12.5px}
   .d-act .btn,.d-act .btn-p{padding:8px 10px;font-size:12.5px}
   #panel .eyebrow{font-size:12px}
   #panel:not([data-sheet="peek"]) .p-head .eyebrow{display:none}
@@ -547,7 +547,7 @@ a.fs-btn{text-decoration:none}
   .in-row{grid-template-columns:92px 1fr 44px}
 }
 @media print{
-  html:root:not(#_){--ink:#0f2233;--ink-2:#4a5d6b;--panel:#fff;--line:#d3dde3;--chip:#eef3f6;--arc:#d9480f}   /* always print light */
+  html:root:not(#_){--ink:#0f2233;--ink-2:#3c4d59;--panel:#fff;--line:#d3dde3;--chip:#eef3f6;--arc:#d9480f}   /* always print light */
   html,body{height:auto;overflow:visible;background:#fff}
   body>*:not(#fact):not(#ins){display:none!important}
   #fact,#ins{position:static;background:none;padding:0;display:block}
@@ -636,6 +636,45 @@ body #allFab:hover,body #dashFab:hover{transform:none;box-shadow:var(--shadow);b
   .prow .pz{grid-area:pz;white-space:normal}
   .prow .pc{grid-area:pc}
   .prow .pn{grid-area:pn}
+}
+/* ---- one set of Dashboard / All routes buttons (2026-11-15) ----
+   desktop: the floating pills only (panel copies hidden); phone: the named panel buttons only (icon-only circles hidden),
+   and the three round buttons left on the map each get a name underneath */
+@media not all and (max-width:900px){@media not all and (pointer:coarse) and (max-width:1200px){#dashBtn,#allBtn{display:none!important}}}
+@media (max-width:900px), (pointer:coarse) and (max-width:1200px){
+  body #dashFab,body #allFab,body[data-side] #dashFab,body[data-side] #allFab{display:none!important}
+  #themeBtn,#helpBtn,#mapBtn{overflow:visible}
+  #themeBtn,body[data-side] #themeBtn{top:calc(14px + env(safe-area-inset-top,0px))}
+  #helpBtn,body[data-side] #helpBtn{top:calc(74px + env(safe-area-inset-top,0px))}
+  #mapBtn,body[data-side] #mapBtn{top:calc(134px + env(safe-area-inset-top,0px))}
+  #themeBtn::after,#helpBtn::after,#mapBtn::after{position:absolute;top:calc(100% + 3px);left:50%;transform:translateX(-50%);white-space:nowrap;pointer-events:none;
+    font:600 12px/1.2 Barlow,sans-serif;letter-spacing:.02em;color:var(--ink);background:var(--panel);border-radius:6px;padding:1px 5px}
+  #themeBtn::after{content:"Theme"} #helpBtn::after{content:"Help"} #mapBtn::after{content:"Map only"}
+  #helpCard,body[data-side] #helpCard{top:calc(196px + env(safe-area-inset-top,0px));max-height:calc(100vh - 220px)}
+  /* country picker moved up under the heading */
+  .p-head .cpick{margin:8px 0 10px}
+}
+/* ---- save the map as a picture (2026-11-15) ---- */
+#shotBtn{position:fixed;right:16px;bottom:calc(278px + env(safe-area-inset-bottom,0px));z-index:5;display:grid;place-items:center;
+  width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer;box-shadow:var(--shadow);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+#shotBtn svg{width:18px;height:18px}
+#shotBtn:hover{border-color:var(--arc);color:var(--arc)}
+#shotBtn:focus-visible{outline:2px solid var(--arc);outline-offset:2px}
+body[data-side="right"] #shotBtn{right:auto;left:16px}
+#shotBox{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:16px;background:rgba(4,10,16,.78)}
+#shotBox[hidden]{display:none}
+.shot-in{max-width:min(940px,100%);max-height:100%;overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.shot-in img{display:block;max-width:100%;max-height:62vh;margin:0 auto;border:1px solid var(--line);border-radius:8px}
+.shot-in p{margin:10px 0;font:500 14px/1.4 Barlow,sans-serif;color:var(--ink-2)}
+.shot-act{display:flex;gap:8px;flex-wrap:wrap}
+.shot-act a,.shot-act button{font:600 14px Barlow,sans-serif;padding:9px 14px;border-radius:999px;border:1px solid var(--line);background:var(--chip);color:var(--ink);text-decoration:none;cursor:pointer}
+.shot-act a{background:var(--arc);border-color:var(--arc);color:#14100a}
+@media (max-width:900px), (pointer:coarse) and (max-width:1200px){
+  #shotBtn,body[data-side] #shotBtn{box-sizing:border-box;width:36px;height:36px;right:14px;left:auto;bottom:auto;top:calc(194px + env(safe-area-inset-top,0px));overflow:visible;transition:opacity .2s}
+  #shotBtn::after{content:"Save";position:absolute;top:calc(100% + 3px);left:50%;transform:translateX(-50%);white-space:nowrap;pointer-events:none;
+    font:600 12px/1.2 Barlow,sans-serif;letter-spacing:.02em;color:var(--ink);background:var(--panel);border-radius:6px;padding:1px 5px}
+  body[data-sheet="full"] #shotBtn{opacity:0;pointer-events:none}
+  #helpCard,body[data-side] #helpCard{top:calc(256px + env(safe-area-inset-top,0px));max-height:calc(100vh - 280px)}
 }
 </style>
 
@@ -737,7 +776,7 @@ body #allFab:hover,body #dashFab:hover{transform:none;box-shadow:var(--shadow);b
       <div class="sec-b"><div class="cnt" id="cityCounts"></div><div class="list" id="list"></div></div>
     </section>
     <p class="src" id="srcLine"></p>
-    <p class="p-stamp">Last updated 3 Nov 2026, 12:59 am SGT</p>
+    <p class="p-stamp">Last updated 15 Nov 2026, 10:26 pm SGT</p>
   </div>
 </aside>
 <button id="showPanel" type="button" hidden>Show panel</button>
@@ -754,6 +793,12 @@ body #allFab:hover,body #dashFab:hover{transform:none;box-shadow:var(--shadow);b
   <p class="ar-hint" id="arHint">Drag to move, scroll or +/− to zoom in for more city names. Tap a city to open that country.</p>
 </div>
 <a id="dashFab" href="dashboard.html" title="Dashboard: key numbers and the latest news" aria-label="Open the dashboard" hidden><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 3h6v8H3zM11 3h6v5h-6zM11 10h6v7h-6zM3 13h6v4H3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span>Dashboard</span></a>
+<button id="shotBtn" type="button" title="Save this map view as a picture (for slides or reports)" aria-label="Save the map as a picture"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6.5h3l1.2-2h5.6l1.2 2h3v9H3z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="10" cy="10.8" r="2.8" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
+<div id="shotBox" role="dialog" aria-modal="true" aria-label="Save the map as a picture" hidden>
+  <div class="shot-in"><img id="shotImg" alt="Picture of the map">
+    <p>If Download does nothing, right-click (or press and hold) the picture and choose Save.</p>
+    <div class="shot-act"><a id="shotGet" download="changi-routes.png">Download picture</a><button id="shotClose" type="button">Close</button></div></div>
+</div>
 <button id="helpBtn" type="button" title="What am I looking at?" aria-label="What am I looking at?">?</button>
 <div id="helpCard" hidden>
   <button id="helpClose" type="button" aria-label="Close">×</button>
@@ -771,7 +816,7 @@ body #allFab:hover,body #dashFab:hover{transform:none;box-shadow:var(--shadow);b
 </div>
 <div id="fact" role="dialog" aria-modal="true" aria-label="Country fact sheet" hidden><div class="fs-in" id="factIn"></div></div>
 <div id="ins" role="dialog" aria-modal="true" aria-label="All-country insights" hidden><div class="fs-in" id="insIn"></div></div>
-<div id="stamp" title="When this map was last rebuilt with new data">Last updated 3 Nov 2026, 12:59 am SGT</div>
+<div id="stamp" title="When this map was last rebuilt with new data">Last updated 15 Nov 2026, 10:26 pm SGT</div>
 <div id="hint">drag to rotate · scroll to zoom · right-drag to pan · press / to search</div>
 <script>
 /**
@@ -1986,7 +2031,7 @@ function ChangiNetwork(opt){
   function placeLabels(){labels=(opt.avoid?opt.avoid():[]).map(b=>({...b,obstacle:1})); ctx.font='600 13px Barlow, system-ui, sans-serif';
     Object.values(hub).sort((a,b)=>b.wk-a.wk).forEach(h=>{if(h.b[2]<=0) return;
       const txt=`${h.flag} ${h.country}`, sub=`${fmt(opt.totals[h.slug]||h.wk)} a week`;
-      ctx.font='600 13px Barlow, system-ui, sans-serif'; const w1=ctx.measureText(txt).width; ctx.font='500 12px "JetBrains Mono", monospace';
+      ctx.font='600 13px Barlow, system-ui, sans-serif'; const w1=ctx.measureText(txt).width; ctx.font='500 13px "JetBrains Mono", monospace';
       const w=Math.max(w1,ctx.measureText(sub).width)+6, [x,y]=h.b;
       const west=h.lon<SG.lon+1&&h.slug!=='indonesia';
       const opts=[[west?x-10-w:x+10,y-14],[west?x-10-w:x+10,y+4],[x-w/2,y-36],[x-w/2,y+12],[west?x+10:x-10-w,y-14]];
@@ -1996,7 +2041,7 @@ function ChangiNetwork(opt){
         for(const d of [0,32,-32,64,-64,96,-96]) if(free(cx,y-14+d)){best=[cx,y-14+d]; break;}}
       if(!best) best=[Math.max(4,Math.min(W-w-4,opts[0][0])),opts[0][1]];
       labels.push({x:best[0],y:best[1],w,h:30,txt,sub,r:h});});
-    names=[]; if(!BOLD) return; ctx.font='600 12px Barlow, system-ui, sans-serif';
+    names=[]; if(!BOLD) return; ctx.font='600 13px Barlow, system-ui, sans-serif';
     const taken=labels.slice(), [sx0,sy0]=P(SG.lon,SG.lat); taken.push({x:sx0-6,y:sy0-6,w:120,h:22});
     [...R].sort((a,b)=>b.wk-a.wk).forEach(r=>{if(r.b[2]<=0) return; const w=ctx.measureText(r.name).width+4, [x,y]=r.b;
       for(const [bx,by] of [[x+7,y-8],[x-7-w,y-8],[x-w/2,y-22],[x-w/2,y+6]]){
@@ -2036,12 +2081,12 @@ function ChangiNetwork(opt){
       ctx.globalAlpha=k*(dim?.35:1);
       ctx.font='600 13px Barlow, system-ui, sans-serif'; ctx.lineWidth=4; ctx.strokeStyle=col.bg;
       ctx.strokeText(l.txt,l.x,l.y+dy); ctx.fillStyle=col.ink; ctx.fillText(l.txt,l.x,l.y+dy);
-      ctx.font='500 12px "JetBrains Mono", monospace'; ctx.strokeText(l.sub,l.x,l.y+16+dy); ctx.fillStyle=col.ink2; ctx.fillText(l.sub,l.x,l.y+16+dy);}
-    ctx.font='600 12px Barlow, system-ui, sans-serif';
+      ctx.font='500 13px "JetBrains Mono", monospace'; ctx.strokeText(l.sub,l.x,l.y+16+dy); ctx.fillStyle=col.ink2; ctx.fillText(l.sub,l.x,l.y+16+dy);}
+    ctx.font='600 13px Barlow, system-ui, sans-serif';
     for(const n of names){const k=clamp((T-(n.r.t0+n.r.dur+.25))/.4); if(!k) continue;
       ctx.globalAlpha=k*(hover&&hover.slug!==n.r.slug?.3:.95); ctx.lineWidth=3.5; ctx.strokeStyle=col.bg;
       ctx.strokeText(n.r.name,n.x,n.y+2); ctx.fillStyle=col.ink; ctx.fillText(n.r.name,n.x,n.y+2);}
-    if(S[2]>0){const kc=clamp((T-.3)/.5); ctx.globalAlpha=kc; ctx.font='700 12px "Barlow Condensed", sans-serif'; ctx.fillStyle=col.sg;
+    if(S[2]>0){const kc=clamp((T-.3)/.5); ctx.globalAlpha=kc; ctx.font='700 13px "Barlow Condensed", sans-serif'; ctx.fillStyle=col.sg;
       ctx.lineWidth=4; ctx.strokeStyle=col.bg; ctx.strokeText('SINGAPORE · CHANGI',sx+9,sy+7); ctx.fillText('SINGAPORE · CHANGI',sx+9,sy+7);}
     ctx.globalAlpha=1;}
   function run(){hover=null; if(tip) tip.hidden=true; start=performance.now(); cancelAnimationFrame(raf);
@@ -4502,12 +4547,16 @@ const panelEl=document.getElementById('panel'), grab=document.getElementById('gr
 // mirror the sheet height on <body> so floating bits can step aside when the panel fills the screen
 {const sync=()=>{document.body.dataset.sheet=isPhone()&&!panelEl.hidden?(panelEl.dataset.sheet||'peek'):'';};
  new MutationObserver(sync).observe(panelEl,{attributes:true,attributeFilter:['data-sheet','hidden']}); addEventListener('resize',sync,{signal:LIVE.signal}); sync();}
+// phone: the country picker sits right under the heading (seen even when the sheet is small); desktop: top of the scrolling part
+{const pick=document.getElementById('countries'), stats=document.getElementById('hstats'), body=panelEl.querySelector('.p-body');
+ const place=()=>{const up=isPhone(); if(up&&pick.previousElementSibling!==stats) stats.after(pick); else if(!up&&pick.parentNode!==body) body.prepend(pick);};
+ addEventListener('resize',place,{signal:LIVE.signal}); place();}
 function openSheet(s){ if(!isPhone()) return; if(s==='half'&&panelEl.dataset.sheet==='full') return; panelEl.dataset.sheet=s; }
 // on a phone the card sits in the sheet; keep the sheet small so the map still shows
 {let y0=null,h0=0,moved=false,src=null;
  const SNAP=['peek','half','full'];
  const start=e=>{if(!isPhone())return;
-   if(e.target.closest('button:not(.grab), a, input, .row, .chip, .seg')) return;   // don't hijack taps on controls
+   if(e.target.closest('button:not(.grab), a, input, select, .row, .chip, .seg')) return;   // don't hijack taps on controls
    src=e.currentTarget; y0=e.clientY; h0=panelEl.getBoundingClientRect().height; moved=false;
    src.setPointerCapture(e.pointerId); panelEl.classList.add('dragging');};
  const move=e=>{if(y0==null)return; const dy=e.clientY-y0; if(Math.abs(dy)>4) moved=true;
@@ -4797,6 +4846,24 @@ const bR=document.getElementById('bRegion'), bP=document.getElementById('bProv')
  [bR,bP].forEach(b=>b.setAttribute('aria-pressed','true'));}   // a new country starts with everything shown
 bR.onclick=()=>{const on=!regionBorders.visible; regionBorders.visible=on; regionGLs.forEach(g=>g.mesh.visible=on); bR.setAttribute('aria-pressed',String(on));};
 bP.onclick=()=>{provBorders.visible=!provBorders.visible; provGLs.forEach(g=>g.mesh.visible=provBorders.visible); bP.setAttribute('aria-pressed',String(provBorders.visible));};
+// save what the map shows right now as a picture: the 3D view, the names floating on the lines, and a caption strip
+{const box=document.getElementById('shotBox'), im=document.getElementById('shotImg'), get=document.getElementById('shotGet');
+ document.getElementById('shotBtn').onclick=()=>{
+  renderer.render(scene,camera);
+  const src=renderer.domElement, R=src.getBoundingClientRect(), k=src.width/R.width, cv=document.createElement('canvas'); cv.width=src.width; cv.height=src.height;
+  const x=cv.getContext('2d'), bg=css().getPropertyValue('--bg').trim()||'#08131c', ink=css().getPropertyValue('--ink').trim()||'#fff';
+  x.drawImage(src,0,0); x.textBaseline='middle'; x.lineJoin='round';
+  document.querySelectorAll('#lineLabels .ll').forEach(el=>{if(el.style.display==='none') return; const es=getComputedStyle(el); if(!+es.opacity) return;
+    [...el.childNodes].forEach(n=>{const st=n.nodeType===3?es:getComputedStyle(n), rg=document.createRange(); rg.selectNodeContents(n); const r=rg.getBoundingClientRect(); if(!r.width) return;
+      let t=n.textContent; if(st.textTransform==='uppercase') t=t.toUpperCase();
+      x.globalAlpha=(+es.opacity)*(n.nodeType===3?1:+st.opacity||1); x.font=`${st.fontWeight} ${parseFloat(st.fontSize)*k}px ${st.fontFamily}`;
+      try{x.letterSpacing=(parseFloat(st.letterSpacing)||0)*k+'px';}catch(e){}
+      const X=(r.left-R.left)*k, Y=(r.top-R.top+r.height/2)*k; x.lineWidth=3*k; x.strokeStyle=bg; x.strokeText(t,X,Y); x.fillStyle=st.color; x.fillText(t,X,Y);});});
+  x.globalAlpha=1; try{x.letterSpacing='0px';}catch(e){}
+  const h=34*k, cap=`${document.getElementById('h1').innerText.replace(/\s+/g,' ')}  ·  Changi Routes  ·  ${document.getElementById('stamp').innerText.replace(/\s+/g,' ')}`;
+  x.globalAlpha=.86; x.fillStyle=bg; x.fillRect(0,cv.height-h,cv.width,h); x.globalAlpha=1; x.fillStyle=ink; x.font=`600 ${14*k}px Barlow, sans-serif`; x.fillText(cap,14*k,cv.height-h/2);
+  cv.toBlob(b=>{if(!b) return; const u=URL.createObjectURL(b); im.src=u; get.href=u; get.download=`changi-routes-${(location.hash||'#map').slice(1)}.png`; box.hidden=false;},'image/png');};
+ document.getElementById('shotClose').onclick=()=>{box.hidden=true;}; box.onclick=e=>{if(e.target===box) box.hidden=true;};}
 document.querySelectorAll('[data-feel]').forEach(b=>b.onclick=()=>setFeel(b.dataset.feel));
 {let k='steady';try{k=localStorage.getItem('cc_feel')||'steady';}catch(e){} setFeel(k);}
 document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>setView(b.dataset.view==='2d'));
@@ -4868,7 +4935,7 @@ function place(el,p){v.copy(p).project(camera);
   el.style.transform=`translate(${(v.x*.5+.5)*innerWidth}px,${(-v.y*.5+.5)*innerHeight}px) translate(-50%,-130%)`;}
 const _p=new THREE.Vector3();
 function toScreen(x,y,z){_p.set(x,y,z).project(camera);return [(_p.x*.5+.5)*innerWidth,(-_p.y*.5+.5)*innerHeight,_p.z];}
-function hits(r,placed){for(const q of placed){if(r[0]<q[2]+3&&r[2]>q[0]-3&&r[1]<q[3]+2&&r[3]>q[1]-2)return true;}return false;}
+function hits(r,placed){for(const q of placed){if(r[0]<q[2]+7&&r[2]>q[0]-7&&r[1]<q[3]+3&&r[3]>q[1]-3)return true;}return false;}
 function glRect(g){const m=g.mesh,hw=m.scale.x/2,hh=m.scale.y/2,P=m.position;let a=[1e9,1e9,-1e9,-1e9];
   [[-1,-1],[1,-1],[1,1],[-1,1]].forEach(([i,j])=>{const s=toScreen(P.x+i*hw,P.y,P.z+j*hh);a[0]=Math.min(a[0],s[0]);a[1]=Math.min(a[1],s[1]);a[2]=Math.max(a[2],s[0]);a[3]=Math.max(a[3],s[1]);});return a;}
 const byPriority=(a,b)=>(b.llHot-a.llHot)||(b.airlines.length-a.airlines.length)||(a.km-b.km);
