@@ -676,6 +676,48 @@ body[data-side="right"] #shotBtn{right:auto;left:16px}
   body[data-sheet="full"] #shotBtn{opacity:0;pointer-events:none}
   #helpCard,body[data-side] #helpCard{top:calc(256px + env(safe-area-inset-top,0px));max-height:calc(100vh - 280px)}
 }
+
+/* ---- phones: fact sheet + insights as floating swipe cards + chip row; "Show all" = whole page (2026-11-22, cardView() in template) ---- */
+@media (max-width:760px){
+  .fs-top{flex-wrap:wrap;row-gap:6px}
+  .fs-top>div:first-child{order:2;flex:1 1 100%;min-width:0}
+  .fs-act{order:1;flex:1 1 100%;justify-content:flex-end;gap:6px}
+  .cc-vw{white-space:nowrap}
+  .cc-bar{display:none}
+  .cc-track{display:grid;gap:10px;margin-top:16px}
+  .cc-card{display:contents}
+  .fs-in.cc-cards{display:flex;flex-direction:column;overflow:hidden;height:100%;padding-bottom:0}
+  .fs-in.cc-cards>.fs-top{flex:none}
+  .cc-cards .cc-bar{display:block;flex:none;margin:10px -16px 0}
+  .cc-chips{display:flex;gap:5px;overflow-x:auto;padding:4px 16px;scrollbar-width:none}
+  .cc-chips::-webkit-scrollbar{display:none}
+  .cc-chips button{all:unset;cursor:pointer;flex:none;font:600 13px/1.4 Barlow,sans-serif;padding:3px 10px;border-radius:999px;background:var(--chip);color:var(--ink-2)}
+  .cc-chips button[aria-pressed="true"]{background:var(--arc);color:var(--fs-bg)}
+  .cc-chips button:focus-visible{outline:2px solid var(--arc);outline-offset:2px}
+  .cc-cards .cc-track{flex:1;min-height:0;display:flex;gap:8px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;align-items:flex-start;
+    margin:0 -16px;padding:10px 5% 16px;scrollbar-width:none;overscroll-behavior-x:contain}
+  .cc-cards .cc-track::-webkit-scrollbar{display:none}
+  .cc-cards .cc-card{display:block;flex:0 0 90%;min-width:0;box-sizing:border-box;scroll-snap-align:center;max-height:100%;overflow-y:auto;overscroll-behavior-y:contain;
+    background:var(--panel);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:14px;transition:transform .25s,opacity .25s;transform-origin:center 40%}
+  .cc-cards .cc-card.side{transform:scale(.95);opacity:.55}
+  .cc-cards .cc-card>section{background:none;border:0;padding:0;margin:0;border-radius:0}
+  .cc-cards .cc-card>*+*{margin-top:12px}
+  .cc-cards .cc-card>.fs-tiles{margin-bottom:0}
+  .cc-cards .cc-card>.fs-tiles:first-child{margin-top:0}
+  .cc-cards .cc-card>section>h3:first-child{font-size:19px;letter-spacing:.03em;color:var(--ink)}
+  /* Every city: one small card per city instead of a wide table */
+  .cc-cards .fs-cities thead{display:none}
+  .cc-cards .fs-cities,.cc-cards .fs-cities tbody{display:block;width:100%;min-width:0}
+  .cc-cards .fs-cities tr{display:flex;flex-wrap:wrap;align-items:center;gap:3px 10px;padding:9px 0;border-bottom:1px solid var(--line);cursor:pointer}
+  .cc-cards .fs-cities tr::after{content:"";order:2;flex-basis:100%;height:0}
+  .cc-cards .fs-cities td,.cc-cards .fs-sw .fs-scroll .fs-cities td:first-child{border:0;padding:0;position:static;background:none;order:3;font-size:12.5px;color:var(--ink-2);white-space:nowrap}
+  .cc-cards .fs-cities td:first-child,.cc-cards .fs-sw .fs-scroll .fs-cities td:first-child{order:0;flex:1 1 auto;font-size:15px;font-weight:600;color:var(--ink);white-space:normal}
+  .cc-cards .fs-cities td:last-child{order:1;flex:none}
+  .cc-cards .fs-cities td:nth-child(4)::after{content:" km"}
+  .cc-cards .fs-cities td:nth-child(6)::before{content:"✈ "}
+  .cc-cards .fs-cities td:nth-child(7){color:var(--arc);font-weight:600}
+  .cc-cards .fs-cities td:nth-child(7)::after{content:" a week";font-weight:400;color:var(--ink-2)}
+}
 </style>
 
 </head>
@@ -776,7 +818,7 @@ body[data-side="right"] #shotBtn{right:auto;left:16px}
       <div class="sec-b"><div class="cnt" id="cityCounts"></div><div class="list" id="list"></div></div>
     </section>
     <p class="src" id="srcLine"></p>
-    <p class="p-stamp">Last updated 15 Nov 2026, 10:35 pm SGT</p>
+    <p class="p-stamp">Last updated 22 Nov 2026, 10:37 pm SGT</p>
   </div>
 </aside>
 <button id="showPanel" type="button" hidden>Show panel</button>
@@ -816,7 +858,7 @@ body[data-side="right"] #shotBtn{right:auto;left:16px}
 </div>
 <div id="fact" role="dialog" aria-modal="true" aria-label="Country fact sheet" hidden><div class="fs-in" id="factIn"></div></div>
 <div id="ins" role="dialog" aria-modal="true" aria-label="All-country insights" hidden><div class="fs-in" id="insIn"></div></div>
-<div id="stamp" title="When this map was last rebuilt with new data">Last updated 15 Nov 2026, 10:35 pm SGT</div>
+<div id="stamp" title="When this map was last rebuilt with new data">Last updated 22 Nov 2026, 10:37 pm SGT</div>
 <div id="hint">drag to rotate · scroll to zoom · right-drag to pan · press / to search</div>
 <script>
 /**
@@ -4766,7 +4808,7 @@ function factSheet(){
       <tbody>${all.map(cityRow).join('')}</tbody></table></div></section>
     <p class="src">Sources: flightsfrom.com timetables (non-stop), airline and airport notices (one-stop). Checked ${fmtDate(DATA_DATE)}. Flight times are estimates. Days and times change often — check a booking site before you fly.</p>`;
 }
-function openFact(){factIn.innerHTML=factSheet(); factEl.hidden=false; factIn.scrollTop=0; wireZoom(factIn);
+function openFact(){factIn.innerHTML=factSheet(); factEl.hidden=false; factIn.scrollTop=0; wireZoom(factIn); cardView(factIn);
   document.getElementById('fsClose').onclick=closeFact;
   document.getElementById('fsPrint').onclick=()=>print();
   factIn.querySelectorAll('tr[data-code]').forEach(tr=>tr.onclick=()=>{const c=cities.find(x=>x.code===tr.dataset.code); closeFact(); if(c) select(c,true);});
@@ -5177,7 +5219,7 @@ function insightsPage(){
        box.innerHTML=`<h3>Latest headlines <span class="src">collected automatically every day · updated ${fd(n.updated)}</span></h3>`+(items.length?`<ul class="fs-chg in-news">${items.map(i=>`<li><span class="in-nd">${fd(i.date)}</span> <a href="${esc(i.url)}" target="_blank" rel="noopener">${esc(i.title)}</a> <span class="in-ns">${esc(i.src)}</span>${(i.tags||[]).map(t=>` <span class="fs-tag soon">${esc(t)}</span>`).join('')}</li>`).join('')}</ul>`:'<p class="in-note">No Changi route news in the last few months.</p>')
          +'<p class="src">Headlines from free news feeds (CNA, Mainly Miles, AeroRoutes and others), picked by keyword — not checked by a person. Tap to read the full story.</p>';
      }).catch(()=>{box.innerHTML='<h3>Latest headlines</h3><p class="in-note">Daily headlines show on the public site (eadgpt.github.io/changi-routes). They could not load here.</p>';});};
-   insBtn.onclick=()=>{insIn.innerHTML=insightsPage(); insEl.hidden=false; insIn.scrollTop=0; wireZoom(insIn); loadNews(); loadIva();
+   insBtn.onclick=()=>{insIn.innerHTML=insightsPage(); insEl.hidden=false; insIn.scrollTop=0; wireZoom(insIn); cardView(insIn); loadNews(); loadIva();
      document.getElementById('insClose').onclick=close; document.getElementById('insPrint').onclick=()=>print();
      document.getElementById('insClose').focus();};
    insEl.onclick=e=>{if(e.target===insEl) close();};
@@ -5219,6 +5261,54 @@ if(COUNTRIES.length>1){
   matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{if(!el.hidden&&net) net.repaint();});
   if(START_HASH==='#all') setTimeout(open,0);
   addEventListener('hashchange',()=>{if(location.hash==='#all') open();});
+}
+
+// ---------- phones: fact sheet + insights as floating swipe cards with a chip row; "Show all" = the whole page in one scroll (2026-11-22) ----------
+const CC_SHORT={'Quick facts':'Quick facts','By region':'Regions','Airlines':'Airlines','Busiest routes':'Busiest',"What's changing":'Changes',
+  'Change planes to reach':'Change planes','Routes lost':'Lost','Every city':'Every city','Visitors to Singapore':'Visitors',
+  'Singaporeans going abroad':'Going abroad','Travel rules to know':'Travel rules','Latest headlines':'News','The map in eight numbers':'Key numbers',
+  'What the numbers say':'What it says','Since the last check':'Since last check','Routes dropped, by half-year':'Dropped by half-year',
+  'Who flies to each country':'Who flies','Budget airline share':'Budget share','Who dropped routes':'Who dropped','Cities with only one airline':'One airline',
+  'No direct flight yet':'No direct flight',"Changi's wish list":'Wish list','What the experts say':'Experts'};
+function cardView(box){
+  box.classList.remove('cc-cards');
+  if(!matchMedia('(max-width:760px)').matches) return;
+  const top=box.querySelector('.fs-top'); if(!top) return;
+  const cards=[]; let last=null;
+  const add=(title,nodes)=>{last={title,nodes:[...nodes]}; cards.push(last);};
+  const titleOf=s=>{const h=s.querySelector('h3'); return h?[...h.childNodes].filter(n=>n.nodeType===3).map(n=>n.textContent).join('').trim():'';};
+  [...box.children].filter(n=>n!==top&&!n.classList.contains('totop')).forEach(n=>{
+    if(n.tagName==='SECTION') add(titleOf(n),[n]);
+    else if(n.classList.contains('fs-grid')) [...n.children].forEach(s=>add(titleOf(s),[s]));
+    else if(n.classList.contains('fs-tiles')){if(last&&last.nodes.length===1&&last.nodes[0].classList.contains('in-tilehd')) last.nodes.push(n); else add('At a glance',[n]);}
+    else if(last) last.nodes.push(n);});
+  if(cards.length<2) return;
+  const bar=document.createElement('div'); bar.className='cc-bar';
+  const chips=document.createElement('div'); chips.className='cc-chips'; chips.setAttribute('role','tablist'); bar.appendChild(chips);
+  const trk=document.createElement('div'); trk.className='cc-track';
+  cards.forEach((c,i)=>{const el=document.createElement('div'); el.className='cc-card'+(i?' side':''); c.nodes.forEach(n=>el.appendChild(n)); trk.appendChild(el); c.el=el;
+    const b=document.createElement('button'); b.type='button'; b.textContent=CC_SHORT[c.title]||c.title||('Part '+(i+1)); b.setAttribute('aria-pressed',String(!i)); chips.appendChild(b); c.chip=b;});
+  top.after(bar,trk);
+  const vw=document.createElement('button'); vw.type='button'; vw.className='btn cc-vw';
+  const act=top.querySelector('.fs-act'); act.insertBefore(vw,act.querySelector('.x'));
+  let all=false; try{all=localStorage.getItem('cc_view')==='all';}catch(e){}
+  const setAll=v=>{all=v; box.classList.toggle('cc-cards',!all); vw.textContent=all?'Cards':'Show all'; vw.setAttribute('aria-pressed',String(all));
+    vw.title=all?'Back to swipe cards':'Show the whole page in one long scroll';
+    try{localStorage.setItem('cc_view',all?'all':'cards');}catch(e){} box.scrollTop=0; trk.scrollLeft=0; cur=-1; upd();};
+  vw.onclick=()=>setAll(!all);
+  let cur=0;
+  const upd=()=>{if(all) return; const mid=trk.scrollLeft+trk.clientWidth/2; let best=0,bd=1e9;
+    cards.forEach((c,i)=>{const d=Math.abs(c.el.offsetLeft+c.el.offsetWidth/2-mid); if(d<bd){bd=d; best=i;}});
+    cards.forEach((c,i)=>c.el.classList.toggle('side',i!==best));
+    if(best!==cur){cur=best; cards.forEach((c,i)=>c.chip.setAttribute('aria-pressed',String(i===best)));
+      const b=cards[best].chip, x=b.offsetLeft-(chips.clientWidth-b.offsetWidth)/2; chips.scrollTo({left:x,behavior:'smooth'});
+      setTimeout(()=>{if(cards[cur].chip===b&&Math.abs(chips.scrollLeft-Math.max(0,Math.min(x,chips.scrollWidth-chips.clientWidth)))>4) chips.scrollTo({left:x});},600);}};
+  trk.addEventListener('scroll',upd,{passive:true});
+  const go=i=>{const el=cards[i].el, x=el.offsetLeft-(trk.clientWidth-el.offsetWidth)/2, from=trk.scrollLeft;
+    trk.scrollTo({left:x,behavior:'smooth'}); setTimeout(()=>{if(trk.scrollLeft===from&&Math.abs(x-from)>2) trk.scrollTo({left:x});},500);};
+  cards.forEach((c,i)=>{c.chip.onclick=()=>{if(all){setAll(false); requestAnimationFrame(()=>go(i));} else go(i);};
+    c.el.addEventListener('click',e=>{if(!all&&i!==cur){e.preventDefault(); e.stopPropagation(); go(i);}},true);});
+  setAll(all);
 }
 
 // ---------- phones: wide tables show they scroll sideways; long pages get a back-to-top button ----------
