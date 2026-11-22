@@ -601,9 +601,9 @@ body #allFab:hover,body #dashFab:hover{transform:none;box-shadow:var(--shadow);b
 .swipe-hint.gone{opacity:0;pointer-events:none}
 .swipe-hint i{font-style:normal;color:var(--arc);display:inline-block;animation:nudge 1.4s ease-in-out 3}
 @keyframes nudge{0%,100%{transform:none}50%{transform:translateX(4px)}}
-.totop{display:none}
-@media (max-width:760px){
-  .totop{display:grid;place-items:center;position:fixed;right:14px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:40;
+/* back-to-top: phones since 2026-10-15, desktop too since 2026-11-22 */
+@media all{
+  .totop{display:grid;place-items:center;position:fixed;right:14px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:40;cursor:pointer;
     width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--ink);
     font:700 20px/1 Barlow,sans-serif;box-shadow:var(--shadow);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
     opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .2s,transform .2s}
@@ -727,7 +727,7 @@ body[data-side="right"] #shotBtn{right:auto;left:16px}
 .jt-bar button:focus-visible{outline:2px solid var(--arc);outline-offset:-2px;border-radius:6px}
 .jt-bar+.fs-tiles{margin-top:0}
 @media (max-width:760px){.jt-bar{display:none}}
-@media print{.jt-bar{display:none}}
+@media print{.jt-bar,.totop{display:none}}
 </style>
 
 </head>
@@ -828,7 +828,7 @@ body[data-side="right"] #shotBtn{right:auto;left:16px}
       <div class="sec-b"><div class="cnt" id="cityCounts"></div><div class="list" id="list"></div></div>
     </section>
     <p class="src" id="srcLine"></p>
-    <p class="p-stamp">Last updated 22 Nov 2026, 10:55 pm SGT</p>
+    <p class="p-stamp">Last updated 22 Nov 2026, 11:08 pm SGT</p>
   </div>
 </aside>
 <button id="showPanel" type="button" hidden>Show panel</button>
@@ -868,7 +868,7 @@ body[data-side="right"] #shotBtn{right:auto;left:16px}
 </div>
 <div id="fact" role="dialog" aria-modal="true" aria-label="Country fact sheet" hidden><div class="fs-in" id="factIn"></div></div>
 <div id="ins" role="dialog" aria-modal="true" aria-label="All-country insights" hidden><div class="fs-in" id="insIn"></div></div>
-<div id="stamp" title="When this map was last rebuilt with new data">Last updated 22 Nov 2026, 10:55 pm SGT</div>
+<div id="stamp" title="When this map was last rebuilt with new data">Last updated 22 Nov 2026, 11:08 pm SGT</div>
 <div id="hint">drag to rotate · scroll to zoom · right-drag to pan · press / to search</div>
 <script>
 /**
@@ -5363,7 +5363,7 @@ function enhanceTables(root){
   const up=document.createElement('button'); up.type='button'; up.className='totop'; up.setAttribute('aria-label','Back to top'); up.title='Back to top'; up.textContent='↑';
   box.parentElement.appendChild(up);
   box.addEventListener('scroll',()=>up.classList.toggle('on',box.scrollTop>500),{passive:true});
-  up.onclick=()=>box.scrollTo({top:0,behavior:'smooth'});
+  up.onclick=()=>{const y=box.scrollTop; box.scrollTo({top:0,behavior:'smooth'}); setTimeout(()=>{if(box.scrollTop===y) box.scrollTo({top:0});},500);};
   new MutationObserver(()=>{if(box.parentElement.hidden) up.classList.remove('on');}).observe(box.parentElement,{attributes:true,attributeFilter:['hidden']});});
 addEventListener('resize',()=>['insIn','factIn'].forEach(id=>{const b=document.getElementById(id); if(b) enhanceTables(b);}));
 </script>
