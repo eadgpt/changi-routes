@@ -718,6 +718,16 @@ body[data-side="right"] #shotBtn{right:auto;left:16px}
   .cc-cards .fs-cities td:nth-child(7){color:var(--arc);font-weight:600}
   .cc-cards .fs-cities td:nth-child(7)::after{content:" a week";font-weight:400;color:var(--ink-2)}
 }
+
+/* ---- desktop: sticky "jump to" tab row on fact sheet + insights (2026-11-22, jumpTabs() in template) ---- */
+.jt-bar{position:sticky;top:-22px;z-index:3;display:flex;flex-wrap:wrap;gap:2px;margin:12px -26px 12px;padding:0 20px;background:var(--fs-bg);border-bottom:1px solid var(--line)}
+.jt-bar button{all:unset;cursor:pointer;position:relative;font:600 14px Barlow,sans-serif;padding:10px 12px 11px;color:var(--ink-2)}
+.jt-bar button:hover,.jt-bar button[aria-pressed="true"]{color:var(--ink)}
+.jt-bar button[aria-pressed="true"]::after{content:"";position:absolute;left:10px;right:10px;bottom:-1px;height:3px;border-radius:2px;background:var(--arc)}
+.jt-bar button:focus-visible{outline:2px solid var(--arc);outline-offset:-2px;border-radius:6px}
+.jt-bar+.fs-tiles{margin-top:0}
+@media (max-width:760px){.jt-bar{display:none}}
+@media print{.jt-bar{display:none}}
 </style>
 
 </head>
@@ -818,7 +828,7 @@ body[data-side="right"] #shotBtn{right:auto;left:16px}
       <div class="sec-b"><div class="cnt" id="cityCounts"></div><div class="list" id="list"></div></div>
     </section>
     <p class="src" id="srcLine"></p>
-    <p class="p-stamp">Last updated 22 Nov 2026, 10:37 pm SGT</p>
+    <p class="p-stamp">Last updated 22 Nov 2026, 10:55 pm SGT</p>
   </div>
 </aside>
 <button id="showPanel" type="button" hidden>Show panel</button>
@@ -858,7 +868,7 @@ body[data-side="right"] #shotBtn{right:auto;left:16px}
 </div>
 <div id="fact" role="dialog" aria-modal="true" aria-label="Country fact sheet" hidden><div class="fs-in" id="factIn"></div></div>
 <div id="ins" role="dialog" aria-modal="true" aria-label="All-country insights" hidden><div class="fs-in" id="insIn"></div></div>
-<div id="stamp" title="When this map was last rebuilt with new data">Last updated 22 Nov 2026, 10:37 pm SGT</div>
+<div id="stamp" title="When this map was last rebuilt with new data">Last updated 22 Nov 2026, 10:55 pm SGT</div>
 <div id="hint">drag to rotate · scroll to zoom · right-drag to pan · press / to search</div>
 <script>
 /**
@@ -5272,7 +5282,7 @@ const CC_SHORT={'Quick facts':'Quick facts','By region':'Regions','Airlines':'Ai
   'No direct flight yet':'No direct flight',"Changi's wish list":'Wish list','What the experts say':'Experts'};
 function cardView(box){
   box.classList.remove('cc-cards');
-  if(!matchMedia('(max-width:760px)').matches) return;
+  if(!matchMedia('(max-width:760px)').matches) return jumpTabs(box);
   const top=box.querySelector('.fs-top'); if(!top) return;
   const cards=[]; let last=null;
   const add=(title,nodes)=>{last={title,nodes:[...nodes]}; cards.push(last);};
@@ -5309,6 +5319,31 @@ function cardView(box){
   cards.forEach((c,i)=>{c.chip.onclick=()=>{if(all){setAll(false); requestAnimationFrame(()=>go(i));} else go(i);};
     c.el.addEventListener('click',e=>{if(!all&&i!==cur){e.preventDefault(); e.stopPropagation(); go(i);}},true);});
   setAll(all);
+}
+
+// ---------- desktop: sticky tab row on fact sheet + insights; click = jump to that part, underline follows the scroll (2026-11-22) ----------
+const JT_NAME={'Airlines':'Airlines & routes',"What's changing":'Changes','Change planes to reach':'Changes','Routes lost':'Changes','Every city':'Every city',
+  'Singaporeans going abroad':'Going abroad','Travel rules to know':'Rules & news','Latest headlines':'Rules & news','The map in eight numbers':'Key numbers',
+  'Since the last check':'Changes','Who flies to each country':'Airlines','No direct flight yet':'Gaps','What the experts say':'Experts'};
+function jumpTabs(box){
+  const top=box.querySelector('.fs-top'); if(!top) return;
+  const titleOf=s=>{const h=s.querySelector('h3'); return h?[...h.childNodes].filter(n=>n.nodeType===3).map(n=>n.textContent).join('').trim():'';};
+  const tabs=[{name:box.id==='insIn'?'Visitors':'Overview',el:null}];
+  box.querySelectorAll(':scope>section,:scope>.fs-grid>section').forEach(s=>{const n=JT_NAME[titleOf(s)];
+    if(n&&!tabs.some(t=>t.name===n)) tabs.push({name:n,el:s});});
+  if(tabs.length<3) return;
+  const bar=document.createElement('nav'); bar.className='jt-bar'; bar.setAttribute('aria-label','Jump to');
+  tabs.forEach((t,i)=>{const b=document.createElement('button'); b.type='button'; b.textContent=t.name; b.setAttribute('aria-pressed',String(!i)); bar.appendChild(b); t.btn=b;});
+  top.after(bar);
+  const posOf=t=>t.el?t.el.getBoundingClientRect().top-box.getBoundingClientRect().top+box.scrollTop-bar.offsetHeight-12:0;
+  let lock=0;
+  const act=i=>tabs.forEach((t,j)=>t.btn.setAttribute('aria-pressed',String(i===j)));
+  const spy=()=>{if(Date.now()<lock) return; let a=0; tabs.forEach((t,i)=>{if(posOf(t)<=box.scrollTop+8) a=i;});
+    if(box.scrollTop+box.clientHeight>=box.scrollHeight-4) a=tabs.length-1; act(a);};
+  box.addEventListener('scroll',spy,{passive:true});
+  box.addEventListener('scrollend',()=>{lock=0;});
+  tabs.forEach((t,i)=>t.btn.onclick=()=>{const y=Math.max(0,posOf(t)), from=box.scrollTop; act(i); lock=Date.now()+1500;
+    box.scrollTo({top:y,behavior:'smooth'}); setTimeout(()=>{if(box.scrollTop===from&&Math.abs(y-from)>2) box.scrollTo({top:y});},500);});
 }
 
 // ---------- phones: wide tables show they scroll sideways; long pages get a back-to-top button ----------
