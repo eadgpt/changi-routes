@@ -311,10 +311,16 @@ a.cl:hover{color:var(--arc);border-bottom-color:var(--arc)}
 @keyframes pop{0%{transform:scale(.4);opacity:0}60%{transform:scale(1.15);opacity:1}100%{transform:none}}
 /* back to top: round button bottom-right, shows after you scroll down */
 .totop{position:fixed;right:calc(18px + env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:30;
-  width:46px;height:46px;display:grid;place-items:center;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--arc);
+  width:44px;height:44px;display:grid;place-items:center;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--arc);
   box-shadow:0 10px 24px -10px rgba(8,19,28,.55);cursor:pointer;opacity:0;transform:translateY(14px);pointer-events:none;transition:opacity .2s,transform .2s,border-color .15s}
 .totop.on{opacity:1;transform:none;pointer-events:auto}
 .totop:hover{border-color:var(--arc)}
+/* back-to-top: solid amber so it stands out (user: white one was hard to spot, 2026-11-22) */
+.totop{--on-arc:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .totop{--on-arc:#08131c}}
+:root[data-theme="dark"] .totop{--on-arc:#08131c}
+.totop{background:var(--arc);color:var(--on-arc);border:0}
+.totop:hover{filter:brightness(1.08)}
 .totop:focus-visible{outline:2px solid var(--arc);outline-offset:3px}
 .totop svg{width:20px;height:20px}
 @media print{.totop{display:none}}
@@ -3107,7 +3113,7 @@ $('jump').querySelectorAll('button').forEach(b=>{const t=$(b.dataset.j); if(!t||
 
 // ---------- back to top ----------
 {const up=document.createElement('button'); up.type='button'; up.className='totop'; up.title='Back to top'; up.setAttribute('aria-label','Back to top');
- up.innerHTML='<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 16V4M4.5 9.5 10 4l5.5 5.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+ up.innerHTML='<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 16V4M4.5 9.5 10 4l5.5 5.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
  document.body.appendChild(up);
  const tog=()=>up.classList.toggle('on',scrollY>600); addEventListener('scroll',tog,{passive:true}); tog();
  up.onclick=()=>{const y=scrollY; scrollTo({top:0,behavior:'smooth'}); setTimeout(()=>{if(scrollY===y) scrollTo({top:0});},500);};}

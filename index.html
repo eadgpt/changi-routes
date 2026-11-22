@@ -728,6 +728,19 @@ body[data-side="right"] #shotBtn{right:auto;left:16px}
 .jt-bar+.fs-tiles{margin-top:0}
 @media (max-width:760px){.jt-bar{display:none}}
 @media print{.jt-bar,.totop{display:none}}
+/* back-to-top: one look everywhere = 44px amber circle with an up arrow (2026-11-22) */
+.totop svg{width:20px;height:20px}
+/* back-to-top: solid amber so it stands out (user: white one was hard to spot, 2026-11-22) */
+.totop{--on-arc:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .totop{--on-arc:#08131c}}
+:root[data-theme="dark"] .totop{--on-arc:#08131c}
+#fact .totop,#ins .totop{background:var(--arc);color:var(--on-arc);border:0;backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:0 8px 22px -6px rgba(8,19,28,.6)}
+#fact .totop:hover,#ins .totop:hover{filter:brightness(1.08)}
+#fact .totop:focus-visible,#ins .totop:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+/* desktop: docked inside the sheet — sticks to the bottom of the scrolling page, right-aligned, takes no space */
+.totop-dock{position:sticky;bottom:0;height:0;z-index:5}
+#fact .totop-dock .totop,#ins .totop-dock .totop{position:absolute;right:-8px;bottom:14px;left:auto;top:auto}
+@media print{.totop-dock{display:none}}
 </style>
 
 </head>
@@ -828,7 +841,7 @@ body[data-side="right"] #shotBtn{right:auto;left:16px}
       <div class="sec-b"><div class="cnt" id="cityCounts"></div><div class="list" id="list"></div></div>
     </section>
     <p class="src" id="srcLine"></p>
-    <p class="p-stamp">Last updated 22 Nov 2026, 11:08 pm SGT</p>
+    <p class="p-stamp">Last updated 22 Nov 2026, 11:19 pm SGT</p>
   </div>
 </aside>
 <button id="showPanel" type="button" hidden>Show panel</button>
@@ -868,7 +881,7 @@ body[data-side="right"] #shotBtn{right:auto;left:16px}
 </div>
 <div id="fact" role="dialog" aria-modal="true" aria-label="Country fact sheet" hidden><div class="fs-in" id="factIn"></div></div>
 <div id="ins" role="dialog" aria-modal="true" aria-label="All-country insights" hidden><div class="fs-in" id="insIn"></div></div>
-<div id="stamp" title="When this map was last rebuilt with new data">Last updated 22 Nov 2026, 11:08 pm SGT</div>
+<div id="stamp" title="When this map was last rebuilt with new data">Last updated 22 Nov 2026, 11:19 pm SGT</div>
 <div id="hint">drag to rotate · scroll to zoom · right-drag to pan · press / to search</div>
 <script>
 /**
@@ -5282,6 +5295,9 @@ const CC_SHORT={'Quick facts':'Quick facts','By region':'Regions','Airlines':'Ai
   'No direct flight yet':'No direct flight',"Changi's wish list":'Wish list','What the experts say':'Experts'};
 function cardView(box){
   box.classList.remove('cc-cards');
+  if(box._up){box._up.classList.remove('on');
+    if(matchMedia('(max-width:760px)').matches) box.parentElement.appendChild(box._up);
+    else {const d=document.createElement('div'); d.className='totop-dock'; d.appendChild(box._up); box.appendChild(d);}}   // desktop: rides at the bottom of the sheet itself
   if(!matchMedia('(max-width:760px)').matches) return jumpTabs(box);
   const top=box.querySelector('.fs-top'); if(!top) return;
   const cards=[]; let last=null;
@@ -5360,10 +5376,15 @@ function enhanceTables(root){
 }
 ['insIn','factIn'].forEach(id=>{const box=document.getElementById(id); if(!box) return;
   let t=0; new MutationObserver(()=>{clearTimeout(t); t=setTimeout(()=>enhanceTables(box),60);}).observe(box,{childList:true,subtree:true});
-  const up=document.createElement('button'); up.type='button'; up.className='totop'; up.setAttribute('aria-label','Back to top'); up.title='Back to top'; up.textContent='↑';
-  box.parentElement.appendChild(up);
-  box.addEventListener('scroll',()=>up.classList.toggle('on',box.scrollTop>500),{passive:true});
-  up.onclick=()=>{const y=box.scrollTop; box.scrollTo({top:0,behavior:'smooth'}); setTimeout(()=>{if(box.scrollTop===y) box.scrollTo({top:0});},500);};
+  const up=document.createElement('button'); up.type='button'; up.className='totop'; up.setAttribute('aria-label','Back to top'); up.title='Back to top'; up.innerHTML='<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 16V4M4.5 9.5 10 4l5.5 5.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  box.parentElement.appendChild(up); box._up=up;
+  // watches the page itself, or (phone card view) whichever card is being scrolled
+  let src=box;
+  box.addEventListener('scroll',e=>{const t=e.target;
+    if(t.classList&&t.classList.contains('cc-track')){up.classList.remove('on'); return;}
+    if(t!==box&&!(t.classList&&t.classList.contains('cc-card'))) return;
+    src=t; up.classList.toggle('on',t.scrollTop>(t===box?500:300));},{passive:true,capture:true});
+  up.onclick=()=>{const el=src, y=el.scrollTop; el.scrollTo({top:0,behavior:'smooth'}); setTimeout(()=>{if(el.scrollTop===y) el.scrollTo({top:0});},500);};
   new MutationObserver(()=>{if(box.parentElement.hidden) up.classList.remove('on');}).observe(box.parentElement,{attributes:true,attributeFilter:['hidden']});});
 addEventListener('resize',()=>['insIn','factIn'].forEach(id=>{const b=document.getElementById(id); if(b) enhanceTables(b);}));
 </script>
