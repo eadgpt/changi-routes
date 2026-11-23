@@ -841,7 +841,7 @@ body[data-side="right"] #shotBtn{right:auto;left:16px}
       <div class="sec-b"><div class="cnt" id="cityCounts"></div><div class="list" id="list"></div></div>
     </section>
     <p class="src" id="srcLine"></p>
-    <p class="p-stamp">Last updated 22 Nov 2026, 11:19 pm SGT</p>
+    <p class="p-stamp">Last updated 24 Nov 2026, 12:23 am SGT</p>
   </div>
 </aside>
 <button id="showPanel" type="button" hidden>Show panel</button>
@@ -881,7 +881,7 @@ body[data-side="right"] #shotBtn{right:auto;left:16px}
 </div>
 <div id="fact" role="dialog" aria-modal="true" aria-label="Country fact sheet" hidden><div class="fs-in" id="factIn"></div></div>
 <div id="ins" role="dialog" aria-modal="true" aria-label="All-country insights" hidden><div class="fs-in" id="insIn"></div></div>
-<div id="stamp" title="When this map was last rebuilt with new data">Last updated 22 Nov 2026, 11:19 pm SGT</div>
+<div id="stamp" title="When this map was last rebuilt with new data">Last updated 24 Nov 2026, 12:23 am SGT</div>
 <div id="hint">drag to rotate · scroll to zoom · right-drag to pan · press / to search</div>
 <script>
 /**
@@ -2458,17 +2458,17 @@ const INSIGHTS = {
  ],
  "outbound": {
   "about": "Singaporeans going abroad: each destination's own count of arrivals from Singapore (SingStat does not publish departures by destination). Hand-kept; refresh in the monthly check. arrivals=null means no official figure could be confirmed.",
-  "checked": "2026-10-28",
-  "period": "Sep 2026",
+  "checked": "2026-11-24",
+  "period": "Oct 2026",
   "rows": [
    {
     "country": "Malaysia",
-    "arrivals": 10740076,
-    "period": "Jan–Jun 2026",
-    "yoy": 4.4,
+    "arrivals": 16493424,
+    "period": "Jan–Sep 2026",
+    "yoy": 5.5,
     "source": "Tourism Malaysia",
-    "url": "https://data.tourism.gov.my/frontend/pdf/2026/infographics/Infographic_Visitor_Arrival_Performance_Jan_Jun_2026_Full.pdf",
-    "note": "Includes 6.35 million day-trippers; 4.39 million stayed overnight. Malaysia publishes country figures half-yearly."
+    "url": "https://data.tourism.gov.my/frontend/pdf/2026/infographics/Infographic_Visitor_Performance_Jan-Sept_2026.pdf",
+    "note": "Includes 9.92 million day-trippers; 6.57 million stayed overnight. Malaysia publishes country figures for the year so far, a few times a year."
    },
    {
     "country": "South Korea",
@@ -2480,53 +2480,63 @@ const INSIGHTS = {
     "note": "The August release gives country figures for Jan–Aug only."
    },
    {
-    "country": "Thailand",
-    "arrivals": 69101,
+    "country": "Indonesia",
+    "arrivals": 134360,
+    "approx": 1,
     "period": "Sep 2026",
-    "prev": 73522,
-    "yoy": -6.0,
+    "yoy": null,
+    "source": "BPS-Statistics Indonesia",
+    "url": "https://www.beritadaerah.co.id/index.php/2026/11/02/bps-september-2026-wisman-ke-indonesia-mencapai-143-juta-kunjungan/",
+    "note": "About 134,360: BPS's September release as quoted in the news (134.36 thousand, 9.42% of all foreign visitors). BPS's own site could not be opened."
+   },
+   {
+    "country": "Japan",
+    "arrivals": 73800,
+    "period": "Oct 2026",
+    "prev": 65745,
+    "yoy": 12.3,
+    "source": "Japan National Tourism Organization (JNTO)",
+    "url": "https://www.jnto.go.jp/en/news/20261119.pdf",
+    "note": "Preliminary estimate."
+   },
+   {
+    "country": "Thailand",
+    "arrivals": 63554,
+    "period": "Oct 2026",
+    "prev": 77095,
+    "yoy": -17.6,
     "source": "Ministry of Tourism and Sports, Thailand",
     "url": "https://www.mots.go.th/news/category/817",
     "note": "Preliminary; counted by nationality."
    },
    {
-    "country": "Japan",
-    "arrivals": 43000,
-    "period": "Sep 2026",
-    "prev": 40495,
-    "yoy": 6.2,
-    "source": "Japan National Tourism Organization (JNTO)",
-    "url": "https://www.jnto.go.jp/en/news/20261021.pdf",
-    "note": "Preliminary estimate."
+    "country": "Vietnam",
+    "arrivals": 39532,
+    "period": "Oct 2026",
+    "yoy": 21.6,
+    "source": "Vietnam National Authority of Tourism",
+    "url": "https://vietnamtourism.gov.vn/en/statistic/international?year=2026&period=t10",
+    "note": "Official estimate."
    },
    {
     "country": "Australia",
-    "arrivals": 42910,
-    "period": "Aug 2026",
-    "prev": 41690,
-    "yoy": 2.9,
+    "arrivals": 37430,
+    "period": "Sep 2026",
+    "prev": 39590,
+    "yoy": -5.5,
     "source": "Australian Bureau of Statistics",
     "url": "https://www.abs.gov.au/statistics/industry/tourism-and-transport/overseas-arrivals-and-departures-australia/latest-release",
     "note": "Short-term visitors living in Singapore."
    },
    {
-    "country": "Vietnam",
-    "arrivals": 38315,
-    "period": "Sep 2026",
-    "yoy": 16.1,
-    "source": "Vietnam National Authority of Tourism",
-    "url": "https://vietnamtourism.gov.vn/en/statistic/international?year=2026&period=t9",
-    "note": "Official estimate."
-   },
-   {
     "country": "Hong Kong",
-    "arrivals": 26281,
-    "period": "Aug 2026",
-    "prev": 24197,
-    "yoy": 8.6,
+    "arrivals": 30619,
+    "period": "Sep 2026",
+    "prev": 31949,
+    "yoy": -4.2,
     "source": "Hong Kong Tourism Board",
-    "url": "https://partnernet.hktb.com/en/research_statistics/latest_statistics/index.html",
-    "note": "Counted by nationality; 18,128 stayed overnight."
+    "url": "https://partnernet.hktb.com/filemanager/LatestStatistics/1141/Tourism%20Statistics%2009%202026.pdf",
+    "note": "Counted by nationality; 21,663 stayed overnight."
    },
    {
     "country": "Taiwan",
@@ -2540,23 +2550,13 @@ const INSIGHTS = {
    },
    {
     "country": "New Zealand",
-    "arrivals": 4613,
-    "period": "Aug 2026",
-    "prev": 4178,
-    "yoy": 10.4,
+    "arrivals": 4219,
+    "period": "Sep 2026",
+    "prev": 3791,
+    "yoy": 11.3,
     "source": "Stats NZ",
-    "url": "https://www.stats.govt.nz/information-releases/international-travel-august-2026/",
+    "url": "https://www.stats.govt.nz/information-releases/international-travel-september-2026/",
     "note": "Visitors living in Singapore."
-   },
-   {
-    "country": "Indonesia",
-    "arrivals": 131650,
-    "approx": 1,
-    "period": "Aug 2026",
-    "yoy": null,
-    "source": "BPS-Statistics Indonesia",
-    "url": "https://databoks.katadata.co.id/pariwisata/statistik/6abeffd05f34c/lawatan-turis-asing-ke-indonesia-menguat-627-pada-agustus-2026",
-    "note": "About 131,700: worked out from Singapore's 8.23% share of 1,599,660 arrivals. BPS's own country table could not be opened."
    },
    {
     "country": "China",
@@ -2582,7 +2582,7 @@ const INSIGHTS = {
 const IVA_FALLBACK = {
  "source": "Singapore Tourism Board via SingStat (tables M550001, M550071, M550281)",
  "updated": "30/10/2026",
- "latest": "2026 Sep",
+ "latest": "2026 Oct",
  "regions": [
   "Southeast Asia",
   "Greater China",
@@ -2665,7 +2665,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 1184533,
    "2026 Jul": 1631284,
    "2026 Aug": 1605019,
-   "2026 Sep": 1227035
+   "2026 Sep": 1227035,
+   "2026 Oct": 1385303
   },
   "Southeast Asia": {
    "2024 Sep": 417351,
@@ -2692,7 +2693,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 425678,
    "2026 Jul": 444979,
    "2026 Aug": 398731,
-   "2026 Sep": 384686
+   "2026 Sep": 384686,
+   "2026 Oct": 437018
   },
   "Brunei Darussalam": {
    "2024 Sep": 3968,
@@ -2719,7 +2721,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 3916,
    "2026 Jul": 4071,
    "2026 Aug": 6098,
-   "2026 Sep": 3526
+   "2026 Sep": 3526,
+   "2026 Oct": 4533
   },
   "Indonesia": {
    "2024 Sep": 173613,
@@ -2746,7 +2749,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 184565,
    "2026 Jul": 194871,
    "2026 Aug": 161684,
-   "2026 Sep": 154566
+   "2026 Sep": 154566,
+   "2026 Oct": 164805
   },
   "Malaysia": {
    "2024 Sep": 112151,
@@ -2773,7 +2777,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 94549,
    "2026 Jul": 86888,
    "2026 Aug": 94204,
-   "2026 Sep": 108068
+   "2026 Sep": 108068,
+   "2026 Oct": 109191
   },
   "Myanmar": {
    "2024 Sep": 9580,
@@ -2800,7 +2805,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 15129,
    "2026 Jul": 17566,
    "2026 Aug": 15775,
-   "2026 Sep": 14918
+   "2026 Sep": 14918,
+   "2026 Oct": 17036
   },
   "Philippines": {
    "2024 Sep": 55976,
@@ -2827,7 +2833,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 56904,
    "2026 Jul": 55104,
    "2026 Aug": 51152,
-   "2026 Sep": 47156
+   "2026 Sep": 47156,
+   "2026 Oct": 59716
   },
   "Thailand": {
    "2024 Sep": 27707,
@@ -2854,7 +2861,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 23190,
    "2026 Jul": 34514,
    "2026 Aug": 24690,
-   "2026 Sep": 24827
+   "2026 Sep": 24827,
+   "2026 Oct": 44846
   },
   "Vietnam": {
    "2024 Sep": 27636,
@@ -2881,7 +2889,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 40051,
    "2026 Jul": 41307,
    "2026 Aug": 36346,
-   "2026 Sep": 23938
+   "2026 Sep": 23938,
+   "2026 Oct": 26874
   },
   "Greater China": {
    "2024 Sep": 275553,
@@ -2908,7 +2917,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 260125,
    "2026 Jul": 530355,
    "2026 Aug": 525304,
-   "2026 Sep": 278249
+   "2026 Sep": 278249,
+   "2026 Oct": 319923
   },
   "China": {
    "2024 Sep": 217205,
@@ -2935,7 +2945,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 197107,
    "2026 Jul": 429819,
    "2026 Aug": 435442,
-   "2026 Sep": 218674
+   "2026 Sep": 218674,
+   "2026 Oct": 251348
   },
   "Hong Kong SAR": {
    "2024 Sep": 26627,
@@ -2962,7 +2973,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 25553,
    "2026 Jul": 38213,
    "2026 Aug": 35779,
-   "2026 Sep": 22554
+   "2026 Sep": 22554,
+   "2026 Oct": 30144
   },
   "Taiwan": {
    "2024 Sep": 30408,
@@ -2989,7 +3001,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 35769,
    "2026 Jul": 58465,
    "2026 Aug": 50589,
-   "2026 Sep": 35564
+   "2026 Sep": 35564,
+   "2026 Oct": 36745
   },
   "North Asia": {
    "2024 Sep": 102800,
@@ -3016,7 +3029,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 66792,
    "2026 Jul": 103342,
    "2026 Aug": 146051,
-   "2026 Sep": 108688
+   "2026 Sep": 108688,
+   "2026 Oct": 92888
   },
   "Japan": {
    "2024 Sep": 57825,
@@ -3043,7 +3057,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 37866,
    "2026 Jul": 57380,
    "2026 Aug": 92964,
-   "2026 Sep": 75408
+   "2026 Sep": 75408,
+   "2026 Oct": 54832
   },
   "South Korea": {
    "2024 Sep": 44886,
@@ -3070,7 +3085,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 28873,
    "2026 Jul": 45873,
    "2026 Aug": 53016,
-   "2026 Sep": 33237
+   "2026 Sep": 33237,
+   "2026 Oct": 37996
   },
   "South Asia": {
    "2024 Sep": 108914,
@@ -3097,7 +3113,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 125264,
    "2026 Jul": 113754,
    "2026 Aug": 113819,
-   "2026 Sep": 110298
+   "2026 Sep": 110298,
+   "2026 Oct": 133060
   },
   "Bangladesh": {
    "2024 Sep": 11473,
@@ -3124,7 +3141,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 10299,
    "2026 Jul": 13051,
    "2026 Aug": 12883,
-   "2026 Sep": 12358
+   "2026 Sep": 12358,
+   "2026 Oct": 13324
   },
   "India": {
    "2024 Sep": 87767,
@@ -3151,7 +3169,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 105985,
    "2026 Jul": 88457,
    "2026 Aug": 87765,
-   "2026 Sep": 87730
+   "2026 Sep": 87730,
+   "2026 Oct": 107918
   },
   "Pakistan": {
    "2024 Sep": 1459,
@@ -3178,7 +3197,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 2094,
    "2026 Jul": 3394,
    "2026 Aug": 2076,
-   "2026 Sep": 1629
+   "2026 Sep": 1629,
+   "2026 Oct": 1694
   },
   "Sri Lanka": {
    "2024 Sep": 5221,
@@ -3205,7 +3225,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 4809,
    "2026 Jul": 5901,
    "2026 Aug": 8453,
-   "2026 Sep": 6133
+   "2026 Sep": 6133,
+   "2026 Oct": 6174
   },
   "West Asia": {
    "2024 Sep": 15370,
@@ -3232,7 +3253,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 11630,
    "2026 Jul": 22499,
    "2026 Aug": 23198,
-   "2026 Sep": 13431
+   "2026 Sep": 13431,
+   "2026 Oct": 16810
   },
   "Iran": {
    "2024 Sep": 853,
@@ -3259,7 +3281,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 75,
    "2026 Jul": 110,
    "2026 Aug": 313,
-   "2026 Sep": 376
+   "2026 Sep": 376,
+   "2026 Oct": 545
   },
   "Israel": {
    "2024 Sep": 1779,
@@ -3286,7 +3309,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 1676,
    "2026 Jul": 2548,
    "2026 Aug": 2518,
-   "2026 Sep": 2324
+   "2026 Sep": 2324,
+   "2026 Oct": 2372
   },
   "Kuwait": {
    "2024 Sep": 598,
@@ -3313,7 +3337,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 262,
    "2026 Jul": 411,
    "2026 Aug": 697,
-   "2026 Sep": 306
+   "2026 Sep": 306,
+   "2026 Oct": 212
   },
   "Saudi Arabia": {
    "2024 Sep": 1929,
@@ -3340,7 +3365,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 1808,
    "2026 Jul": 4013,
    "2026 Aug": 3453,
-   "2026 Sep": 2032
+   "2026 Sep": 2032,
+   "2026 Oct": 1200
   },
   "United Arab Emirates": {
    "2024 Sep": 7831,
@@ -3367,7 +3393,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 5524,
    "2026 Jul": 10791,
    "2026 Aug": 11415,
-   "2026 Sep": 6044
+   "2026 Sep": 6044,
+   "2026 Oct": 8316
   },
   "Americas": {
    "2024 Sep": 64689,
@@ -3394,7 +3421,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 73490,
    "2026 Jul": 83392,
    "2026 Aug": 68761,
-   "2026 Sep": 59283
+   "2026 Sep": 59283,
+   "2026 Oct": 77231
   },
   "Canada": {
    "2024 Sep": 9230,
@@ -3421,7 +3449,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 7211,
    "2026 Jul": 11104,
    "2026 Aug": 11276,
-   "2026 Sep": 7879
+   "2026 Sep": 7879,
+   "2026 Oct": 10181
   },
   "USA": {
    "2024 Sep": 47493,
@@ -3448,7 +3477,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 61082,
    "2026 Jul": 65307,
    "2026 Aug": 51446,
-   "2026 Sep": 44929
+   "2026 Sep": 44929,
+   "2026 Oct": 56898
   },
   "Europe": {
    "2024 Sep": 149578,
@@ -3475,7 +3505,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 102358,
    "2026 Jul": 181045,
    "2026 Aug": 213836,
-   "2026 Sep": 133291
+   "2026 Sep": 133291,
+   "2026 Oct": 164975
   },
   "Belgium & Luxembourg": {
    "2024 Sep": 3334,
@@ -3502,7 +3533,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 2055,
    "2026 Jul": 5988,
    "2026 Aug": 4518,
-   "2026 Sep": 3021
+   "2026 Sep": 3021,
+   "2026 Oct": 2774
   },
   "Denmark": {
    "2024 Sep": 2219,
@@ -3529,7 +3561,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 1461,
    "2026 Jul": 3859,
    "2026 Aug": 1996,
-   "2026 Sep": 1761
+   "2026 Sep": 1761,
+   "2026 Oct": 2663
   },
   "Finland": {
    "2024 Sep": 1334,
@@ -3556,7 +3589,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 1470,
    "2026 Jul": 1313,
    "2026 Aug": 964,
-   "2026 Sep": 1233
+   "2026 Sep": 1233,
+   "2026 Oct": 2519
   },
   "France": {
    "2024 Sep": 14774,
@@ -3583,7 +3617,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 10569,
    "2026 Jul": 21750,
    "2026 Aug": 29052,
-   "2026 Sep": 12519
+   "2026 Sep": 12519,
+   "2026 Oct": 14099
   },
   "Germany": {
    "2024 Sep": 23795,
@@ -3610,7 +3645,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 14105,
    "2026 Jul": 24357,
    "2026 Aug": 30917,
-   "2026 Sep": 23065
+   "2026 Sep": 23065,
+   "2026 Oct": 25174
   },
   "Italy": {
    "2024 Sep": 8001,
@@ -3637,7 +3673,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 5401,
    "2026 Jul": 9042,
    "2026 Aug": 28406,
-   "2026 Sep": 7042
+   "2026 Sep": 7042,
+   "2026 Oct": 5765
   },
   "Netherlands": {
    "2024 Sep": 7563,
@@ -3664,7 +3701,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 4998,
    "2026 Jul": 13743,
    "2026 Aug": 11491,
-   "2026 Sep": 6679
+   "2026 Sep": 6679,
+   "2026 Oct": 8005
   },
   "Norway": {
    "2024 Sep": 1597,
@@ -3691,7 +3729,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 2038,
    "2026 Jul": 3573,
    "2026 Aug": 1409,
-   "2026 Sep": 1416
+   "2026 Sep": 1416,
+   "2026 Oct": 2076
   },
   "Rep Of Ireland": {
    "2024 Sep": 2041,
@@ -3718,7 +3757,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 2088,
    "2026 Jul": 2461,
    "2026 Aug": 1995,
-   "2026 Sep": 1702
+   "2026 Sep": 1702,
+   "2026 Oct": 2237
   },
   "Russian Federation": {
    "2024 Sep": 3475,
@@ -3745,7 +3785,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 3365,
    "2026 Jul": 4938,
    "2026 Aug": 4812,
-   "2026 Sep": 3470
+   "2026 Sep": 3470,
+   "2026 Oct": 6518
   },
   "Spain": {
    "2024 Sep": 7460,
@@ -3772,7 +3813,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 4266,
    "2026 Jul": 8488,
    "2026 Aug": 12989,
-   "2026 Sep": 6317
+   "2026 Sep": 6317,
+   "2026 Oct": 5240
   },
   "Sweden": {
    "2024 Sep": 1574,
@@ -3799,7 +3841,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 1662,
    "2026 Jul": 2131,
    "2026 Aug": 1516,
-   "2026 Sep": 1545
+   "2026 Sep": 1545,
+   "2026 Oct": 2842
   },
   "Switzerland": {
    "2024 Sep": 6888,
@@ -3826,7 +3869,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 4721,
    "2026 Jul": 10569,
    "2026 Aug": 6997,
-   "2026 Sep": 6544
+   "2026 Sep": 6544,
+   "2026 Oct": 9021
   },
   "United Kingdom": {
    "2024 Sep": 43032,
@@ -3853,7 +3897,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 27780,
    "2026 Jul": 42159,
    "2026 Aug": 50100,
-   "2026 Sep": 35999
+   "2026 Sep": 35999,
+   "2026 Oct": 49745
   },
   "Oceania": {
    "2024 Sep": 130165,
@@ -3880,7 +3925,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 112635,
    "2026 Jul": 142521,
    "2026 Aug": 105365,
-   "2026 Sep": 131791
+   "2026 Sep": 131791,
+   "2026 Oct": 134910
   },
   "Australia": {
    "2024 Sep": 110930,
@@ -3907,7 +3953,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 95231,
    "2026 Jul": 121491,
    "2026 Aug": 86568,
-   "2026 Sep": 112538
+   "2026 Sep": 112538,
+   "2026 Oct": 117218
   },
   "New Zealand": {
    "2024 Sep": 15792,
@@ -3934,7 +3981,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 14495,
    "2026 Jul": 18461,
    "2026 Aug": 15180,
-   "2026 Sep": 16580
+   "2026 Sep": 16580,
+   "2026 Oct": 14919
   },
   "Africa": {
    "2024 Sep": 6193,
@@ -3961,7 +4009,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 6519,
    "2026 Jul": 9338,
    "2026 Aug": 9900,
-   "2026 Sep": 7290
+   "2026 Sep": 7290,
+   "2026 Oct": 8426
   },
   "Egypt": {
    "2024 Sep": 267,
@@ -3988,7 +4037,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 185,
    "2026 Jul": 245,
    "2026 Aug": 257,
-   "2026 Sep": 309
+   "2026 Sep": 309,
+   "2026 Oct": 256
   },
   "Mauritius": {
    "2024 Sep": 320,
@@ -4015,7 +4065,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 231,
    "2026 Jul": 492,
    "2026 Aug": 589,
-   "2026 Sep": 272
+   "2026 Sep": 272,
+   "2026 Oct": 354
   },
   "South Africa (Rep Of)": {
    "2024 Sep": 2646,
@@ -4042,7 +4093,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 2847,
    "2026 Jul": 3536,
    "2026 Aug": 2200,
-   "2026 Sep": 2891
+   "2026 Sep": 2891,
+   "2026 Oct": 3329
   },
   "Others": {
    "2024 Sep": 68,
@@ -4069,7 +4121,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 42,
    "2026 Jul": 59,
    "2026 Aug": 54,
-   "2026 Sep": 28
+   "2026 Sep": 28,
+   "2026 Oct": 62
   }
  },
  "extra": {
@@ -4098,7 +4151,8 @@ const IVA_FALLBACK = {
    "2026 Jun": 850391,
    "2026 Jul": 1168134,
    "2026 Aug": 1244929,
-   "2026 Sep": 851284
+   "2026 Sep": 851284,
+   "2026 Oct": 1046531
   },
   "avgStay": {
    "2024 Sep": 3.55,
@@ -4125,8 +4179,16 @@ const IVA_FALLBACK = {
    "2026 Jun": 3.59,
    "2026 Jul": 3.38,
    "2026 Aug": 3.46,
-   "2026 Sep": 3.29
+   "2026 Sep": 3.29,
+   "2026 Oct": 3.29
   }
+ },
+ "stb": {
+  "months": [
+   "2026 Oct"
+  ],
+  "note": "Oct 2026 from STB's Stan monthly visitor arrivals download (MONTHLY_VA_20261116.xlsx, stan.stb.gov.sg). Checked against SingStat for Jul–Sep 2026 and Sep–Oct 2025: same apart from STB revisions of 1–2 visitors and figures under 50 that the download hides.",
+  "checked": "2026-11-24"
  }
 };   // visitor arrivals as of the last build; the daily copy on the public site is tried first
 const HISTORY = {"china":{"2026-09":{"date":"2026-09-23","r":{"PEK":{"Air China":21,"Singapore Airlines":21},"PKX":{"China Eastern":7,"Singapore Airlines":7},"CSX":{"Scoot":6,"XiamenAir":4},"TFU":{"Sichuan Airlines":14,"Air China":7,"Singapore Airlines":7},"CKG":{"West Air":7,"Air China":7,"Singapore Airlines":7},"FOC":{"XiamenAir":7,"Scoot":4},"CAN":{"China Southern":25,"Singapore Airlines":14,"Scoot":7,"9 Air":7,"Spring Airlines":3},"KWE":{"Tianjin Airlines":4},"HAK":{"Hainan Airlines":18,"Scoot":5},"HGH":{"Scoot":7,"XiamenAir":7,"Singapore Airlines":7,"China Eastern":4},"HRB":{"Shenzhen Airlines":4},"HFE":{"China Eastern":3},"SWA":{"Scoot":3},"TNA":{"Shandong Airlines":7},"KMG":{"China Eastern":14,"Scoot":4},"LHW":{"Hainan Airlines":4},"LXA":{"West Air":3},"KHN":{"China Eastern":3},"NKG":{"Scoot":11,"China Eastern":7,"XiamenAir":7},"NNG":{"Scoot":4},"NGB":{"China Eastern":6},"TAO":{"Scoot":7},"PVG":{"China Eastern":32,"Singapore Airlines":35,"Juneyao Air":14,"Spring Airlines":14,"Air China":7,"Shanghai Airlines":7},"SHE":{"Scoot":4},"SZX":{"Shenzhen Airlines":21,"China Southern":21,"Singapore Airlines":7},"TSN":{"Scoot":5},"WNZ":{"Loong Air":2},"WUH":{"Scoot":7,"China Eastern":4},"WUX":{"Juneyao Air":4},"XIY":{"Scoot":7,"China Eastern":7},"XMN":{"XiamenAir":21,"Singapore Airlines":7},"YIH":{"Hainan Airlines":3},"INC":{"9 Air":7},"DYG":{"Loong Air":3},"CGO":{"Scoot":4}}},"2026-10":{"date":"2026-10-01","r":{"PEK":{"Air China":21,"Singapore Airlines":21},"PKX":{"China Eastern":7,"Singapore Airlines":7},"CSX":{"Scoot":5,"XiamenAir":4},"TFU":{"Sichuan Airlines":14,"Air China":7,"Singapore Airlines":7},"CKG":{"West Air":7,"Air China":7,"Singapore Airlines":7},"FOC":{"XiamenAir":7,"Scoot":4},"CAN":{"China Southern":25,"Singapore Airlines":14,"Scoot":7,"9 Air":7,"Spring Airlines":3},"KWE":{"Tianjin Airlines":4},"HAK":{"Hainan Airlines":18,"Scoot":4},"HGH":{"Scoot":7,"XiamenAir":7,"Singapore Airlines":7,"China Eastern":4},"HRB":{"Shenzhen Airlines":4},"HFE":{"China Eastern":3},"SWA":{"Scoot":3},"TNA":{"Shandong Airlines":7},"KMG":{"China Eastern":14,"Scoot":4},"LHW":{"Hainan Airlines":4},"LXA":{"West Air":3},"KHN":{"China Eastern":3},"NKG":{"Scoot":11,"China Eastern":7,"XiamenAir":7},"NNG":{"Scoot":4},"NGB":{"China Eastern":6},"TAO":{"Scoot":7},"PVG":{"China Eastern":32,"Singapore Airlines":35,"Juneyao Air":14,"Spring Airlines":14,"Air China":7,"Shanghai Airlines":7},"SHE":{"Scoot":4},"SZX":{"Shenzhen Airlines":21,"China Southern":21,"Singapore Airlines":7},"TSN":{"Scoot":5},"WNZ":{"Loong Air":2},"WUH":{"Scoot":7,"China Eastern":4},"WUX":{"Juneyao Air":4},"XIY":{"Scoot":7,"China Eastern":7},"XMN":{"XiamenAir":21,"Singapore Airlines":7},"YIH":{"Hainan Airlines":3},"INC":{"9 Air":7},"DYG":{"Loong Air":3},"CGO":{"Scoot":4}}},"2026-11":{"date":"2026-11-03","r":{"PEK":{"Air China":18,"Singapore Airlines":18},"PKX":{"China Eastern":7,"Singapore Airlines":7},"CSX":{"Scoot":6},"TFU":{"Sichuan Airlines":14,"Air China":7,"Singapore Airlines":7},"CKG":{"West Air":7,"Air China":7,"Singapore Airlines":7,"Chongqing Airlines":7},"FOC":{"XiamenAir":7,"Scoot":4},"CAN":{"China Southern":28,"Singapore Airlines":14,"Scoot":7},"KWE":{"Scoot":3},"HAK":{"Hainan Airlines":18,"Scoot":4},"HGH":{"Scoot":7,"XiamenAir":7,"Singapore Airlines":7,"China Eastern":4},"HRB":{"Shenzhen Airlines":4},"HFE":{"China Eastern":3},"SWA":{"Scoot":3},"TNA":{"Shandong Airlines":7},"KMG":{"China Eastern":21,"Scoot":4},"LHW":{"Hainan Airlines":4},"LXA":{"West Air":3},"KHN":{"China Eastern":3},"NKG":{"Scoot":11,"China Eastern":7,"XiamenAir":7},"NNG":{"Scoot":4},"NGB":{"China Eastern":3},"TAO":{"Scoot":7},"SYX":{"Cambodia Airways":2,"SCAT Airlines":2},"PVG":{"China Eastern":32,"Singapore Airlines":28,"Juneyao Air":14,"Spring Airlines":14,"Air China":7,"Shanghai Airlines":7},"SHE":{"Scoot":4},"SZX":{"Shenzhen Airlines":21,"China Southern":21,"Singapore Airlines":7},"TSN":{"Scoot":5},"WNZ":{"Loong Air":2},"WUH":{"Scoot":7,"China Eastern":7},"WUX":{"Juneyao Air":4},"XIY":{"Scoot":7,"China Eastern":4},"XMN":{"XiamenAir":18,"Singapore Airlines":7},"YIH":{"Hainan Airlines":3},"INC":{"9 Air":7},"DYG":{"Loong Air":3},"CGO":{"Scoot":4}}}},"hongkong":{"2026-09":{"date":"2026-09-23","r":{"HKG":{"Cathay Pacific":56,"Singapore Airlines":35,"Scoot":7}}},"2026-10":{"date":"2026-10-01","r":{"HKG":{"Cathay Pacific":56,"Singapore Airlines":35,"Scoot":7},"MFM":{"Scoot":7,"Air Macau":7}}},"2026-11":{"date":"2026-11-15","r":{"HKG":{"Cathay Pacific":49,"Singapore Airlines":35,"Scoot":7},"MFM":{"Scoot":7,"Air Macau":7}}}},"japan":{"2026-09":{"date":"2026-09-23","r":{"HND":{"Singapore Airlines":21,"All Nippon Airways":14,"Japan Airlines":14,"Scoot":7},"NRT":{"All Nippon Airways":14,"Singapore Airlines":14,"Japan Airlines":7,"ZIPAIR":7,"Scoot":7},"KIX":{"Singapore Airlines":21,"Scoot":7,"Peach Aviation":7},"NGO":{"Singapore Airlines":7},"FUK":{"Singapore Airlines":7},"OKA":{"Scoot":5}}},"2026-10":{"date":"2026-10-01","r":{"HND":{"Singapore Airlines":21,"All Nippon Airways":14,"Japan Airlines":14,"Scoot":7},"NRT":{"All Nippon Airways":14,"Singapore Airlines":14,"Japan Airlines":7,"ZIPAIR":7,"Scoot":7},"KIX":{"Singapore Airlines":21,"Scoot":7,"Peach Aviation":7},"NGO":{"Singapore Airlines":7},"FUK":{"Singapore Airlines":7},"OKA":{"Scoot":4}}},"2026-11":{"date":"2026-11-15","r":{"HND":{"Singapore Airlines":21,"Japan Airlines":14,"All Nippon Airways":14,"Scoot":7},"NRT":{"All Nippon Airways":14,"Singapore Airlines":14,"Japan Airlines":7,"ZIPAIR":7,"Scoot":7},"KIX":{"Singapore Airlines":21,"Scoot":7,"Peach Aviation":7},"NGO":{"Singapore Airlines":7},"FUK":{"Singapore Airlines":7},"OKA":{"Scoot":5}}}},"korea":{"2026-09":{"date":"2026-09-23","r":{"ICN":{"Singapore Airlines":28,"Korean Air":21,"Asiana Airlines":7,"Jeju Air":7,"Trinity Airways":7,"Scoot":5},"PUS":{"Jeju Air":7,"Singapore Airlines":7},"CJU":{"Scoot":7,"Trinity Airways":7}}},"2026-10":{"date":"2026-10-01","r":{"ICN":{"Singapore Airlines":28,"Korean Air":21,"Asiana Airlines":7,"Jeju Air":7,"Trinity Airways":7,"Scoot":5},"PUS":{"Jeju Air":7,"Singapore Airlines":7},"CJU":{"Scoot":7,"Trinity Airways":7}}},"2026-11":{"date":"2026-11-15","r":{"ICN":{"Singapore Airlines":28,"Korean Air":21,"Asiana Airlines":7,"Trinity Airways":7,"Jeju Air":7,"Scoot":3},"PUS":{"Jeju Air":7,"Singapore Airlines":7},"CJU":{"Scoot":7,"Trinity Airways":7}}}},"thailand":{"2026-09":{"date":"2026-09-23","r":{"BKK":{"Singapore Airlines":42,"Thai Airways":35,"Scoot":32},"DMK":{"Thai Lion Air":11,"Thai AirAsia":7},"HKT":{"Singapore Airlines":35,"Scoot":21},"KBV":{"Scoot":11},"USM":{"Scoot":21,"Bangkok Airways":14},"HDY":{"Scoot":14},"CNX":{"Scoot":7},"CEI":{"Scoot":3}}},"2026-10":{"date":"2026-10-01","r":{"BKK":{"Singapore Airlines":42,"Thai Airways":35,"Scoot":32},"DMK":{"Thai Lion Air":11,"Thai AirAsia":7},"HKT":{"Singapore Airlines":35,"Scoot":21},"KBV":{"Scoot":11},"USM":{"Scoot":21,"Bangkok Airways":14},"HDY":{"Scoot":14},"CNX":{"Scoot":7},"CEI":{"Scoot":3}}},"2026-11":{"date":"2026-11-15","r":{"BKK":{"Singapore Airlines":42,"Scoot":39,"Thai Airways":35},"DMK":{"Thai AirAsia":11,"Thai Lion Air":11},"HKT":{"Singapore Airlines":42,"Scoot":18},"KBV":{"Scoot":11},"USM":{"Scoot":18,"Bangkok Airways":7},"HDY":{"Scoot":11},"CNX":{"Scoot":14},"CEI":{"Scoot":4}}}},"malaysia":{"2026-09":{"date":"2026-09-23","r":{"KUL":{"AirAsia":74,"Malaysia Airlines":67,"Singapore Airlines":53,"Scoot":32,"Batik Air Malaysia":28,"Ethiopian Airlines":5},"SZB":{"Scoot":7,"Batik Air Malaysia":7},"PEN":{"Singapore Airlines":35,"Scoot":32,"AirAsia":21},"BKI":{"Scoot":11},"KCH":{"AirAsia":11,"Scoot":11,"AirBorneo":7},"LGK":{"AirAsia":7,"Scoot":7},"IPH":{"Scoot":25},"MKZ":{"Scoot":3},"KUA":{"Scoot":3},"KBR":{"Scoot":2},"MYY":{"Scoot":3},"SBW":{"Scoot":4}}},"2026-10":{"date":"2026-10-01","r":{"KUL":{"AirAsia":74,"Malaysia Airlines":67,"Singapore Airlines":53,"Scoot":32,"Batik Air Malaysia":28,"Ethiopian Airlines":5},"SZB":{"Scoot":7,"Batik Air Malaysia":7},"PEN":{"Singapore Airlines":35,"Scoot":32,"AirAsia":21},"BKI":{"Scoot":11},"KCH":{"AirAsia":11,"Scoot":11,"AirBorneo":7},"LGK":{"AirAsia":7,"Scoot":7},"IPH":{"Scoot":25},"MKZ":{"Scoot":3},"KUA":{"Scoot":2},"KBR":{"Scoot":2},"MYY":{"Scoot":3},"SBW":{"Scoot":4}}},"2026-11":{"date":"2026-11-15","r":{"KUL":{"AirAsia":74,"Malaysia Airlines":56,"Singapore Airlines":53,"Scoot":32,"Batik Air Malaysia":28,"Gulf Air":7,"Ethiopian Airlines":5},"SZB":{"Scoot":7,"Batik Air Malaysia":7},"PEN":{"Singapore Airlines":35,"AirAsia":28,"Scoot":28},"BKI":{"Scoot":11},"KCH":{"AirAsia":11,"Scoot":11,"AirBorneo":7},"LGK":{"Scoot":11,"AirAsia":7},"IPH":{"Scoot":21},"MKZ":{"Scoot":4},"KUA":{"Scoot":5},"KBR":{"Scoot":2},"MYY":{"Scoot":5},"SBW":{"Scoot":4}}}},"indonesia":{"2026-09":{"date":"2026-09-23","r":{"CGK":{"Singapore Airlines":63,"Garuda Indonesia":42,"Scoot":35,"Batik Air":32,"TransNusa":21,"Citilink":14,"Pelita Air":7},"DPS":{"Singapore Airlines":42,"Scoot":32,"TransNusa":14,"Garuda Indonesia":7,"Jetstar":7,"KLM":7,"Saudia":3},"SUB":{"Singapore Airlines":21,"Scoot":11},"KNO":{"Singapore Airlines":14,"Batik Air":7,"Scoot":7},"YIA":{"Scoot":11},"SRG":{"Scoot":4},"KJT":{"Scoot":2},"BPN":{"Scoot":3},"PNK":{"Scoot":3},"UPG":{"Scoot":4},"MDC":{"Scoot":7},"PDG":{"Scoot":3},"PLM":{"Scoot":3},"PKU":{"Scoot":5},"TJQ":{"Scoot":2},"LOP":{"Scoot":11},"LBJ":{"Scoot":4}}},"2026-10":{"date":"2026-10-01","r":{"CGK":{"Singapore Airlines":63,"Garuda Indonesia":42,"Scoot":35,"Batik Air":32,"TransNusa":21,"Citilink":14,"Pelita Air":7},"DPS":{"Singapore Airlines":42,"Scoot":32,"TransNusa":14,"Garuda Indonesia":7,"Jetstar":7,"KLM":7,"Saudia":3},"SUB":{"Singapore Airlines":21,"Scoot":11},"KNO":{"Singapore Airlines":14,"Batik Air":7,"Scoot":7},"YIA":{"Scoot":11},"SRG":{"Scoot":4},"KJT":{"Scoot":2},"BPN":{"Scoot":3},"PNK":{"Scoot":3},"UPG":{"Scoot":3},"MDC":{"Scoot":7},"PDG":{"Scoot":3},"PLM":{"Scoot":3},"PKU":{"Scoot":4},"TJQ":{"Scoot":2},"LOP":{"Scoot":11},"LBJ":{"Scoot":4}}},"2026-11":{"date":"2026-11-15","r":{"CGK":{"Singapore Airlines":63,"Garuda Indonesia":42,"Batik Air":35,"Scoot":28,"TransNusa":28,"Citilink":14,"Pelita Air":7},"DPS":{"Singapore Airlines":35,"Scoot":21,"TransNusa":14,"Garuda Indonesia":7,"Jetstar":7,"KLM":7,"Saudia":3},"SUB":{"Singapore Airlines":21,"Scoot":11},"KNO":{"Singapore Airlines":14,"Scoot":7},"YIA":{"Scoot":11},"SRG":{"Scoot":4},"KJT":{"Scoot":2},"BPN":{"Scoot":5},"PNK":{"Scoot":3},"UPG":{"Scoot":4},"MDC":{"Scoot":7},"PDG":{"Scoot":3},"PLM":{"Scoot":4},"PKU":{"Scoot":5},"TJQ":{"Scoot":2},"LOP":{"Scoot":7},"LBJ":{"Scoot":3}}}},"philippines":{"2026-09":{"date":"2026-09-23","r":{"MNL":{"Singapore Airlines":32,"Philippine Airlines":25,"Cebu Pacific":14,"Scoot":11},"CEB":{"Cebu Pacific":7,"Scoot":7,"Singapore Airlines":7},"CRK":{"Scoot":7,"Cebu Pacific":4},"ILO":{"Scoot":3},"DVO":{"Scoot":11}}},"2026-10":{"date":"2026-10-01","r":{"MNL":{"Singapore Airlines":32,"Philippine Airlines":25,"Cebu Pacific":14,"Scoot":11},"CEB":{"Cebu Pacific":7,"Scoot":7,"Singapore Airlines":7},"CRK":{"Scoot":7,"Cebu Pacific":2},"ILO":{"Scoot":3},"DVO":{"Scoot":11}}},"2026-11":{"date":"2026-11-15","r":{"MNL":{"Singapore Airlines":35,"Philippine Airlines":28,"Cebu Pacific":18,"Scoot":11},"CEB":{"Scoot":7,"Singapore Airlines":7},"CRK":{"Scoot":7,"Cebu Pacific":4},"ILO":{"Scoot":6},"DVO":{"Scoot":7}}}},"vietnam":{"2026-09":{"date":"2026-09-23","r":{"SGN":{"Singapore Airlines":21,"Scoot":21,"VietJet":18,"Vietnam Airlines":18},"HAN":{"Singapore Airlines":21,"Vietnam Airlines":11,"Scoot":6,"VietJet":3},"DAD":{"Singapore Airlines":14,"Scoot":7,"VietJet":7},"CXR":{"Scoot":6},"PQC":{"Scoot":11,"VietJet":7,"Sun PhuQuoc Airways":7}}},"2026-10":{"date":"2026-10-01","r":{"SGN":{"Singapore Airlines":21,"Scoot":21,"VietJet":18,"Vietnam Airlines":18},"HAN":{"Singapore Airlines":21,"Vietnam Airlines":11,"Scoot":6,"VietJet":7},"DAD":{"Singapore Airlines":14,"Scoot":7,"VietJet":7},"CXR":{"Scoot":3},"PQC":{"Scoot":11,"VietJet":7,"Sun PhuQuoc Airways":7}}},"2026-11":{"date":"2026-11-15","r":{"SGN":{"Singapore Airlines":28,"Scoot":21,"Vietnam Airlines":18,"VietJet":14},"HAN":{"Singapore Airlines":21,"Vietnam Airlines":14,"VietJet":7,"Scoot":6},"DAD":{"Singapore Airlines":18,"VietJet":7,"Vietnam Airlines":7,"Scoot":7},"CXR":{"Scoot":6},"PQC":{"Scoot":7,"VietJet":7,"Sun PhuQuoc Airways":7}}}}};     // monthly flights per route, saved by build.py (data/history.json)   // hand-kept expert notes (data/insights.json)
